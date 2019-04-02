@@ -1,0 +1,174 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'live-server' ]
+2 info using npm@2.7.4
+3 info using node@v0.12.2
+4 silly cache add args [ 'live-server', null ]
+5 verbose cache add spec live-server
+6 silly cache add parsed spec { raw: 'live-server',
+6 silly cache add   scope: null,
+6 silly cache add   name: 'live-server',
+6 silly cache add   rawSpec: '',
+6 silly cache add   spec: '*',
+6 silly cache add   type: 'range' }
+7 verbose addNamed live-server@*
+8 silly addNamed semver.valid null
+9 silly addNamed semver.validRange *
+10 silly addNameRange { name: 'live-server', range: '*', hasData: false }
+11 silly mapToRegistry name live-server
+12 silly mapToRegistry using default registry
+13 silly mapToRegistry registry https://registry.npmjs.org/
+14 silly mapToRegistry uri https://registry.npmjs.org/live-server
+15 verbose addNameRange registry:https://registry.npmjs.org/live-server not in flight; fetching
+16 verbose request uri https://registry.npmjs.org/live-server
+17 verbose request no auth needed
+18 info attempt registry request try #1 at 4:31:49 PM
+19 verbose request id 49c0661a157e3abd
+20 http request GET https://registry.npmjs.org/live-server
+21 http 200 https://registry.npmjs.org/live-server
+22 silly get cb [ 200,
+22 silly get   { date: 'Tue, 02 Apr 2019 21:31:50 GMT',
+22 silly get     'content-type': 'application/json',
+22 silly get     'transfer-encoding': 'chunked',
+22 silly get     connection: 'keep-alive',
+22 silly get     'set-cookie': [ '__cfduid=d8ceee7bd781dca18072a7353842269501554240710; expires=Wed, 01-Apr-20 21:31:50 GMT; path=/; domain=.registry.npmjs.org; HttpOnly' ],
+22 silly get     'cf-cache-status': 'HIT',
+22 silly get     'cache-control': 'max-age=300',
+22 silly get     'cf-ray': '4c15e977e876b54e-BOG',
+22 silly get     etag: 'W/"382dc3b266bd9bf4633ac99e931e4924"',
+22 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+22 silly get     'last-modified': 'Fri, 04 Jan 2019 16:10:14 GMT',
+22 silly get     vary: 'accept-encoding, accept',
+22 silly get     'x-amz-meta-rev': '212-2488a905de90d198cf8ea9d11f4dac8b',
+22 silly get     server: 'cloudflare',
+22 silly get     'content-encoding': 'gzip' } ]
+23 verbose get saving live-server to /Users/carlosalbertosalgado1/.npm/registry.npmjs.org/live-server/.cache.json
+24 silly addNameRange number 2 { name: 'live-server', range: '*', hasData: true }
+25 silly addNameRange versions [ 'live-server',
+25 silly addNameRange   [ '0.1.0',
+25 silly addNameRange     '0.1.1',
+25 silly addNameRange     '0.2.0',
+25 silly addNameRange     '0.3.0',
+25 silly addNameRange     '0.4.0',
+25 silly addNameRange     '0.5.0',
+25 silly addNameRange     '0.6.0',
+25 silly addNameRange     '0.6.1',
+25 silly addNameRange     '0.6.2',
+25 silly addNameRange     '0.6.3',
+25 silly addNameRange     '0.6.4',
+25 silly addNameRange     '0.7.0',
+25 silly addNameRange     '0.7.1',
+25 silly addNameRange     '0.8.0',
+25 silly addNameRange     '0.8.1',
+25 silly addNameRange     '0.8.2',
+25 silly addNameRange     '0.9.0',
+25 silly addNameRange     '0.9.1',
+25 silly addNameRange     '0.9.2',
+25 silly addNameRange     '1.0.0',
+25 silly addNameRange     '1.1.0',
+25 silly addNameRange     '1.2.0',
+25 silly addNameRange     '1.2.1' ] ]
+26 verbose addNamed live-server@1.2.1
+27 silly addNamed semver.valid 1.2.1
+28 silly addNamed semver.validRange 1.2.1
+29 silly mapToRegistry name live-server
+30 silly mapToRegistry using default registry
+31 silly mapToRegistry registry https://registry.npmjs.org/
+32 silly mapToRegistry uri https://registry.npmjs.org/live-server
+33 verbose addRemoteTarball https://registry.npmjs.org/live-server/-/live-server-1.2.1.tgz not in flight; adding
+34 verbose addRemoteTarball [ 'https://registry.npmjs.org/live-server/-/live-server-1.2.1.tgz',
+34 verbose addRemoteTarball   '670630dd409d22fe9c513ab1c1894686c757153e' ]
+35 info retry fetch attempt 1 at 4:31:50 PM
+36 info attempt registry request try #1 at 4:31:50 PM
+37 http fetch GET https://registry.npmjs.org/live-server/-/live-server-1.2.1.tgz
+38 http fetch 200 https://registry.npmjs.org/live-server/-/live-server-1.2.1.tgz
+39 silly fetchAndShaCheck shasum 670630dd409d22fe9c513ab1c1894686c757153e
+40 verbose addTmpTarball /var/folders/n2/y87xbvm52zl_bxfvhk6psj7m0000gp/T/npm-57998-00d52b93/registry.npmjs.org/live-server/-/live-server-1.2.1.tgz not in flight; adding
+41 verbose addTmpTarball already have metadata; skipping unpack for live-server@1.2.1
+42 silly cache afterAdd live-server@1.2.1
+43 verbose afterAdd /Users/carlosalbertosalgado1/.npm/live-server/1.2.1/package/package.json not in flight; writing
+44 verbose afterAdd /Users/carlosalbertosalgado1/.npm/live-server/1.2.1/package/package.json written
+45 silly install resolved [ { name: 'live-server',
+45 silly install resolved     version: '1.2.1',
+45 silly install resolved     description: 'simple development http server with live reload capability',
+45 silly install resolved     keywords: [ 'front-end', 'development', 'tool', 'server', 'http', 'cli' ],
+45 silly install resolved     author: { name: 'Tapio Vierros' },
+45 silly install resolved     dependencies:
+45 silly install resolved      { chokidar: '^2.0.4',
+45 silly install resolved        colors: 'latest',
+45 silly install resolved        connect: '^3.6.6',
+45 silly install resolved        cors: 'latest',
+45 silly install resolved        'event-stream': '3.3.4',
+45 silly install resolved        'faye-websocket': '0.11.x',
+45 silly install resolved        'http-auth': '3.1.x',
+45 silly install resolved        morgan: '^1.9.1',
+45 silly install resolved        'object-assign': 'latest',
+45 silly install resolved        opn: 'latest',
+45 silly install resolved        'proxy-middleware': 'latest',
+45 silly install resolved        send: 'latest',
+45 silly install resolved        'serve-index': '^1.9.1' },
+45 silly install resolved     devDependencies:
+45 silly install resolved      { eslint: '^5.9.0',
+45 silly install resolved        jshint: '^2.9.6',
+45 silly install resolved        mocha: '^5.2.0',
+45 silly install resolved        supertest: '^3.3.0' },
+45 silly install resolved     scripts:
+45 silly install resolved      { lint: 'eslint live-server.js index.js',
+45 silly install resolved        hint: 'jshint live-server.js index.js',
+45 silly install resolved        test: 'mocha test --exit && npm run lint' },
+45 silly install resolved     bin: { 'live-server': './live-server.js' },
+45 silly install resolved     repository:
+45 silly install resolved      { type: 'git',
+45 silly install resolved        url: 'git+https://github.com/tapio/live-server.git' },
+45 silly install resolved     engines: { node: '>=0.10.0' },
+45 silly install resolved     preferGlobal: true,
+45 silly install resolved     license: 'MIT',
+45 silly install resolved     eslintConfig: { env: [Object], rules: [Object] },
+45 silly install resolved     gitHead: '01cd7f970439d42537bbe13b4885befb816a0446',
+45 silly install resolved     bugs: { url: 'https://github.com/tapio/live-server/issues' },
+45 silly install resolved     homepage: 'https://github.com/tapio/live-server#readme',
+45 silly install resolved     _id: 'live-server@1.2.1',
+45 silly install resolved     _npmVersion: '6.4.1',
+45 silly install resolved     _nodeVersion: '10.13.0',
+45 silly install resolved     _npmUser: { name: 'tapio', email: 'tapiovierros@gmail.com' },
+45 silly install resolved     dist:
+45 silly install resolved      { integrity: 'sha512-Yn2XCVjErTkqnM3FfTmM7/kWy3zP7+cEtC7x6u+wUzlQ+1UW3zEYbbyJrc0jNDwiMDZI0m4a0i3dxlGHVyXczw==',
+45 silly install resolved        shasum: '670630dd409d22fe9c513ab1c1894686c757153e',
+45 silly install resolved        tarball: 'https://registry.npmjs.org/live-server/-/live-server-1.2.1.tgz',
+45 silly install resolved        fileCount: 33,
+45 silly install resolved        unpackedSize: 52132,
+45 silly install resolved        'npm-signature': '-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJb/FhPCRA9TVsSAnZWagAAOrcQAIAGS/AppitxCPv25THM\nCFFQGNSL/JLaoouLsB4qFmmCbC02Qb1A0TxZXMMlFPMG8jjswDjjecSAQ61N\nVxUQ1lldkgmH8IGe1qp8SUQzRZ5ROoDEfCdykmKF87u+STvNO4eJsDJY9nkI\nYt18s2vB+m6w0MKUAkisoWM4/s+j7l60yzNpcj5U7ZalP5DwzeCdKtlf5pD+\n6jFncDRewwcG+9UEt2g3L1FCKYyekNOdVX5RS/94Yepvl7vBAdBtFi08xpiO\n/vsV3wybqo6VqemDG1JUSttZSBX6J8+YqlSc/wQ4mMyb62OD9fJdqveGmiTE\nbWqvjZDiQHyU0R/uf9gvtfpRMnfdsHiS0ObKm8w8oqIyjvz2EauZepyfRK7d\nPg3T4vBdCj8+AsPV6xEuDXshBeA/0+BGs5pPE8DGXjMocJiVhNm2+qM1m9u2\nHtSe1g8FlREzUJ7OmZugijQ4qSxdPewhDwVOnbPxdOHKvmZT96hp0EZi1dXv\n1Ka+chFO6W+McRriqwpnN7vc7uXJqZgIorcjxchpGJFm7a/+IBdlxMhoSMw0\n17t0SzFN0/TIU5PeVcCbnP1+uW2iETDz/OjSqMjTK9hp3cCjG0bcGON/pxg0\n/QRtNYMcW9Khmqgk9KxJzN0cHxoo4GY98oPKiny3040w1X/4Y7C25+hrRoi8\nqosx\r\n=mqqI\r\n-----END PGP SIGNATURE-----\r\n' },
+45 silly install resolved     maintainers: [ [Object] ],
+45 silly install resolved     directories: {},
+45 silly install resolved     _npmOperationalInternal:
+45 silly install resolved      { host: 's3://npm-registry-packages',
+45 silly install resolved        tmp: 'tmp/live-server_1.2.1_1543264334536_0.8845596284696962' },
+45 silly install resolved     _hasShrinkwrap: false,
+45 silly install resolved     _shasum: '670630dd409d22fe9c513ab1c1894686c757153e',
+45 silly install resolved     _resolved: 'https://registry.npmjs.org/live-server/-/live-server-1.2.1.tgz',
+45 silly install resolved     _from: 'live-server@*' } ]
+46 info install live-server@1.2.1 into /usr/local/lib
+47 info installOne live-server@1.2.1
+48 verbose installOne of live-server to /usr/local/lib not in flight; installing
+49 warn locking Error: EACCES, open '/Users/carlosalbertosalgado1/.npm/_locks/live-server-1932c27c2adeb129.lock'
+49 warn locking     at Error (native)
+49 warn locking  /Users/carlosalbertosalgado1/.npm/_locks/live-server-1932c27c2adeb129.lock failed { [Error: EACCES, open '/Users/carlosalbertosalgado1/.npm/_locks/live-server-1932c27c2adeb129.lock']
+49 warn locking   errno: -13,
+49 warn locking   code: 'EACCES',
+49 warn locking   path: '/Users/carlosalbertosalgado1/.npm/_locks/live-server-1932c27c2adeb129.lock' }
+50 verbose stack Error: Attempt to unlock /usr/local/lib/node_modules/live-server, which hasn't been locked
+50 verbose stack     at unlock (/usr/local/lib/node_modules/npm/lib/utils/locker.js:66:11)
+50 verbose stack     at cb (/usr/local/lib/node_modules/npm/lib/install.js:1004:5)
+50 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:1008:20
+50 verbose stack     at /usr/local/lib/node_modules/npm/lib/utils/locker.js:40:9
+50 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+50 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:177:38
+50 verbose stack     at FSReqWrap.oncomplete (fs.js:95:15)
+51 verbose cwd /Users/carlosalbertosalgado1/Desktop/tracker
+52 error Darwin 16.7.0
+53 error argv "node" "/usr/local/bin/npm" "install" "-g" "live-server"
+54 error node v0.12.2
+55 error npm  v2.7.4
+56 error Attempt to unlock /usr/local/lib/node_modules/live-server, which hasn't been locked
+57 error If you need help, you may report this error at:
+57 error     <https://github.com/npm/npm/issues>
+58 verbose exit [ 1, true ]
