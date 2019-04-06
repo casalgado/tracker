@@ -43,10 +43,25 @@ function saveEntry(e) {
     localStorage.setItem('entries', JSON.stringify(entries));
   }
   
-  document.getElementById('issueInputForm').reset();
+  document.getElementById('entryInputForm').reset();
+
  
   fetchEntries();
-  
+  focusStart()
   e.preventDefault();
 
+}
+
+var moveFocus = function moveFocus(num) {
+  if (num.length === 4) {
+    focusEnd()
+  }
+}
+
+function focusEnd() {
+  document.getElementById('entryEnd').focus()
+}
+
+function focusStart() {
+  document.getElementById('entryStart').focus()
 }
