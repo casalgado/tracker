@@ -12,25 +12,27 @@
 
     <body onload="fetchEntries()">
       <div class="container">
-        <h1> Internet Tracker <small> by Mr. Salgado</small> </h1>
+        <h1> Internet Tracker <small> to perceive is to know </small> </h1>
         <div class="jumbotron">
           <h3> New Entry: </h3>
 
           <form id="entryInputForm">
 
             <div class="form-group">
-              <label for="entryStartTime">Start</label>
-              <input type="text" class="form-control" id="entryStartTime" placeholder="Start ...">
+              <label for="entryStart">Start</label>
+              <input type="text" class="form-control" id="entryStart" placeholder="Start ...">
             </div>
 
             <div class="form-group">
-              <label for="entryEndTime">End</label>
-              <input type="text" class="form-control" id="entryEndTime" placeholder="End ...">
+              <label for="entryEnd">End</label>
+              <input type="text" class="form-control" id="entryEnd" placeholder="End ...">
             </div>
 
             <button type="submit" class="btn btn-primary">Add</button>
-            
+
           </form>
+
+          <div id='entryList'></div>
 
         </div>
       </div>
