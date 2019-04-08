@@ -17,6 +17,7 @@ function fetchEntries () {
                               '<h3>' + start + '</h3>'+
                               '<h3>' + end + '</h3>'+
                               '</div>';
+    draw(entries[i])
   }
 }
 
@@ -49,7 +50,6 @@ function saveEntry(e) {
   
   document.getElementById('entryInputForm').reset();
 
- 
   fetchEntries();
   focusStart()
   e.preventDefault();
