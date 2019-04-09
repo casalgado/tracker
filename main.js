@@ -11,12 +11,6 @@ function fetchEntries () {
     var start = entries[i].start;
     var end = entries[i].end;
     
-    entryList.innerHTML +=   '<div class="well">'+
-                              '<h6>Issue ID: ' + id + '</h6>'+
-                              '<p><span class="label label-info">' + status + '</span></p>'+
-                              '<h3>' + start + '</h3>'+
-                              '<h3>' + end + '</h3>'+
-                              '</div>';
     draw(entries[i])
   }
 }
@@ -57,8 +51,8 @@ function saveEntry(e) {
 }
 
 function convertToDate(num) {
-	d = new Date()
-	entryDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), parseInt(num.substring(0,2))-5, parseInt(num.substring(2,4)))
+	d = moment()
+	entryDate = moment(`${d.format('Y')}-${d.format('MM')}-${d.format('DD')}T${num.substring(0,2)}:${num.substring(2,4)}:00`)
 	return entryDate
 }
 

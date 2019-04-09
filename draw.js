@@ -12,20 +12,21 @@ function draw(entry) {
   	}
 
   	var entryBar = document.createElement('div')
+  	var entryStart = parseFloat(timeToWidth(entry.start))
+  	var entryEnd = parseFloat(timeToWidth(entry.end))
   	entryBar.id = 'bar' + entry.id
   	entryBar.className = 'entryBar'
-  	entryBar.style.width = timeToWidth(entry.end) + 'px'
-  	entryBar.style.left = timeToWidth(entry.start) + 'px'
+  	entryBar.style.width = entryEnd - entryStart + '%'
+  	entryBar.style.left = entryStart + '%'
   	cont.appendChild(entryBar)
-
-
 }
 
 function timeToWidth(date){
-	hours = new Date(date).getHours()
-	minutes = new Date(date).getMinutes()
+	time = moment(date)
+	hours = time.hours()
+	minutes = time.minutes()/60
 
-	return hours + minutes
+	return ((hours + minutes)*100/24).toFixed(2)
 }
 
 function minutesToHour(min){
