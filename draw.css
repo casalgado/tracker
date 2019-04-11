@@ -4,6 +4,8 @@
 	height: 50px;
 	border-left: 1px solid lightslategray;
 	position: relative;
+	clear: both;
+	margin-top: 5px;
 }
 
 .hourSegment {
@@ -19,4 +21,19 @@
 	height: 50%;
 	background-color: deepskyblue;
 	z-index: -1;
+}
+
+.legendContainer {
+	width: 100%;
+	position: relative;
+}
+
+.legendSegment {
+	font-size: 8px;
+	float: left;
+	width: 3.1666%;
+	margin: .5%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	text-align: center;
 }

@@ -1,4 +1,6 @@
 
+document.getElementById('entryInputForm').addEventListener('submit', saveEntry);
+
 function fetchEntries () {
 
   var entries = JSON.parse(localStorage.getItem('entries')) || []
@@ -7,11 +9,9 @@ function fetchEntries () {
   entryList.innerHTML = '';
   
   for (var i = 0; i < entries.length; i++) {
-    draw(entries[i])
+    drawEntry(entries[i])
   }
 }
-
-document.getElementById('entryInputForm').addEventListener('submit', saveEntry);
 
 function saveEntry(e) {
   if (localStorage.getItem('entries') === null) {

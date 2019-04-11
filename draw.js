@@ -1,5 +1,7 @@
 
-function draw(entry) {
+drawLegend()
+
+function drawEntry(entry) {
 	var list = document.getElementById('entryList')
 
 	if (document.getElementById(entryYMD(entry))) {
@@ -17,7 +19,6 @@ function draw(entry) {
 	  	}
 	}
 	
-
   	var entryBar = document.createElement('div')
   	var entryStart = parseFloat(timeToWidth(entry.start))
   	var entryEnd = parseFloat(timeToWidth(entry.end))
@@ -29,6 +30,15 @@ function draw(entry) {
   	cont.appendChild(entryBar)
 }
 
+function drawLegend() {
+		cont = document.getElementById('legendContainer')
+		for (var i = 0; i < 24; i++) {
+	    	var segment = document.createElement('p')
+	    	segment.className = 'legendSegment'
+	    	segment.innerHTML = ("0" + i).slice(-2) + ":00"
+	    	cont.appendChild(segment)
+	  	}
+}
 
 
 function timeToWidth(date){
