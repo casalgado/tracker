@@ -50,9 +50,9 @@ function saveEntry(e) {
 
 }
 
-function convertToDate(num) {
-	d = moment()
-	entryDate = moment(`${d.format('Y')}-${d.format('MM')}-${d.format('DD')}T${num.substring(0,2)}:${num.substring(2,4)}:00`)
+function convertToDate(num) { // takes in a 4 digit number and returns a date format. Number corresponds to hh:mm.
+	t = moment()
+	entryDate = moment(`${t.format('Y')}-${t.format('MM')}-${t.format('DD')}T${num.substring(0,2)}:${num.substring(2,4)}:00`)
 	return entryDate
 }
 
@@ -60,6 +60,11 @@ var moveFocus = function moveFocus(num) {
   if (num.length === 4) {
     focusEnd()
   }
+}
+
+function entryYMD(entry) { // returns a string with date of entry, to use as id of container
+	t = moment(entry.start)
+	return `${t.format('Y')}-${t.format('MM')}-${t.format('DD')}`
 }
 
 function focusEnd() {

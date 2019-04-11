@@ -1,15 +1,22 @@
 
 function draw(entry) {
 	var list = document.getElementById('entryList')
-	var cont = document.createElement('div')
-	cont.className = 'entryContainer'
-	list.appendChild(cont)
 
-	for (var i = 0; i < 24; i++) {
-    	var segment = document.createElement('div')
-    	segment.className = 'dateSegment'
-    	cont.appendChild(segment)
-  	}
+	if (document.getElementById(entryYMD(entry))) {
+		var cont = document.getElementById(entryYMD(entry))
+	} else {
+		var cont = document.createElement('div')
+		cont.className = 'entryContainer'
+		cont.id = entryYMD(entry)
+		list.appendChild(cont)
+
+		for (var i = 0; i < 24; i++) {
+	    	var segment = document.createElement('div')
+	    	segment.className = 'dateSegment'
+	    	cont.appendChild(segment)
+	  	}
+	}
+	
 
   	var entryBar = document.createElement('div')
   	var entryStart = parseFloat(timeToWidth(entry.start))
@@ -18,8 +25,11 @@ function draw(entry) {
   	entryBar.className = 'entryBar'
   	entryBar.style.width = entryEnd - entryStart + '%'
   	entryBar.style.left = entryStart + '%'
+
   	cont.appendChild(entryBar)
 }
+
+
 
 function timeToWidth(date){
 	time = moment(date)
@@ -32,3 +42,4 @@ function timeToWidth(date){
 function minutesToHour(min){
 	return parseInt(min)/60
 }
+
