@@ -43,3 +43,8 @@ function minutesToHour(min){
 	return parseInt(min)/60
 }
 
+function entryYMD(entry) { // returns a string with date of entry, to use as id of container
+	t = moment(entry.start)
+	return `${t.format('Y')}-${t.format('MM')}-${t.format('DD')}`
+}
+

@@ -7,10 +7,6 @@ function fetchEntries () {
   entryList.innerHTML = '';
   
   for (var i = 0; i < entries.length; i++) {
-    var id = entries[i].id;
-    var start = entries[i].start;
-    var end = entries[i].end;
-    
     draw(entries[i])
   }
 }
@@ -23,8 +19,16 @@ function saveEntry(e) {
   } else {
     var entryId = JSON.parse(localStorage.getItem('entries')).length + 1
   }
-  var entryStart = convertToDate(document.getElementById('entryStart').value);
-  var entryEnd = convertToDate(document.getElementById('entryEnd').value);
+
+  // values from form
+  var start = document.getElementById('entryStart').value
+  var end   = document.getElementById('entryEnd').value
+  var day   = document.getElementById('entryDay').value
+  var month = document.getElementById('entryMonth').value
+  var year  = document.getElementById('entryYear').value
+
+  var entryStart = convertToDate(start, day, month, year);
+  var entryEnd = convertToDate(end, day, month, year);
 
   var entry = {
     id: entryId,
@@ -45,26 +49,26 @@ function saveEntry(e) {
   document.getElementById('entryInputForm').reset();
 
   fetchEntries();
-  focusStart()
   e.preventDefault();
+  focusStart();
 
 }
 
-function convertToDate(num) { // takes in a 4 digit number and returns a date format. Number corresponds to hh:mm.
+function convertToDate(eHourMinute, eDay, eMonth, eYear) { // takes form parameters as strings and returns a date format. Is called by saveEntry().
 	t = moment()
-	entryDate = moment(`${t.format('Y')}-${t.format('MM')}-${t.format('DD')}T${num.substring(0,2)}:${num.substring(2,4)}:00`)
+	minutes = eHourMinute.substring(2,4)
+	hours   = eHourMinute.substring(0,2)
+	day     = eDay || t.format('DD')
+	month   = eMonth || t.format('MM')
+	year    = eYear || t.format('Y')
+	entryDate = moment(`${year}-${month}-${day}T${hours}:${minutes}:00`)
 	return entryDate
 }
 
-var moveFocus = function moveFocus(num) {
-  if (num.length === 4) {
+var moveFocus = function moveFocus(num, limit) {
+  if (num.length === limit) {
     focusEnd()
   }
-}
-
-function entryYMD(entry) { // returns a string with date of entry, to use as id of container
-	t = moment(entry.start)
-	return `${t.format('Y')}-${t.format('MM')}-${t.format('DD')}`
 }
 
 function focusEnd() {
