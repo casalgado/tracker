@@ -12,7 +12,7 @@ function draw(entry) {
 
 		for (var i = 0; i < 24; i++) {
 	    	var segment = document.createElement('div')
-	    	segment.className = 'dateSegment'
+	    	segment.className = 'hourSegment'
 	    	cont.appendChild(segment)
 	  	}
 	}
