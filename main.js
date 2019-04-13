@@ -34,7 +34,7 @@ function saveEntry(e) {											   // saves entry, called by for submit.
   var year  = document.getElementById('entryYear').value
 
   var entryStart = convertToDate(start, day, month, year);      // converts values to date formats
-  var entryEnd = convertToDate(end, day, month, year);          // combines all values into two attributes, start and end
+  var entryEnd   = convertToDate(end, day, month, year);        // combines all values into two attributes, start and end
 
   var entry = {													// creates entry object with 3 properties
     id: entryId,												// start, end, id
