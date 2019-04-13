@@ -35,13 +35,13 @@ function drawEntry(entry) {									// draws each entry
 															// creates entry bar, used to visualize time and duration of entry
   	var entryBar = document.createElement('div')            // creates DOM elemens
   	var entryStart = parseFloat(timeToWidth(entry.start))   // calculates starting position
-  	var entryEnd = parseFloat(timeToWidth(entry.end))       // and width, based on entry data
+  	var entryEnd   = parseFloat(timeToWidth(entry.end))     // and width, based on entry data
   	entryBar.id = 'bar' + entry.id 							// sets element attributes: id
   	entryBar.className = 'entryBar'							// class
   	entryBar.style.left = entryStart + '%'					// start
   	entryBar.style.width = entryEnd - entryStart + '%'	    // duration
 
-  	visualCont.appendChild(entryBar)								// appends entryBar to entry Container
+  	visualCont.appendChild(entryBar)					    // appends entryBar to visualContainer
 }
 
 function drawLegend() {										// draws legend to be used atop entry list

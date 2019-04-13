@@ -5,6 +5,7 @@ function onLoad(){
 	fetchEntries()
 	drawLegend()
 }
+
 function fetchEntries () {  // fetches all entries and calls the drawEntry function for each one. 
 
   var entries = JSON.parse(localStorage.getItem('entries')) || []  // parses entry data object from localStorage
@@ -17,7 +18,6 @@ function fetchEntries () {  // fetches all entries and calls the drawEntry funct
     drawEntry(entries[i])										   // calls draw() for each entry
   }
 }
-
 
 function saveEntry(e) {											   // saves entry, called by for submit. 
   if (localStorage.getItem('entries') === null) {
@@ -68,6 +68,19 @@ function sortEntries(array){                                     // sorts entry 
 	return array
 }
 
+function deleteEntry(id){
+  var entries = JSON.parse(localStorage.getItem('entries'));
+  
+  for(var i = 0; i < entries.length; i++) {
+    if (entries[i].id == id) {
+      entries.splice(i, 1);
+    }
+  }
+  
+  localStorage.setItem('entries', JSON.stringify(entries));
+  
+  fetchEntries();
+}
 
 function convertToDate(eHourMinute, eDay, eMonth, eYear) { 		 // takes form parameters as strings and returns a date format. Is called by saveEntry().
 	t = moment()
