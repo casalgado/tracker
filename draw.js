@@ -1,20 +1,20 @@
 
-function drawEntry(entry) {									// draws each entry
-	var list = document.getElementById('entryList')			// assigns DOM element entryList to variable 
+function drawEntry(entry) {								           	// draws each entry
+	var list = document.getElementById('entryList')			// assigns DOM element entryList to variable
 
 
-	if (document.getElementById('ec-' + entryYMD(entry))) {			       // determines if an entryContainer has been drawn for an entry
+	if (document.getElementById('ec-' + entryYMD(entry))) {			         // determines if an entryContainer has been drawn for an entry
 		var cont       = document.getElementById('ec-' + entryYMD(entry))  // with the same date. If so, assigns it to a variable.
 		var visualCont = document.getElementById('vc-' + entryYMD(entry))  // Also assigns visual container and date container to variable.
 		var dateCont   = document.getElementById('dc-' + entryYMD(entry))
 	} else {
-		var cont = document.createElement('div')			// if no entryContainer exists for that day, draws it. 
-		cont.className = 'entryContainer'					// and appends it to entryList
+		var cont = document.createElement('div')			// if no entryContainer exists for that day, draws it.
+		cont.className = 'entryContainer'				    	// and appends it to entryList
 		cont.id = 'ec-' + entryYMD(entry)
 		list.appendChild(cont)
 
 		var visualCont = document.createElement('div')		// creates a visualization container to hold the
-		visualCont.className = 'visualContainer' 			// entry visualization
+		visualCont.className = 'visualContainer' 		    	// entry visualization
 		visualCont.id = 'vc-' + entryYMD(entry)
 		cont.appendChild(visualCont)
 
@@ -24,7 +24,7 @@ function drawEntry(entry) {									// draws each entry
 		dateCont.innerHTML = moment(entry.start).format('dd MMM D')
 		cont.prepend(dateCont)
 
-		for (var i = 0; i < 24; i++) {						// creates segments used to mark the time of day
+		for (var i = 0; i < 24; i++) {					        	// creates segments used to mark the time of day
 	    	var segment = document.createElement('div')	 	// appends them to entryContainer
 	    	segment.className = 'hourSegment'
 	    	visualCont.appendChild(segment)
@@ -37,7 +37,7 @@ function drawEntry(entry) {									// draws each entry
   	var entryStart = parseFloat(timeToWidth(entry.start))   // calculates starting position
   	var entryEnd   = parseFloat(timeToWidth(entry.end))     // and width, based on entry data
   	entryBar.id = 'bar' + entry.id 							// sets element attributes: id
-  	entryBar.className = 'entryBar'							// class
+  	entryBar.className = 'entryBar entryType' + entry.type							// class
   	entryBar.style.left = entryStart + '%'					// start
   	entryBar.style.width = entryEnd - entryStart + '%'	    // duration
 
@@ -66,4 +66,3 @@ function entryYMD(entry) { 									// returns a string with date of entry, to u
 	t = moment(entry.start)
 	return `${t.format('Y')}-${t.format('MM')}-${t.format('DD')}`
 }
-

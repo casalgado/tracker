@@ -1,25 +1,25 @@
 
 function onLoad(){
 	document.getElementById('entryInputForm').addEventListener('submit', saveEntry);  // attaches saveEntry() to form 'submit' button
-	focusStart()  
+	focusType()
 	fetchEntries()
 	drawLegend()
 }
 
-function fetchEntries () {  // fetches all entries and calls the drawEntry function for each one. 
+function fetchEntries () {  // fetches all entries and calls the drawEntry function for each one.
 
   var entries = JSON.parse(localStorage.getItem('entries')) || []  // parses entry data object from localStorage
   sortEntries(entries)											   // and sorts it
   var entryList = document.getElementById('entryList');            // gets DOM object Entry list
-  
+
   entryList.innerHTML = '';										   // empties DOM object Entry List
-  
-  for (var i = 0; i < entries.length; i++) {					   // iterates through entry data 
+
+  for (var i = 0; i < entries.length; i++) {					   // iterates through entry data
     drawEntry(entries[i])										   // calls draw() for each entry
   }
 }
 
-function saveEntry(e) {											   // saves entry, called by for submit. 
+function saveEntry(e) {											   // saves entry, called by for submit.
   if (localStorage.getItem('entries') === null) {
     var entryId = 1;
   } else {
@@ -27,11 +27,12 @@ function saveEntry(e) {											   // saves entry, called by for submit.
   }																// sets entry ID's
 
 
-  var start = document.getElementById('entryStart').value       // gets values from form
-  var end   = document.getElementById('entryEnd').value
-  var day   = document.getElementById('entryDay').value
-  var month = document.getElementById('entryMonth').value
-  var year  = document.getElementById('entryYear').value
+  var entryType = document.getElementById('entryType').value       // gets values from form
+  var start     = document.getElementById('entryStart').value
+  var end       = document.getElementById('entryEnd').value
+  var day       = document.getElementById('entryDay').value
+  var month     = document.getElementById('entryMonth').value
+  var year      = document.getElementById('entryYear').value
 
   var entryStart = convertToDate(start, day, month, year);      // converts values to date formats
   var entryEnd   = convertToDate(end, day, month, year);        // combines all values into two attributes, start and end
@@ -40,8 +41,9 @@ function saveEntry(e) {											   // saves entry, called by for submit.
     id: entryId,												// start, end, id
     start: entryStart,
     end: entryEnd,
+		type: entryType,
   }
-  
+
   if (localStorage.getItem('entries') === null) {				// saves entry in local storage
     var entries = [];											// if no entries exists, creates entries array
     entries.push(entry);
@@ -51,12 +53,12 @@ function saveEntry(e) {											   // saves entry, called by for submit.
     entries.push(entry);										// after retreiving it and pushing the latest entry
     localStorage.setItem('entries', JSON.stringify(entries));
   }
-  
+
   document.getElementById('entryInputForm').reset();             // resets input form
 
   fetchEntries();                                                // fetches entries once more and focuses start
   e.preventDefault();
-  focusStart();
+  focusType();
 }
 
 function sortEntries(array){                                     // sorts entry array in reverse order
@@ -70,15 +72,15 @@ function sortEntries(array){                                     // sorts entry 
 
 function deleteEntry(id){
   var entries = JSON.parse(localStorage.getItem('entries'));
-  
+
   for(var i = 0; i < entries.length; i++) {
     if (entries[i].id == id) {
       entries.splice(i, 1);
     }
   }
-  
+
   localStorage.setItem('entries', JSON.stringify(entries));
-  
+
   fetchEntries();
 }
 
@@ -93,7 +95,7 @@ function convertToDate(eHourMinute, eDay, eMonth, eYear) { 		 // takes form para
 	return entryDate
 }
 
-var moveFocus = function moveFocus(num, limit, func) {           // moves focus to target element after a number of characters 
+var moveFocus = function moveFocus(num, limit, func) {           // moves focus to target element after a number of characters
   if (num.length === limit) {									 // has been added to form group. Used to speed up entry input.
     func()
   }
@@ -117,4 +119,17 @@ function focusMonth() {
 
 function focusYear() {
   document.getElementById('entryYear').focus()
+}
+
+function focusType() {
+	document.getElementById('entryType').focus()
+}
+
+function setEntryTypes(){
+	var entries = JSON.parse(localStorage.getItem('entries'))
+	entries.forEach(function (i) {
+		i.type = 1
+	})
+
+	return entries
 }
