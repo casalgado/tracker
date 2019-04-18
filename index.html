@@ -19,15 +19,15 @@
           <form id="entryInputForm">
 
             <div class="form-group">
-              <input type="text" onkeyup="moveFocus(this.value, 1, focusStart)" class="form-control" id="entryType" placeholder="Type">
-            </div>
-
-            <div class="form-group">
               <input type="text" onkeyup="moveFocus(this.value, 4, focusEnd)" class="form-control" id="entryStart" placeholder="Start">
             </div>
 
             <div class="form-group">
-              <input type="text" onkeyup="moveFocus(this.value, 4, focusDay)" class="form-control" id="entryEnd" placeholder="End">
+              <input type="text" onkeyup="moveFocus(this.value, 4, focusType)" class="form-control" id="entryEnd" placeholder="End">
+            </div>
+
+            <div class="form-group">
+              <input type="text" onkeyup="moveFocus(this.value, 1, focusDay)" class="form-control" id="entryType" placeholder="Type">
             </div>
 
             <div class="form-group">

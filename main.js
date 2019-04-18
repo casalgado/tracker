@@ -1,7 +1,7 @@
 
 function onLoad(){
 	document.getElementById('entryInputForm').addEventListener('submit', saveEntry);  // attaches saveEntry() to form 'submit' button
-	focusType()
+	focusStart()
 	fetchEntries()
 	drawLegend()
 }
@@ -58,7 +58,7 @@ function saveEntry(e) {											   // saves entry, called by for submit.
 
   fetchEntries();                                                // fetches entries once more and focuses start
   e.preventDefault();
-  focusType();
+  focusStart();
 }
 
 function sortEntries(array){                                     // sorts entry array in reverse order
