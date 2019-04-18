@@ -70,20 +70,6 @@ function sortEntries(array){                                     // sorts entry 
 	return array
 }
 
-function deleteEntry(id){
-  var entries = JSON.parse(localStorage.getItem('entries'));
-
-  for(var i = 0; i < entries.length; i++) {
-    if (entries[i].id == id) {
-      entries.splice(i, 1);
-    }
-  }
-
-  localStorage.setItem('entries', JSON.stringify(entries));
-
-  fetchEntries();
-}
-
 function convertToDate(eHourMinute, eDay, eMonth, eYear) { 		 // takes form parameters as strings and returns a date format. Is called by saveEntry().
 	t = moment()
 	minutes   = eHourMinute.substring(2,4)
@@ -125,11 +111,27 @@ function focusType() {
 	document.getElementById('entryType').focus()
 }
 
-function setEntryTypes(){
-	var entries = JSON.parse(localStorage.getItem('entries'))
-	entries.forEach(function (i) {
-		i.type = 1
-	})
 
-	return entries
+function deleteEntry(entryId){
+  var entries = JSON.parse(localStorage.getItem('entries'));
+
+  for(var i = 0; i < entries.length; i++) {
+    if (entries[i].id == entryId) {
+      entries.splice(i, 1);
+    }
+  }
+  localStorage.setItem('entries', JSON.stringify(entries));
+  fetchEntries();
+}
+
+function updateEntryType(entryId, newType){
+	var entries = JSON.parse(localStorage.getItem('entries'))
+	for(var i = 0; i < entries.length; i++) {
+		if (entries[i].id == entryId) {
+			entries[i].type = newType
+			break
+		}
+	}
+	localStorage.setItem('entries', JSON.stringify(entries));
+  fetchEntries();
 }
