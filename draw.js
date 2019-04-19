@@ -26,7 +26,7 @@ function drawEntry(entry) {								           	// draws each entry
 
 		for (var i = 0; i < 24; i++) {					        	// creates segments used to mark the time of day
 	    	var segment = document.createElement('div')	 	// appends them to entryContainer
-	    	segment.className = 'hourSegment'
+	    	segment.className = 'hourSegment hs' + i
 	    	visualCont.appendChild(segment)
 	  	}
 
