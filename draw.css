@@ -1,7 +1,7 @@
 
 .visualContainer {
-	width: 100%;
-	margin-left: 0%;
+	width: 102%;
+	margin-left: -1%;
 	height: 50px;
 	border-left: 1px solid lightslategray;
 	position: relative;
@@ -18,7 +18,7 @@
 
 .hourSegment {
 	height: 100%;
-	width: 4.1676%;
+	width: 4.167%;
 	float: left;
 	border-right: 1px solid lightslategray;
 	background-color: rgb(233, 236, 239);
@@ -31,7 +31,7 @@
 	opacity: .8;
 	background-color: gray;
 	border-radius: 3px;
-	z-index: 2;
+
 }
 
 .entryType1 {
@@ -60,9 +60,27 @@
 #popOver {
 	display: none;
 	position: absolute;
-	width: 100px;
-	height: 100px;
-	border: 1px solid gray;
-	background-color: black;
+	width: 200px;
+	height: 105px;
 	z-index: 1;
+	border: 1px solid gray;
+	padding: 2px;
+	/* if height is modified, check for hidePopOver() bug when mouseleave over entryBar */
+}
+
+#popOver p {
+	margin: 0px 5px 0px 5px;
+	display: inline-block;
+	width: 50%;
+
+}
+
+#popOverContent{
+	width: 100%;
+	background-color: lightslategray;
+	border-radius: 2px;
+	border: 1px solid black;
+	font-size: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }

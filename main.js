@@ -1,7 +1,7 @@
 
 function onLoad(){
 	document.getElementById('entryInputForm').addEventListener('submit', saveEntry);  // attaches saveEntry() to form 'submit' button
-	document.getElementById('popOver').addEventListener('mouseover', showPopOver)
+	document.getElementById('popOver').addEventListener('mouseover', holdPopOver)
 	document.getElementById('popOver').addEventListener('mouseleave', hidePopOver)
 	focusStart()
 	fetchEntries()

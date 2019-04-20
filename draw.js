@@ -16,7 +16,6 @@ function drawEntry(entry) {								           	// draws each entry
 		var visualCont = document.createElement('div')		// creates a visualization container to hold the
 		visualCont.className = 'visualContainer' 		    	// entry visualization
 		visualCont.id = 'vc-' + entryYMD(entry)
-		visualCont.addEventListener('mouseover', appendPopover)
 		cont.appendChild(visualCont)
 
 		var dateCont = document.createElement('p')		// creates a date container to hold date data for entry
@@ -32,15 +31,15 @@ function drawEntry(entry) {								           	// draws each entry
 	  }
 	}
 															// creates entry bar, used to visualize time and duration of entry
-  	var entryBar = document.createElement('div')            // creates DOM elemens
+  	var entryBar   = document.createElement('div')            // creates DOM elemens
   	var entryStart = parseFloat(timeToWidth(entry.start))   // calculates starting position
   	var entryEnd   = parseFloat(timeToWidth(entry.end))     // and width, based on entry data
   	entryBar.id = 'bar' + entry.id 																// sets element id
-  	entryBar.className = 'entryBar entryType' + entry.type				// class
-  	entryBar.style.left = entryStart + '%'												// start
+  	entryBar.className   = 'entryBar entryType' + entry.type				// class
+  	entryBar.style.left  = entryStart + '%'												// start
   	entryBar.style.width = entryEnd - entryStart + '%'    			  // duration
+		entryBar.addEventListener('mouseover', appendPopover)
 		entryBar.addEventListener('mouseover', showPopOver);
-		entryBar.addEventListener('mouseleave', hidePopOver);
   	visualCont.appendChild(entryBar)	        			    // appends entryBar to visualContainer
 }
 
@@ -53,7 +52,6 @@ function drawLegend() {										// draws legend to be used atop entry list
 	    	cont.appendChild(segment)
 	  	}
 }
-
 
 function timeToWidth(date){									// converts a time format to a % width, used by drawEntry
 	time = moment(date)
@@ -76,20 +74,42 @@ function updatePopoverPosition(popOver, target){
 	var targetStyle = window.getComputedStyle(target)
 	popOver.style.top  = parseFloat(targetStyle.top) + parseFloat(targetStyle.height) - 100 + 'px'
 	popOver.style.left = parseFloat(targetStyle.left) + parseFloat(targetStyle.width)/2 - 50 + 'px'
+}
 
+function elevateEntryBars(target){										// modifies zindex of entryBars in current visualCont
+	var children = target.parentElement.childNodes		  // this is done to keep popover below entry bars in current visualCont and above all other entry bars.
+	for (var i = 0; i < children.length; i++) {
+		if (children[i].className.includes('entryBar')) {
+			children[i].style.zIndex = '2'
+		}
+	}
+}
+
+function flattenEntryBars(){   													// resets all entryBar z-index property
+	var entryBars = document.getElementsByClassName("entryBar")
+	for (var i = 0; i < entryBars.length; i++) {
+		entryBars[i].style.zIndex = '0'
+	}
 }
 
 function updatePopoverContent(target){
+}
+
+var holdPopOver = function(e) {
+	document.getElementById('popOver').style.display = 'block'
 }
 
 
 var showPopOver = function(e) {
     var popOver = document.getElementById('popOver')
 		popOver.style.display = 'block'
+		elevateEntryBars(e.target)
 		updatePopoverPosition(popOver, e.target)
 		updatePopoverContent(popOver, e.target)
 };
 
 var hidePopOver = function(e) {
     document.getElementById('popOver').style.display = 'none'
+    document.getElementById('popOver').style.zIndex = '1'
+		flattenEntryBars()
 };
