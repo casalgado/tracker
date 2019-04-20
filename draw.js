@@ -2,12 +2,12 @@
 function drawEntry(entry) {								           	// draws each entry
 	var list = document.getElementById('entryList')			// assigns DOM element entryList to variable
 
-
 	if (document.getElementById('ec-' + entryYMD(entry))) {			         // determines if an entryContainer has been drawn for an entry
 		var cont       = document.getElementById('ec-' + entryYMD(entry))  // with the same date. If so, assigns it to a variable.
 		var visualCont = document.getElementById('vc-' + entryYMD(entry))  // Also assigns visual container and date container to variable.
 		var dateCont   = document.getElementById('dc-' + entryYMD(entry))
-	} else {
+	}
+	else {
 		var cont = document.createElement('div')			// if no entryContainer exists for that day, draws it.
 		cont.className = 'entryContainer'				    	// and appends it to entryList
 		cont.id = 'ec-' + entryYMD(entry)
@@ -28,19 +28,17 @@ function drawEntry(entry) {								           	// draws each entry
 	    	var segment = document.createElement('div')	 	// appends them to entryContainer
 	    	segment.className = 'hourSegment hs' + i
 	    	visualCont.appendChild(segment)
-	  	}
-
-
+	  }
 	}
 															// creates entry bar, used to visualize time and duration of entry
   	var entryBar = document.createElement('div')            // creates DOM elemens
   	var entryStart = parseFloat(timeToWidth(entry.start))   // calculates starting position
   	var entryEnd   = parseFloat(timeToWidth(entry.end))     // and width, based on entry data
-  	entryBar.id = 'bar' + entry.id 							// sets element attributes: id
-  	entryBar.className = 'entryBar entryType' + entry.type							// class
-  	entryBar.style.left = entryStart + '%'					// start
-  	entryBar.style.width = entryEnd - entryStart + '%'	    // duration
-
+  	entryBar.id = 'bar' + entry.id 																// sets element id
+  	entryBar.className = 'entryBar entryType' + entry.type				// class
+  	entryBar.style.left = entryStart + '%'												// start
+  	entryBar.style.width = entryEnd - entryStart + '%'	  			  // duration
+		entryBar.addEventListener('mouseover', showPopOver, false);
   	visualCont.appendChild(entryBar)					    // appends entryBar to visualContainer
 }
 
@@ -66,3 +64,26 @@ function entryYMD(entry) { 									// returns a string with date of entry, to u
 	t = moment(entry.start)
 	return `${t.format('Y')}-${t.format('MM')}-${t.format('DD')}`
 }
+
+
+function updatePopoverPosition(popOver, target){
+	rect = target.getBoundingClientRect()
+	popOver.style.top = rect.top - 100 + rect.height + 'px'
+	popOver.style.left = rect.left + rect.width/2 - 50 + 'px'
+}
+
+function updatePopoverContent(target){
+
+}
+
+
+var showPopOver = function(e) {
+    var popOver = document.getElementById('popOver')
+		popOver.style.display = 'block'
+		updatePopoverPosition(popOver, e.target)
+		updatePopoverContent(popOver, e.target)
+};
+
+var hidePopOver = function(e) {
+    document.getElementById('popOver').style.display = 'none'
+};
