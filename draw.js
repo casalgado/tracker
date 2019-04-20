@@ -16,6 +16,7 @@ function drawEntry(entry) {								           	// draws each entry
 		var visualCont = document.createElement('div')		// creates a visualization container to hold the
 		visualCont.className = 'visualContainer' 		    	// entry visualization
 		visualCont.id = 'vc-' + entryYMD(entry)
+		visualCont.addEventListener('mouseover', appendPopover)
 		cont.appendChild(visualCont)
 
 		var dateCont = document.createElement('p')		// creates a date container to hold date data for entry
@@ -37,9 +38,10 @@ function drawEntry(entry) {								           	// draws each entry
   	entryBar.id = 'bar' + entry.id 																// sets element id
   	entryBar.className = 'entryBar entryType' + entry.type				// class
   	entryBar.style.left = entryStart + '%'												// start
-  	entryBar.style.width = entryEnd - entryStart + '%'	  			  // duration
-		entryBar.addEventListener('mouseover', showPopOver, false);
-  	visualCont.appendChild(entryBar)					    // appends entryBar to visualContainer
+  	entryBar.style.width = entryEnd - entryStart + '%'    			  // duration
+		entryBar.addEventListener('mouseover', showPopOver);
+		entryBar.addEventListener('mouseleave', hidePopOver);
+  	visualCont.appendChild(entryBar)	        			    // appends entryBar to visualContainer
 }
 
 function drawLegend() {										// draws legend to be used atop entry list
@@ -65,15 +67,19 @@ function entryYMD(entry) { 									// returns a string with date of entry, to u
 	return `${t.format('Y')}-${t.format('MM')}-${t.format('DD')}`
 }
 
+function appendPopover(e){                    // appends popOver to visual container
+	var popOver = document.getElementById('popOver')
+	e.target.parentElement.appendChild(popOver)   // target in this case is hour segment. parentElement selects visualCont
+}
 
 function updatePopoverPosition(popOver, target){
-	rect = target.getBoundingClientRect()
-	popOver.style.top = rect.top - 100 + rect.height + 'px'
-	popOver.style.left = rect.left + rect.width/2 - 50 + 'px'
+	var targetStyle = window.getComputedStyle(target)
+	popOver.style.top  = parseFloat(targetStyle.top) + parseFloat(targetStyle.height) - 100 + 'px'
+	popOver.style.left = parseFloat(targetStyle.left) + parseFloat(targetStyle.width)/2 - 50 + 'px'
+
 }
 
 function updatePopoverContent(target){
-
 }
 
 
