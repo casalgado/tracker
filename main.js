@@ -45,7 +45,7 @@ function saveEntry(e) {											   // saves entry, called by for submit.
     end: entryEnd,
 		type: entryType,
   }
-
+	
 	entry.duration = function() {
 		return moment.duration(moment(this.end).diff(moment(this.start))).humanize()
 	}

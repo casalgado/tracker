@@ -103,7 +103,6 @@ var holdPopOver = function(e) {
 	document.getElementById('popOver').style.display = 'block'
 }
 
-
 var showPopOver = function(e) {
     var popOver = document.getElementById('popOver')
 		popOver.style.display = 'block'
