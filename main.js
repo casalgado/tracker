@@ -46,6 +46,10 @@ function saveEntry(e) {											   // saves entry, called by for submit.
 		type: entryType,
   }
 
+	entry.duration = function() {
+		return moment.duration(moment(this.end).diff(moment(this.start))).humanize()
+	}
+
   if (localStorage.getItem('entries') === null) {				// saves entry in local storage
     var entries = [];											// if no entries exists, creates entries array
     entries.push(entry);
@@ -58,9 +62,10 @@ function saveEntry(e) {											   // saves entry, called by for submit.
 
   document.getElementById('entryInputForm').reset();             // resets input form
 
-  fetchEntries();                                                // fetches entries once more and focuses start
+
   e.preventDefault();
-  focusStart();
+  focusStart();																			// focuses start
+	fetchEntries();  																	// fetches entries once more
 }
 
 function sortEntries(array){                                     // sorts entry array in reverse order
@@ -136,4 +141,16 @@ function updateEntryType(entryId, newType){
 	}
 	localStorage.setItem('entries', JSON.stringify(entries));
   fetchEntries();
+}
+
+function getEntry(entryId){
+	var entries = JSON.parse(localStorage.getItem('entries'))
+	var entry = {}
+	for(var i = 0; i < entries.length; i++) {
+		if (entries[i].id == entryId) {
+			entry = entries[i]
+			break
+		}
+	}
+	return entry
 }

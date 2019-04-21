@@ -32,13 +32,13 @@ function drawEntry(entry) {								           	// draws each entry
 	}
 															// creates entry bar, used to visualize time and duration of entry
   	var entryBar   = document.createElement('div')            // creates DOM elemens
-  	var entryStart = parseFloat(timeToWidth(entry.start))   // calculates starting position
-  	var entryEnd   = parseFloat(timeToWidth(entry.end))     // and width, based on entry data
-  	entryBar.id = 'bar' + entry.id 																// sets element id
+  	var entryStart = parseFloat(timeToWidth(entry.start))     // calculates starting position
+  	var entryEnd   = parseFloat(timeToWidth(entry.end))       // and width, based on entry data
+  	entryBar.id = entry.id 																    // sets element id
   	entryBar.className   = 'entryBar entryType' + entry.type				// class
-  	entryBar.style.left  = entryStart + '%'												// start
-  	entryBar.style.width = entryEnd - entryStart + '%'    			  // duration
-		entryBar.addEventListener('mouseover', appendPopover)
+  	entryBar.style.left  = entryStart + '%'						  						// start
+  	entryBar.style.width = entryEnd - entryStart + '%'    			    // duration
+		entryBar.addEventListener('mouseover', appendPopover)						// and event listeners
 		entryBar.addEventListener('mouseover', showPopOver);
   	visualCont.appendChild(entryBar)	        			    // appends entryBar to visualContainer
 }
@@ -68,6 +68,7 @@ function entryYMD(entry) { 									// returns a string with date of entry, to u
 function appendPopover(e){                    // appends popOver to visual container
 	var popOver = document.getElementById('popOver')
 	e.target.parentElement.appendChild(popOver)   // target in this case is hour segment. parentElement selects visualCont
+	console.log(e.target)
 }
 
 function updatePopoverPosition(popOver, target){
@@ -93,6 +94,9 @@ function flattenEntryBars(){   													// resets all entryBar z-index prope
 }
 
 function updatePopoverContent(target){
+	var start    = document.getElementById('startDesc').innerHTML = 'Start ' + moment(getEntry(target.id).start).format('HH:mm')
+	var end      = document.getElementById('endDesc').innerHTML = 'End ' + moment(getEntry(target.id).end).format('HH:mm')
+	var duration = document.getElementById('durationDesc').innerHTML = 'Duration: '
 }
 
 var holdPopOver = function(e) {
@@ -105,7 +109,7 @@ var showPopOver = function(e) {
 		popOver.style.display = 'block'
 		elevateEntryBars(e.target)
 		updatePopoverPosition(popOver, e.target)
-		updatePopoverContent(popOver, e.target)
+		updatePopoverContent(e.target)
 };
 
 var hidePopOver = function(e) {
