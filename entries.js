@@ -8,8 +8,28 @@ function Entry(id, start, end, type) {
 }
 
 function calculateDuration(entry){
-  return moment.duration(moment(entry.end).diff(moment(entry.start))).humanize()
+  return moment.duration(moment(entry.end).diff(moment(entry.start))).as('minutes') + ' minutes'
 }
+
+// returns array object with all entries
+function allEntries(){
+  return JSON.parse(localStorage.getItem('entries'))
+}
+
+// toggles throug possible types
+function toggleType(){
+  entryId = document.getElementById('popOver')
+  entry = getEntry(entryId)
+  types = []
+  allEntries().forEach(function(e){
+    types.push(parseInt(e.type))
+  })
+  possibleTypes = [...new Set(types)];
+  i = possibleTypes.indexOf(parseInt(entry.type))
+  newType = possibleTypes[(i + 1 + possibleTypes.length) % possibleTypes.length]
+  updateEntryType(entryId, newType)
+}
+
 
 function deleteEntry(entryId){
   var entries = JSON.parse(localStorage.getItem('entries'));
@@ -24,7 +44,7 @@ function deleteEntry(entryId){
 }
 
 function updateEntryType(entryId, newType){
-	var entries = JSON.parse(localStorage.getItem('entries'))
+	var entries = allEntries()
 	for(var i = 0; i < entries.length; i++) {
 		if (entries[i].id == entryId) {
 			entries[i].type = newType

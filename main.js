@@ -10,7 +10,7 @@ function onLoad(){
 
 function fetchEntries () {  // fetches all entries and calls the drawEntry function for each one.
 
-  var entries = JSON.parse(localStorage.getItem('entries')) || []  // parses entry data object from localStorage
+  var entries = allEntries() || []  // parses entry data object from localStorage
   sortEntries(entries)											   // and sorts it
   var entryList = document.getElementById('entryList');            // gets DOM object Entry list
 

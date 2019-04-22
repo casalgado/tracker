@@ -9,7 +9,7 @@ function appendPopover(e){                    // appends popOver to visual conta
 function updatePopoverPosition(popOver, target){
 	var targetStyle = window.getComputedStyle(target)
 	popOver.style.top  = parseFloat(targetStyle.top) + parseFloat(targetStyle.height) - 100 + 'px'
-	popOver.style.left = parseFloat(targetStyle.left) + parseFloat(targetStyle.width)/2 - 50 + 'px'
+	popOver.style.left = parseFloat(targetStyle.left) + parseFloat(targetStyle.width)/2 - 90 + 'px'
 }
 
 function elevateEntryBars(target){										// modifies zindex of entryBars in current visualCont
@@ -29,9 +29,9 @@ function flattenEntryBars(){   													// resets all entryBar z-index prope
 }
 
 function updatePopoverContent(target){
-	var start    = document.getElementById('startDesc').innerHTML = 'Start ' + moment(getEntry(target.id).start).format('HH:mm')
-	var end      = document.getElementById('endDesc').innerHTML = 'End ' + moment(getEntry(target.id).end).format('HH:mm')
-	var duration = document.getElementById('durationDesc').innerHTML = 'Duration: ' + calculateDuration(getEntry(target.id))
+	var start    = document.getElementById('startDesc').innerHTML = 'Start: ' + moment(getEntry(target.id).start).format('HH:mm')
+	var end      = document.getElementById('endDesc').innerHTML = 'End: ' + moment(getEntry(target.id).end).format('HH:mm')
+	var duration = document.getElementById('durationDesc').innerHTML = 'Dur: ' + calculateDuration(getEntry(target.id))
 }
 
 var holdPopOver = function(e) {

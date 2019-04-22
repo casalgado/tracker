@@ -36,8 +36,8 @@ function drawEntry(entry) {								           	// draws each entry
   	var entryEnd   = parseFloat(timeToWidth(entry.end))       // and width, based on entry data
   	entryBar.id = entry.id 																    // sets element id
   	entryBar.className   = 'entryBar entryType' + entry.type				// class
-  	entryBar.style.left  = entryStart + '%'						  						// start
-  	entryBar.style.width = entryEnd - entryStart + '%'    			    // duration
+  	entryBar.style.left  = Math.round((entryStart)*1000)/1000 + '%'						  						// start
+  	entryBar.style.width = Math.round((entryEnd - entryStart)*1000)/1000 + '%'    			    // duration
 		entryBar.addEventListener('mouseover', appendPopover)						// and event listeners
 		entryBar.addEventListener('mouseover', showPopOver);
   	visualCont.appendChild(entryBar)	        			    // appends entryBar to visualContainer
@@ -57,5 +57,5 @@ function timeToWidth(date){									// converts a time format to a % width, used
 	time = moment(date)
 	hours = time.hours()
 	minutes = time.minutes()/60
-	return ((hours + minutes)*100/24).toFixed(2)
+	return ((hours + minutes)*100/24)
 }

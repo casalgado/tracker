@@ -42,6 +42,10 @@
 	background-color: orange;
 }
 
+.entryType3 {
+	background-color: maroon;
+}
+
 .legendContainer {
 	width: 100%;
 	position: relative;
@@ -63,7 +67,6 @@
 	width: 180px;
 	height: 105px;
 	z-index: 1;
-	border: 1px solid gray;
 	padding: 2px;
 	/* if height is modified, check for hidePopOver() bug when mouseleave over entryBar */
 }
@@ -77,10 +80,24 @@
 
 #popOverContent{
 	width: 100%;
-	background-color: lightslategray;
+	background-color: rgb(233, 236, 239);;
 	border-radius: 2px;
-	border: 1px solid black;
+	border: 1px solid lightslategray;
 	font-size: 10px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+
+.btn-popover {
+	position: absolute;
+	height: 12px;
+	width: 12px;
+	padding: 0px;
+	right: 10px;
+	top: 10px;
+	border-radius: 4px;
+}
+
+#toggleClassButton {
+	top: 28px;
 }
