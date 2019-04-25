@@ -16,12 +16,11 @@ function allEntries(){
   return JSON.parse(localStorage.getItem('entries'))
 }
 
-// toggles throug possible types
-function toggleType(){
-  entryId = document.getElementById('popOver')
+// toggles through possible types
+function toggleType(entryId){
   entry = getEntry(entryId)
   types = []
-  allEntries().forEach(function(e){
+  allEntries().forEach(function(e){ // this method can be abstracted so it runs only once, onLoad, and returns an array of types
     types.push(parseInt(e.type))
   })
   possibleTypes = [...new Set(types)];

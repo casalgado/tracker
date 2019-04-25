@@ -34,6 +34,15 @@ function updatePopoverContent(target){
 	var duration = document.getElementById('durationDesc').innerHTML = 'Dur: ' + calculateDuration(getEntry(target.id))
 }
 
+function updateDeleteButton(target){
+	document.getElementById('deleteButton').setAttribute('onclick', `deleteEntry(${target.id})`)
+
+}
+
+function updateUpdateButton(target) {
+	document.getElementById('toggleClassButton').setAttribute('onclick', `toggleType(${target.id})`)
+}
+
 var holdPopOver = function(e) {
 	document.getElementById('popOver').style.display = 'block'
 }
@@ -41,6 +50,8 @@ var holdPopOver = function(e) {
 var showPopOver = function(e) {
     var popOver = document.getElementById('popOver')
 		popOver.style.display = 'block'
+		updateDeleteButton(e.target)
+		updateUpdateButton(e.target)
 		elevateEntryBars(e.target)
 		updatePopoverPosition(popOver, e.target)
 		updatePopoverContent(e.target)
