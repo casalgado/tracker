@@ -61,7 +61,7 @@
 	text-align: center;
 }
 
-#popOver {
+#popoverContainer {
 	display: none;
 	position: absolute;
 	width: 180px;
@@ -71,7 +71,7 @@
 	/* if height is modified, check for hidePopOver() bug when mouseleave over entryBar */
 }
 
-#popOver p {
+#popoverContainer p {
 	margin: 0px 5px 0px 5px;
 	display: inline-block;
 	width: 50%;

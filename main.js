@@ -1,8 +1,8 @@
 
 function onLoad(){
 	document.getElementById('entryInputForm').addEventListener('submit', saveEntry);  // attaches saveEntry() to form 'submit' button
-	document.getElementById('popOver').addEventListener('mouseover', holdPopOver)
-	document.getElementById('popOver').addEventListener('mouseleave', hidePopOver)
+	document.getElementById('popoverContainer').addEventListener('mouseover', holdPopOver)
+	document.getElementById('popoverContainer').addEventListener('mouseleave', hidePopOver)
 	focusStart()
 	fetchEntries()
 	drawLegend()
@@ -14,6 +14,8 @@ function fetchEntries () {  // fetches all entries and calls the drawEntry funct
   sortEntries(entries)											   // and sorts it
   var entryList = document.getElementById('entryList');            // gets DOM object Entry list
 
+
+	document.getElementById('mainContainer').appendChild(document.getElementById('popoverContainer'))
   entryList.innerHTML = '';										   // empties DOM object Entry List
 
   for (var i = 0; i < entries.length; i++) {					   // iterates through entry data

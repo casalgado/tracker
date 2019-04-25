@@ -1,7 +1,7 @@
 
 
 function appendPopover(e){                    // appends popOver to visual container
-	var popOver = document.getElementById('popOver')
+	var popOver = document.getElementById('popoverContainer')
 	e.target.parentElement.appendChild(popOver)   // target in this case is hour segment. parentElement selects visualCont
 	console.log(e.target)
 }
@@ -44,11 +44,11 @@ function updateUpdateButton(target) {
 }
 
 var holdPopOver = function(e) {
-	document.getElementById('popOver').style.display = 'block'
+	document.getElementById('popoverContainer').style.display = 'block'
 }
 
 var showPopOver = function(e) {
-    var popOver = document.getElementById('popOver')
+    var popOver = document.getElementById('popoverContainer')
 		popOver.style.display = 'block'
 		updateDeleteButton(e.target)
 		updateUpdateButton(e.target)
@@ -58,7 +58,7 @@ var showPopOver = function(e) {
 };
 
 var hidePopOver = function(e) {
-    document.getElementById('popOver').style.display = 'none'
-    document.getElementById('popOver').style.zIndex = '1'
+    document.getElementById('popoverContainer').style.display = 'none'
+    document.getElementById('popoverContainer').style.zIndex = '1'
 		flattenEntryBars()
 };
