@@ -16,7 +16,7 @@ function elevateEntryBars(target){										// modifies zindex of entryBars in c
 	var children = target.parentElement.childNodes		  // this is done to keep popover below entry bars in current visualCont and above all other entry bars.
 	for (var i = 0; i < children.length; i++) {
 		if (children[i].className.includes('entryBar')) {
-			children[i].style.zIndex = '2'
+			children[i].style.zIndex = '4'
 		}
 	}
 }
@@ -59,6 +59,6 @@ var showPopOver = function(e) {
 
 var hidePopOver = function(e) {
     document.getElementById('popoverContainer').style.display = 'none'
-    document.getElementById('popoverContainer').style.zIndex = '1'
+    document.getElementById('popoverContainer').style.zIndex = '3'
 		flattenEntryBars()
 };

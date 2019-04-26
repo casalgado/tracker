@@ -14,15 +14,7 @@
 
     <body onload="onLoad()">
       <div id="mainContainer" class="container">
-        <div id="popoverContainer">
-          <div id="popOverContent">
-            <p id="startDesc">Start: </p>
-            <p id="endDesc">End:  </p>
-            <p id="durationDesc"> Duration: </p>
-            <button type="button" id='deleteButton' class="btn btn-danger btn-popover"></button>
-            <button type="button" id='toggleClassButton' class="btn btn-warning btn-popover"></button>
-          </div>
-        </div>
+
         <h6 class="pageTitle"> Tracker <small> To perceive is to know </small> </h6>
         <div class="jumbotron">
           <form id="entryInputForm">
@@ -55,8 +47,17 @@
 
           </form>
         </div>
-        <div id='legendContainer'></div>
+        <div id='legendContainer' class="sticky"></div>
         <div id='entryList'> </div>
+        <div id="popoverContainer">
+          <div id="popOverContent">
+            <p id="startDesc">Start: </p>
+            <p id="endDesc">End:  </p>
+            <p id="durationDesc"> Duration: </p>
+            <button type="button" id='deleteButton' class="btn btn-danger btn-popover"></button>
+            <button type="button" id='toggleClassButton' class="btn btn-warning btn-popover"></button>
+          </div>
+        </div>
 
       </div>
 

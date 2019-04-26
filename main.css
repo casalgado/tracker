@@ -2,6 +2,13 @@
 	margin-top: 10px;
 }
 
+.sticky {
+		position: -webkit-sticky;
+		top: 0px;
+		background-color: white;
+		z-index: 3;
+}
+
 .jumbotron {
 	border-radius: 0px;
 	padding: 10px;

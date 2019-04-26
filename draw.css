@@ -46,13 +46,15 @@
 	background-color: maroon;
 }
 
-.legendContainer {
-	width: 100%;
-	position: relative;
+#legendContainer {
+	width: 106%;
+	margin-left: -3%;
+	height: 20px;
+	padding: 5px 20px 0px 20px;
 }
 
 .legendSegment {
-	font-size: 8px;
+	font-size: 10px;
 	float: left;
 	width: 3.1666%;
 	margin: .5%;
