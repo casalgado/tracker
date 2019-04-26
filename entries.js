@@ -23,7 +23,7 @@ function toggleType(entryId){
   allEntries().forEach(function(e){ // this method can be abstracted so it runs only once, onLoad, and returns an array of types
     types.push(parseInt(e.type))
   })
-  possibleTypes = [...new Set(types)];
+  possibleTypes = [...new Set(types)].sort()
   i = possibleTypes.indexOf(parseInt(entry.type))
   newType = possibleTypes[(i + 1 + possibleTypes.length) % possibleTypes.length]
   updateEntryType(entryId, newType)
@@ -47,11 +47,12 @@ function updateEntryType(entryId, newType){
 	for(var i = 0; i < entries.length; i++) {
 		if (entries[i].id == entryId) {
 			entries[i].type = newType
+      entrybar = document.getElementById(entries[i].id)
+      entrybar.className = "entryBar entryType" + newType  // this can be improved
 			break
 		}
 	}
 	localStorage.setItem('entries', JSON.stringify(entries));
-  fetchEntries();
 }
 
 function getEntry(entryId){
