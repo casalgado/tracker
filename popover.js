@@ -39,8 +39,9 @@ function updateDeleteButton(target){
 
 }
 
+// target correspond to the entryBar dom object that has an id attribute corresponding to its entry object.
 function updateUpdateButton(target) {
-	document.getElementById('toggleClassButton').setAttribute('onclick', `toggleType(${target.id})`)
+	document.getElementById('toggleClassButton').setAttribute('onclick', `changeType(${target.id})`)
 }
 
 var holdPopOver = function(e) {

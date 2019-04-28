@@ -1,15 +1,14 @@
 
-.visualContainer {
+.dayVisualization {
 	width: 102%;
 	margin-left: -1%;
-	height: 50px;
 	border-left: 1px solid lightslategray;
 	position: relative;
 	clear: both;
 	margin-bottom: 5px;
 }
 
-.dateContainer {
+.dayTitle {
 	font-size: 10px;
 	margin: 0px;
 	width: 100%;
@@ -17,9 +16,9 @@
 }
 
 .hourSegment {
-	height: 100%;
+	height: 50px;
 	width: 4.167%;
-	float: left;
+	display: inline-block;
 	border-right: 1px solid lightslategray;
 	background-color: rgb(233, 236, 239);
 }
@@ -28,7 +27,6 @@
 	position: absolute;
 	top: 25%;
 	height: 50%;
-	opacity: .8;
 	background-color: gray;
 	border-radius: 3px;
 
@@ -46,16 +44,16 @@
 	background-color: maroon;
 }
 
-#legendContainer {
+#legend {
 	width: 106%;
 	margin-left: -3%;
-	height: 22px;
-	padding: 3px 20px 0px 20px;
+	padding: 0px 20px 0px 20px;
 }
 
 .legendSegment {
 	font-size: 10px;
-	float: left;
+	height: 22px;
+	display: inline-block;
 	width: 3.1666%;
 	margin: .5%;
 	margin-top: 0px;

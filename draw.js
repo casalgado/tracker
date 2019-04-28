@@ -1,61 +1,79 @@
 
-function drawEntry(entry) {								           	// draws each entry
-	var list = document.getElementById('entryList')			// assigns DOM element entryList to variable
+function drawEntry(entry) {
 
-	if (document.getElementById('ec-' + entryYMD(entry))) {			         // determines if an entryContainer has been drawn for an entry
-		var cont       = document.getElementById('ec-' + entryYMD(entry))  // with the same date. If so, assigns it to a variable.
-		var visualCont = document.getElementById('vc-' + entryYMD(entry))  // Also assigns visual container and date container to variable.
-		var dateCont   = document.getElementById('dc-' + entryYMD(entry))
+	if (dayExists(entry)) {
+		var dayVisualization = document.getElementById('dv-' + getDateString(entry))
+	} else {
+		var entryList        = document.getElementById('entryList')
+		var dayContainer     = createDayContainer(entry)
+		var dayTitle         = createDayTitle(entry)
+		var dayVisualization = createDayVisualization(entry)
+
+		entryList.appendChild(dayContainer)
+		dayContainer.appendChild(dayTitle)
+		dayContainer.appendChild(dayVisualization)
 	}
-	else {
-		var cont = document.createElement('div')			// if no entryContainer exists for that day, draws it.
-		cont.className = 'entryContainer'				    	// and appends it to entryList
-		cont.id = 'ec-' + entryYMD(entry)
-		list.appendChild(cont)
 
-		var visualCont = document.createElement('div')		// creates a visualization container to hold the
-		visualCont.className = 'visualContainer' 		    	// entry visualization
-		visualCont.id = 'vc-' + entryYMD(entry)
-		cont.appendChild(visualCont)
-
-		var dateCont = document.createElement('p')		// creates a date container to hold date data for entry
-		dateCont.className = 'dateContainer'
-		dateCont.id = 'dc-' + entryYMD(entry)
-		dateCont.innerHTML = moment(entry.start).format('dd MMM D')
-		cont.prepend(dateCont)
-
-		for (var i = 0; i < 24; i++) {					        	// creates segments used to mark the time of day
-	    	var segment = document.createElement('div')	 	// appends them to entryContainer
-	    	segment.className = 'hourSegment hs' + i
-	    	visualCont.appendChild(segment)
-	  }
-	}
-															// creates entry bar, used to visualize time and duration of entry
-  	var entryBar   = document.createElement('div')            // creates DOM elemens
-  	var entryStart = parseFloat(timeToWidth(entry.start))     // calculates starting position
-  	var entryEnd   = parseFloat(timeToWidth(entry.end))       // and width, based on entry data
-  	entryBar.id = entry.id 																    // sets element id
-  	entryBar.className   = 'entryBar entryType' + entry.type				// class
-  	entryBar.style.left  = Math.round((entryStart)*1000)/1000 + '%'						  						// start
-  	entryBar.style.width = Math.round((entryEnd - entryStart)*1000)/1000 + '%'    			    // duration
-		entryBar.addEventListener('mouseover', appendPopover)						// and event listeners
-		entryBar.addEventListener('mouseover', showPopOver);
-  	visualCont.appendChild(entryBar)	        			    // appends entryBar to visualContainer
+  	var entryBar   = createEntryBar(entry)
+  	dayVisualization.appendChild(entryBar)
 }
 
-function drawLegend() {										// draws legend to be used atop entry list
-		cont = document.getElementById('legendContainer')
-		for (var i = 0; i < 24; i++) {						// draws one segment per hour of the day
+function createDayContainer(entry){
+	var dayContainer = document.createElement('div')
+	dayContainer.id = 'dc-' + getDateString(entry)
+	return dayContainer
+}
+
+function createDayTitle(entry){
+	var dayTitle = document.createElement('p')
+	dayTitle.className = 'dayTitle'
+	dayTitle.id = 'dt-' + getDateString(entry)
+	dayTitle.innerHTML = moment(entry.start).format('dd MMM D')
+	return dayTitle
+}
+
+function createDayVisualization(entry){
+	var dayVisualization = document.createElement('div')
+	dayVisualization.className = 'dayVisualization'
+	dayVisualization.id = 'dv-' + getDateString(entry)
+	createHourSegments(dayVisualization)
+	return dayVisualization
+}
+
+function createHourSegments(dayVisualization) {
+	for (var i = 0; i < 24; i++) {
+			var segment = document.createElement('div')
+			segment.className = 'hourSegment hs' + i
+			dayVisualization.appendChild(segment)
+	}
+}
+
+function createEntryBar(entry){
+	var entryBar   = document.createElement('div')
+	var entryStart = parseFloat(timeToPercentage(entry.start))
+	var entryEnd   = parseFloat(timeToPercentage(entry.end))
+	entryBar.id = entry.id
+	entryBar.className   = 'entryBar entryType' + entry.type
+	entryBar.style.left  = entryStart + '%'
+	entryBar.style.width = (entryEnd - entryStart) + '%'
+	entryBar.addEventListener('mouseover', appendPopover)
+	entryBar.addEventListener('mouseover', showPopOver)
+	return entryBar
+}
+
+function drawLegend() {
+		legend = document.getElementById('legend')
+		for (var i = 0; i < 24; i++) {
 	    	var segment = document.createElement('p')
 	    	segment.className = 'legendSegment'
 	    	segment.innerHTML = ("0" + i).slice(-2) + ":00"
-	    	cont.appendChild(segment)
+	    	legend.appendChild(segment)
 	  	}
 }
 
-function timeToWidth(date){									// converts a time format to a % width, used by drawEntry
-	time = moment(date)
-	hours = time.hours()
-	minutes = time.minutes()/60
-	return ((hours + minutes)*100/24)
+function timeToPercentage(time){
+	date = moment(time)
+	hours = date.hours()
+	minutes = date.minutes()/60
+	return Math.round(parseFloat((hours + minutes)*100/24)*1000)/1000
 }
