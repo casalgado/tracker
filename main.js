@@ -18,18 +18,9 @@ function fetchEntries () {
 	document.getElementById('mainContainer').appendChild(document.getElementById('popoverContainer'))
   entryList.innerHTML = '';
 
-  for (var i = 0; i < reverseArray(entries).length; i++) {
+  for (var i = 0; i < entries.length; i++) {
     drawEntry(entries[i])
   }
-}
-
-function reverseArray(array){
-	array.sort(function(a, b) {
-		time1 = moment(a.start)
-		time2 = moment(b.start)
-    	return time2 - time1;
-	});
-	return array
 }
 
 function moveFocus(num, limit, func) {

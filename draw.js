@@ -9,7 +9,7 @@ function drawEntry(entry) {
 		var dayTitle         = createDayTitle(entry)
 		var dayVisualization = createDayVisualization(entry)
 
-		entryList.appendChild(dayContainer)
+		entryList.prepend(dayContainer)
 		dayContainer.appendChild(dayTitle)
 		dayContainer.appendChild(dayVisualization)
 	}
@@ -56,7 +56,6 @@ function createEntryBar(entry){
 	entryBar.className   = 'entryBar entryType' + entry.type
 	entryBar.style.left  = entryStart + '%'
 	entryBar.style.width = (entryEnd - entryStart) + '%'
-	entryBar.addEventListener('mouseover', appendPopover)
 	entryBar.addEventListener('mouseover', showPopOver)
 	return entryBar
 }
