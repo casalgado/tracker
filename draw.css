@@ -1,6 +1,7 @@
 
 .dayVisualization {
 	width: 102%;
+	height: 50px;
 	margin-left: -1%;
 	border-left: 1px solid lightslategray;
 	position: relative;
@@ -16,7 +17,7 @@
 }
 
 .hourSegment {
-	height: 50px;
+	height: 100%;
 	width: 4.167%;
 	display: inline-block;
 	border-right: 1px solid lightslategray;
@@ -25,23 +26,27 @@
 
 .entryBar {
 	position: absolute;
-	top: 25%;
-	height: 50%;
+	top: 0;
+	height: 100%;
 	background-color: gray;
-	border-radius: 3px;
+	/* border-left:  3px solid;
+	border-right: 3px solid; */
 
 }
 
 .entryType1 {
-	background-color: deepskyblue;
+	background-color: rgba(0, 191, 255, 1 );
+	border-color: rgba(0, 191, 255 ,1 );
 }
 
 .entryType2 {
-	background-color: orange;
+	background-color: rgba(255,165,0 ,1);
+	border-color: rgba(255,165,0 ,1);
 }
 
 .entryType3 {
-	background-color: maroon;
+	background-color: rgba(128,0,0 ,1);
+	border-color: rgba(128,0,0 ,1);
 }
 
 #legend {
@@ -68,6 +73,7 @@
 	height: 105px;
 	z-index: 1;
 	padding: 2px;
+	transition: all 5000 ease-in;
 	/* if height is modified, check for hidePopOver() bug when mouseleave over entryBar */
 }
 
