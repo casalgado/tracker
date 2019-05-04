@@ -2,6 +2,9 @@
 ######################
 *.ai
 
+# Database #
+######################
+firebase-app.js
 
 # OS generated files #
 ######################
