@@ -1,27 +1,40 @@
 
 function onLoad(){
-	POSSIBLE_TYPES = getPossibleTypesOfEntries()
-	document.getElementById('entryInputForm').addEventListener('submit', createEntry);
-	document.getElementById('popoverContainer').addEventListener('mouseover', holdPopOver)
-	document.getElementById('popoverContainer').addEventListener('mouseleave', hidePopOver)
-	focusStart()
-	fetchEntries()
-	drawLegend()
+	POSSIBLE_TYPES = []
+	firebase.auth().onAuthStateChanged(function(user) {
+	  if (user) {
+			setTimeout(function(){fetchEntries(user.uid)}, 0)
+			setTimeout(function(){fetchEntries(user.uid)}, 1000)
+	  } else {
+
+	  }
+	});
+	document.getElementById('timeEntryInputForm').addEventListener('submit', createTimeEntry);
+	document.getElementById('moneyEntryInputForm').addEventListener('submit', createMoneyEntry);
 }
 
-function fetchEntries () {
+function fetchEntries (userId) {
+  var timeEntries    = allEntries('time', userId)
+  var moneyEntries   = allEntries('money', userId)
+  var timeEntryList  = document.getElementById('timeEntryList');
+  var moneyEntryList = document.getElementById('moneyEntryList');
+	timeEntryList.innerHTML = ''
+	moneyEntryList.innerHTML = ''
+  for (var i = 0; i < timeEntries.length; i++) {
+    drawEntry(timeEntries[i], timeEntryList)
+  }
 
-  var entries = allEntries()
-  var entryList = document.getElementById('entryList');
-
-	// popover should be removed from entryList or it will be deleted when reseting it.
-	document.getElementById('mainContainer').appendChild(document.getElementById('popoverContainer'))
-  entryList.innerHTML = '';
-
-  for (var i = 0; i < entries.length; i++) {
-    drawEntry(entries[i])
+	for (var i = 0; i < moneyEntries.length; i++) {
+    drawEntry(moneyEntries[i], moneyEntryList)
   }
 }
+
+function drawEntry(entry, element) {
+	li = document.createElement('li')
+	li.innerHTML = JSON.stringify(entry)
+	element.appendChild(li)
+}
+
 
 function moveFocus(num, limit, func) {
   if (num.length === limit) {
@@ -29,30 +42,31 @@ function moveFocus(num, limit, func) {
   }
 }
 
-function focusEnd() {
-  document.getElementById('entryEnd').focus()
+function focusTimeEnd() {
+  document.getElementById('timeEntryEnd').focus()
 }
 
-function focusStart() {
-  document.getElementById('entryStart').focus()
+function focusTimeStart() {
+  document.getElementById('timeEntryStart').focus()
 }
 
-function focusDay() {
-  document.getElementById('entryDay').focus()
+function focusTimeDay() {
+  document.getElementById('timeEntryDay').focus()
 }
 
-function focusMonth() {
-  document.getElementById('entryMonth').focus()
+function focusTimeMonth() {
+  document.getElementById('timeEntryMonth').focus()
 }
 
-function focusYear() {
-  document.getElementById('entryYear').focus()
+function focusTimeYear() {
+  document.getElementById('timeEntryYear').focus()
 }
 
-function focusType() {
-	document.getElementById('entryType').focus()
+function focusTimeCategory() {
+	document.getElementById('timeEntryCategory').focus()
 }
 
-function resetInputForm() {
-	document.getElementById('entryInputForm').reset();
+function resetInputForms() {
+	document.getElementById('moneyEntryInputForm').reset();
+	document.getElementById('timeEntryInputForm').reset();
 }

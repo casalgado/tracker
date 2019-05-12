@@ -1,58 +1,136 @@
+function TimeEntry(start, end, category, eid){
+    this.start    = start;
+    this.end      = end;
+    this.category = category;
+    this.eid      = eid;
+    this.duration = function (){
+      return moment.duration(moment(this.end).diff(moment(this.start))).as('minutes') + ' minutes'
+    }
+}
 
-class Entry{
-  constructor(id, start, end, type){
-    this.id    = id;
-    this.start = start;
-    this.end   = end;
-    this.type  = type;
+function MoneyEntry(name, amount, category, subcategory, comment, date, eid){
+    this.name        = name;
+    this.amount      = amount;
+    this.category    = category;
+    this.subcategory = subcategory;
+    this.comment     = comment;
+    this.date        = date;
+    this.eid         = eid;
+}
+
+function allEntries(type, userId){
+  all = []
+  entries = firebase.database().ref(type + 'Entries')
+  entries.orderByChild("uid").equalTo(userId).on("value", function(snapshot) {
+    switch (type) {
+      case 'money':
+          snapshot.forEach(function(entry) {
+            all.push(new MoneyEntry(entry.val().name, entry.val().amount, entry.val().category, entry.val().subcategory, entry.val().comment, entry.val().date, entry.key))
+          });
+        break;
+      case 'time':
+          snapshot.forEach(function(entry) {
+            all.push(new TimeEntry(entry.val().start, entry.val().end, entry.val().category, entry.key))
+          });
+        break;
+    }
+  });
+  return all
+}
+
+function saveEntry(type, userId, entry){
+  var entriesRef = firebase.database().ref(type + 'Entries')
+  switch (type) {
+    case 'money':
+       key = entriesRef.push({
+        uid:  userId,
+        name:  entry.name,
+        amount:  entry.amount,
+        category:  entry.category,
+        subcategory:  entry.subcategory,
+        comment:  entry.comment,
+        date: entry.date
+      }).key
+      firebase.database().ref('users/' + userId).child(type + 'Entries').update({
+        [key]: true
+      })
+      break;
+    case 'time':
+       key = entriesRef.push({
+        uid: userId,
+        start: entry.start,
+        end: entry.end,
+        category: entry.category
+      }).key
+      firebase.database().ref('users/' + userId).child(type + 'Entries').update({
+        [key]: true
+      })
+      break;
   }
+  fetchEntries(userId)
 }
 
-function allEntries(){
-  var entries = localStorage.getItem('entries') || "[]"
-  return JSON.parse(entries)
+function getEntry(type, entryId){
+  var attributes = []
+  switch (type) {
+    case 'money':
+      firebase.database().ref('timeEntries/' + entryId).once('value', function(entry) {
+         attributes.push(entry.val().name, entry.val().amount, entry.val().category, entry.val().subcategory, entry.val().comment, entry.val().date, entry.key)
+      })
+      break;
+    case 'time':
+      firebase.database().ref('timeEntries/' + entryId).once('value', function(entry) {
+         attributes.push(entry.val().start, entry.val().end, entry.val().type, entry.key)
+      })
+      break;
+  }
+  var obj =  new Entry(attributes[0], attributes[1], attributes[2], attributes[3])
+  return obj
 }
 
-function getEntry(entryId){
-	var entries = allEntries()
-	var entry = {}
-	for(var i = 0; i < entries.length; i++) {
-		if (entries[i].id == entryId) {
-			entry = entries[i]
-			break
-		}
-	}
-	return entry
-}
+function createMoneyEntry(e) {
 
-function createEntry(e) {
+  var userId      = firebase.auth().currentUser.uid
+  var name        = document.getElementById('moneyEntryName').value
+  var amount      = document.getElementById('moneyEntryAmount').value
+  var category    = document.getElementById('moneyEntryCategory').value
+  var subcategory = document.getElementById('moneyEntrySubCategory').value
+  var comment     = document.getElementById('moneyEntryComment').value
+  var eid         = ''
+  var day         = document.getElementById('timeEntryDay').value
+  var month       = document.getElementById('timeEntryMonth').value
+  var year        = document.getElementById('timeEntryYear').value
 
-  var entryId    = newEntryId()
-  var entryType  = document.getElementById('entryType').value
+  var date  = convertToDate('0700', day, month, year).format('X')
+  var entry = new MoneyEntry(name, amount, category, subcategory, comment, date, eid)
 
-  var start_time = document.getElementById('entryStart').value
-  var end_time   = document.getElementById('entryEnd').value
-  var day        = document.getElementById('entryDay').value
-  var month      = document.getElementById('entryMonth').value
-  var year       = document.getElementById('entryYear').value
-
-  var entryStart = convertToDate(start_time, day, month, year);
-  var entryEnd   = convertToDate(end_time, day, month, year);
-
-  var entry = new Entry(entryId, entryStart, entryEnd, entryType)
-
-  saveEntry(entry);
-  drawEntry(entry);
+  saveEntry('money', userId, entry);
 
   e.preventDefault();
-  resetInputForm();
-  focusStart();
+  resetInputForms();
 }
 
-function saveEntry(entry){
-  var entries = allEntries()
-	entries.push(entry);
-  localStorage.setItem('entries', JSON.stringify(entries));
+function createTimeEntry(e) {
+
+  var userId      = firebase.auth().currentUser.uid
+  var start_time = document.getElementById('timeEntryStart').value
+  var end_time   = document.getElementById('timeEntryEnd').value
+  var category   = document.getElementById('timeEntryCategory').value
+  var day        = document.getElementById('timeEntryDay').value
+  var month      = document.getElementById('timeEntryMonth').value
+  var year       = document.getElementById('timeEntryYear').value
+  var eid        = ''
+
+  var entryStart = convertToDate(start_time, day, month, year).format('X');
+  var entryEnd   = convertToDate(end_time, day, month, year).format('X');
+
+  var entry = new TimeEntry(entryStart, entryEnd, category, eid)
+
+  saveEntry('time', userId, entry)
+
+  e.preventDefault();
+  resetInputForms();
+  focusTimeStart();
 }
 
 function updateEntry(entry){
@@ -128,24 +206,4 @@ function convertToDate(eHourMinute, eDay, eMonth, eYear) {
 	year      = eYear  || t.format('Y')
 	entryDate = moment(`${year}-${month}-${day}T${hours}:${minutes}:00`)
 	return entryDate
-}
-
-// methods below are used to draw entry
-function getDateString(entry) {
-	t = moment(entry.start)
-	return `${t.format('Y')}-${t.format('MM')}-${t.format('DD')}`
-}
-
-function recolorEntryBar(entry){
-  entrybar = document.getElementById(entry.id)
-  entrybar.className = "entryBar entryType" + entry.type
-}
-
-function deleteEntryBar(entryId) {
-  document.getElementById(entryId).style.display = 'none'
-  // it would be nice to add a method that deletes the entryBar container if it was the only entry of the day
-}
-
-function dayExists(entry){
-   if (document.getElementById('dc-' + getDateString(entry))) { return true }
 }

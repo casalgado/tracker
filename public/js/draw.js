@@ -1,22 +1,22 @@
 
-function drawEntry(entry) {
-
-	if (dayExists(entry)) {
-		var dayVisualization = document.getElementById('dv-' + getDateString(entry))
-	} else {
-		var entryList        = document.getElementById('entryList')
-		var dayContainer     = createDayContainer(entry)
-		var dayTitle         = createDayTitle(entry)
-		var dayVisualization = createDayVisualization(entry)
-
-		entryList.prepend(dayContainer)
-		dayContainer.appendChild(dayTitle)
-		dayContainer.appendChild(dayVisualization)
-	}
-
-  	var entryBar   = createEntryBar(entry)
-  	dayVisualization.appendChild(entryBar)
-}
+// function drawEntry(entry) {
+//
+// 	if (dayExists(entry)) {
+// 		var dayVisualization = document.getElementById('dv-' + getDateString(entry))
+// 	} else {
+// 		var entryList        = document.getElementById('entryList')
+// 		var dayContainer     = createDayContainer(entry)
+// 		var dayTitle         = createDayTitle(entry)
+// 		var dayVisualization = createDayVisualization(entry)
+//
+// 		entryList.prepend(dayContainer)
+// 		dayContainer.appendChild(dayTitle)
+// 		dayContainer.appendChild(dayVisualization)
+// 	}
+//
+//   	var entryBar   = createEntryBar(entry)
+//   	dayVisualization.appendChild(entryBar)
+// }
 
 function createDayContainer(entry){
 	var dayContainer = document.createElement('div')

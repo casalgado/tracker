@@ -7,58 +7,70 @@
 
     <title> Tracker </title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/draw.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="css/main.css">
   </head>
 
     <body onload="onLoad()">
       <div id="mainContainer" class="container">
-
-        <h6 class="pageTitle"> Tracker <small> To perceive is to know </small> </h6>
-        <div class="jumbotron">
-          <form id="entryInputForm">
-
-            <div class="form-group">
-              <input type="text" onkeyup="moveFocus(this.value, 4, focusEnd)" class="form-control" id="entryStart" placeholder="Start">
-            </div>
-
-            <div class="form-group">
-              <input type="text" onkeyup="moveFocus(this.value, 4, focusType)" class="form-control" id="entryEnd" placeholder="End">
-            </div>
-
-            <div class="form-group">
-              <input type="text" onkeyup="moveFocus(this.value, 1, focusDay)" class="form-control" id="entryType" placeholder="Type">
-            </div>
-
-            <div class="form-group">
-              <input type="text" onkeyup="moveFocus(this.value, 2, focusMonth)" class="form-control" id="entryDay" placeholder="Day">
-            </div>
-
-            <div class="form-group">
-              <input type="text" onkeyup="moveFocus(this.value, 2, focusYear)" class="form-control" id="entryMonth" placeholder="Month">
-            </div>
-
-            <div class="form-group">
-              <input type="text" class="form-control" id="entryYear" placeholder="Year">
-            </div>
-
-            <button type="submit" class="btn btn-dark btnSubmit">Add</button>
-
-          </form>
-        </div>
-        <div id='legend' class="sticky"></div>
-        <div id='entryList'> </div>
-        <div id="popoverContainer">
-          <div id="popOverContent">
-            <p id="startDesc">Start: </p>
-            <p id="endDesc">End:  </p>
-            <p id="durationDesc"> Duration: </p>
-            <button type="button" id='deleteButton' class="btn btn-danger btn-popover"></button>
-            <button type="button" id='toggleClassButton' class="btn btn-warning btn-popover"></button>
+        <h5 class="pageTitle"> Tracker <small> To perceive is to know </small> </h5>
+        <div id="formContainer"class="container">
+          <div class="jumbotron">
+            <h6>Time</h6>
+            <form id="timeEntryInputForm">
+              <div class="form-group">
+                <input type="text" onkeyup="moveFocus(this.value, 4, focusTimeEnd)" class="form-control" id="timeEntryStart" placeholder="Start">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="moveFocus(this.value, 4, focusTimeCategory)" class="form-control" id="timeEntryEnd" placeholder="End">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="moveFocus(this.value, 1, focusTimeDay)" class="form-control" id="timeEntryCategory" placeholder="Type">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="moveFocus(this.value, 2, focusTimeMonth)" class="form-control" id="timeEntryDay" placeholder="Day">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="moveFocus(this.value, 2, focusTimeYear)" class="form-control" id="timeEntryMonth" placeholder="Month">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control" id="timeEntryYear" placeholder="Year">
+              </div>
+              <button type="submit" class="btn btn-dark btnSubmit">Add</button>
+            </form>
+          </div>
+          <div class="jumbotron">
+            <h6>Money</h6>
+            <form id="moneyEntryInputForm">
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control" id="moneyEntryName" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control" id="moneyEntryAmount" placeholder="Amount">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control" id="moneyEntryCategory" placeholder="Category">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control" id="moneyEntrySubCategory" placeholder="Subcategory">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control" id="moneyEntryComment" placeholder="Comment">
+              </div>
+              <button type="submit" class="btn btn-dark btnSubmit">Add</button>
+            </form>
           </div>
         </div>
-
+        <div id="showMoneyContainer"class="container">
+          <h6> Today's Money </h6>
+          <div class="moneyChartContainer"></div>
+          <ul id="moneyEntryList"></ul>
+        </div>
+        <div id="showTimeContainer"class="container">
+          <h6> Today's Time </h6>
+          <div class="timeChartContainer"></div>
+          <ul id="timeEntryList"></ul>
+        </div>
       </div>
 
       <!-- Scripts -->
@@ -68,13 +80,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="js/firebase-app.js"></script>
         <script src="js/database.js"></script>
-        <script src="js/firebaseauth.js"></script>
         <script src="js/entries.js"></script>
         <script src="js/popover.js"></script>
-        <script src="js/draw.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/firebase-app.js"></script>
       <!-- -->
     </body>
 </html>

@@ -1,25 +1,29 @@
-[debug] [2019-05-07T13:22:12.137Z] ----------------------------------------------------------------------
-[debug] [2019-05-07T13:22:12.139Z] Command:       /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/node /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/firebase serve
-[debug] [2019-05-07T13:22:12.140Z] CLI Version:   6.8.0
-[debug] [2019-05-07T13:22:12.140Z] Platform:      darwin
-[debug] [2019-05-07T13:22:12.140Z] Node Version:  v11.14.0
-[debug] [2019-05-07T13:22:12.141Z] Time:          Tue May 07 2019 08:22:12 GMT-0500 (Colombia Standard Time)
-[debug] [2019-05-07T13:22:12.142Z] ----------------------------------------------------------------------
+[debug] [2019-05-11T23:17:50.597Z] ----------------------------------------------------------------------
+[debug] [2019-05-11T23:17:50.600Z] Command:       /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/node /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/firebase serve
+[debug] [2019-05-11T23:17:50.601Z] CLI Version:   6.9.2
+[debug] [2019-05-11T23:17:50.601Z] Platform:      darwin
+[debug] [2019-05-11T23:17:50.601Z] Node Version:  v11.14.0
+[debug] [2019-05-11T23:17:50.602Z] Time:          Sat May 11 2019 18:17:50 GMT-0500 (Colombia Standard Time)
+[debug] [2019-05-11T23:17:50.602Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2019-05-07T13:22:12.156Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-05-07T13:22:12.156Z] > authorizing via signed-in user
-[debug] [2019-05-07T13:22:12.156Z] [iam] checking project tracker-4d4e1 for permissions ["firebase.projects.get"]
-[debug] [2019-05-07T13:22:12.158Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1:testIamPermissions  
+[debug] [2019-05-11T23:17:50.617Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-05-11T23:17:50.617Z] > authorizing via signed-in user
+[debug] [2019-05-11T23:17:50.617Z] [iam] checking project tracker-4d4e1 for permissions ["firebase.projects.get"]
+[debug] [2019-05-11T23:17:50.619Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-05-11T23:17:50.619Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-05-11T23:17:51.058Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-11T23:17:51.084Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1:testIamPermissions  
 
-[debug] [2019-05-07T13:22:13.018Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-07T13:22:13.020Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1  
+[debug] [2019-05-11T23:17:52.074Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-11T23:17:52.076Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1  
  
-[debug] [2019-05-07T13:22:13.746Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-11T23:17:53.428Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Serving from '/Users/carlosalbertosalgado1/Desktop/tracker'...
 [info] 
-[debug] [2019-05-07T13:22:13.748Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/102325833706/clients/_:getWebAppConfig  
+[debug] [2019-05-11T23:17:53.431Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/102325833706/clients/_:getWebAppConfig  
  
-[debug] [2019-05-07T13:22:14.461Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-11T23:17:54.857Z] <<< HTTP RESPONSE 200
 [info] i  hosting: Serving hosting files from: public
 [info] ✔  hosting: Local server: http://localhost:5000
