@@ -1,76 +1,103 @@
-function TimeEntry(start, end, category, eid){
-    this.start    = start;
-    this.end      = end;
-    this.category = category;
-    this.eid      = eid;
-    this.duration = function (){
-      return moment.duration(moment(this.end).diff(moment(this.start))).as('minutes') + ' minutes'
+class Entry {
+    constructor(eid, uid){
+      this.eid = eid
+      this.uid = uid
     }
 }
 
-function MoneyEntry(name, amount, category, subcategory, comment, date, eid){
-    this.name        = name;
-    this.amount      = amount;
-    this.category    = category;
-    this.subcategory = subcategory;
-    this.comment     = comment;
-    this.date        = date;
-    this.eid         = eid;
+class TimeEntry extends Entry {
+  constructor(eid, uid, type, start, end, category){
+      super(eid, uid);
+      this.type     = type;
+      this.start    = start;
+      this.end      = end;
+      this.category = category;
+  }
+  duration(){
+    return moment.duration(moment(this.end, 'X').diff(moment(this.start, 'X'))).as('minutes') + ' minutes'
+  }
 }
 
-function allEntries(type, userId){
-  all = []
-  entries = firebase.database().ref(type + 'Entries')
-  entries.orderByChild("uid").equalTo(userId).on("value", function(snapshot) {
+class MoneyEntry extends Entry {
+  constructor(eid, uid, type, name, amount, category, subcategory, comment, date){
+      super(eid, uid);
+      this.type        = type;
+      this.name        = name;
+      this.amount      = amount;
+      this.category    = category;
+      this.subcategory = subcategory;
+      this.comment     = comment;
+      this.date        = date;
+  }
+}
+
+function allEntries(type, uid){
+  return new Promise(resolve => {
+    firebase.database().ref(type + 'Entries').orderByChild("uid").equalTo(uid).once("value").then(function(snapshot) {
+      switch (type) {
+        case 'money':
+            all = []
+            snapshot.forEach(function(entry) {
+              all.push(new MoneyEntry(entry.key, uid, entry.val().type, entry.val().name, entry.val().amount, entry.val().category, entry.val().subcategory, entry.val().comment, entry.val().date))
+            });
+          break;
+        case 'time':
+            all = []
+            snapshot.forEach(function(entry) {
+              all.push(new TimeEntry(entry.key, uid, entry.val().type, entry.val().start, entry.val().end, entry.val().category))
+            });
+          break;
+      } return resolve(all)
+    });
+  })
+}
+
+function saveEntry(type, uid, entry){
+  var entriesRef = firebase.database().ref(type + 'Entries')
     switch (type) {
       case 'money':
-          snapshot.forEach(function(entry) {
-            all.push(new MoneyEntry(entry.val().name, entry.val().amount, entry.val().category, entry.val().subcategory, entry.val().comment, entry.val().date, entry.key))
-          });
-        break;
-      case 'time':
-          snapshot.forEach(function(entry) {
-            all.push(new TimeEntry(entry.val().start, entry.val().end, entry.val().category, entry.key))
-          });
-        break;
-    }
-  });
-  return all
-}
-
-function saveEntry(type, userId, entry){
-  var entriesRef = firebase.database().ref(type + 'Entries')
-  switch (type) {
-    case 'money':
-       key = entriesRef.push({
-        uid:  userId,
-        name:  entry.name,
-        amount:  entry.amount,
-        category:  entry.category,
-        subcategory:  entry.subcategory,
-        comment:  entry.comment,
-        date: entry.date
-      }).key
-      firebase.database().ref('users/' + userId).child(type + 'Entries').update({
-        [key]: true
-      })
+        new Promise(resolve => {
+           var key = entriesRef.push({
+             uid:  uid,
+             type: entry.type,
+             name:  entry.name,
+             amount:  entry.amount,
+             category:  entry.category,
+             subcategory:  entry.subcategory,
+             comment:  entry.comment,
+             date: entry.date
+           }).key
+           return resolve(key)
+        })
+        .then(value => {
+          firebase.database().ref('users/' + uid).child(type + 'Entries').update({
+            [value]: true
+          })
+        })
+        .then(() => {fetchEntries(uid)}) // this can be abstracted if saveEntry returns a promise
       break;
-    case 'time':
-       key = entriesRef.push({
-        uid: userId,
-        start: entry.start,
-        end: entry.end,
-        category: entry.category
-      }).key
-      firebase.database().ref('users/' + userId).child(type + 'Entries').update({
-        [key]: true
-      })
+      case 'time':
+        new Promise(resolve => {
+           var key = entriesRef.push({
+            uid: uid,
+            type: entry.type,
+            start: entry.start,
+            end: entry.end,
+            category: entry.category
+          }).key
+           return resolve(key)
+        })
+        .then(value => {
+          firebase.database().ref('users/' + uid).child(type + 'Entries').update({
+            [value]: true
+          })
+        })
+        .then(() => {fetchEntries(uid)})
       break;
   }
-  fetchEntries(userId)
 }
 
-function getEntry(type, entryId){
+function getEntry(type, entryId){ // work in progress
   var attributes = []
   switch (type) {
     case 'money':
@@ -90,7 +117,7 @@ function getEntry(type, entryId){
 
 function createMoneyEntry(e) {
 
-  var userId      = firebase.auth().currentUser.uid
+  var uid      = firebase.auth().currentUser.uid
   var name        = document.getElementById('moneyEntryName').value
   var amount      = document.getElementById('moneyEntryAmount').value
   var category    = document.getElementById('moneyEntryCategory').value
@@ -102,17 +129,16 @@ function createMoneyEntry(e) {
   var year        = document.getElementById('timeEntryYear').value
 
   var date  = convertToDate('0700', day, month, year).format('X')
-  var entry = new MoneyEntry(name, amount, category, subcategory, comment, date, eid)
+  var entry = new MoneyEntry(eid, uid, 'money', name, amount, category, subcategory, comment, date)
 
-  saveEntry('money', userId, entry);
-
+  saveEntry('money', uid, entry);
   e.preventDefault();
   resetInputForms();
 }
 
 function createTimeEntry(e) {
 
-  var userId      = firebase.auth().currentUser.uid
+  var uid        = firebase.auth().currentUser.uid
   var start_time = document.getElementById('timeEntryStart').value
   var end_time   = document.getElementById('timeEntryEnd').value
   var category   = document.getElementById('timeEntryCategory').value
@@ -124,77 +150,15 @@ function createTimeEntry(e) {
   var entryStart = convertToDate(start_time, day, month, year).format('X');
   var entryEnd   = convertToDate(end_time, day, month, year).format('X');
 
-  var entry = new TimeEntry(entryStart, entryEnd, category, eid)
+  var entry = new TimeEntry(eid, uid, 'time', entryStart, entryEnd, category)
 
-  saveEntry('time', userId, entry)
+  saveEntry('time', uid, entry)
 
   e.preventDefault();
   resetInputForms();
   focusTimeStart();
 }
 
-function updateEntry(entry){
-  var entries = allEntries()
-	for(var i = 0; i < entries.length; i++) {
-		if (entries[i].id == entry.id) {
-			break
-		}
-	}
-  entries[i] = entry
-  localStorage.setItem('entries', JSON.stringify(entries));
-}
-
-function deleteEntry(entryId){
-  var entries = allEntries()
-  for(var i = 0; i < entries.length; i++) {
-    if (entries[i].id == entryId) {
-      entries.splice(i, 1);
-    }
-  }
-  localStorage.setItem('entries', JSON.stringify(entries));
-  deleteEntryBar(entryId)
-}
-
-function newEntryId(){
-  var entries = allEntries()
-  var maxId = entries.reduce(function(currentMax, currentValue) {
-    return Math.max(currentMax, currentValue.id)
-  }, 0)
-  return maxId + 1
-}
-
-function changeType(entryId){
-  entry = getEntry(entryId)
-  entry.type = getNextPossibleType(entry)
-  recolorEntryBar(entry)
-	updateEntry(entry)
-}
-
-function calculateDuration(entry){
-  return moment.duration(moment(entry.end).diff(moment(entry.start))).as('minutes') + ' minutes'
-}
-
-function getNextPossibleType(entry){
-  i = POSSIBLE_TYPES.indexOf(parseInt(entry.type))
-  newType = POSSIBLE_TYPES[(i + 1 + POSSIBLE_TYPES.length) % POSSIBLE_TYPES.length]
-  return newType
-}
-
-function getPossibleTypesOfEntries(){
-  types = []
-  allEntries().forEach(function(e){
-    types.push(parseInt(e.type))
-  })
-  possibleTypes = [...new Set(types)].sort()
-  return possibleTypes
-}
-
-function clearDatabase(){
-  if (confirm("are you sure?")) {
-    localStorage.setItem('entries', "");
-  }
-  fetchEntries()
-}
 
 // takes form parameters as strings and returns a date format. Is called by createEntry().
 function convertToDate(eHourMinute, eDay, eMonth, eYear) {

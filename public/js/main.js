@@ -3,10 +3,9 @@ function onLoad(){
 	POSSIBLE_TYPES = []
 	firebase.auth().onAuthStateChanged(function(user) {
 	  if (user) {
-			setTimeout(function(){fetchEntries(user.uid)}, 0)
-			setTimeout(function(){fetchEntries(user.uid)}, 1000)
+			fetchEntries(user.uid)
 	  } else {
-
+			alert('User not signed in')
 	  }
 	});
 	document.getElementById('timeEntryInputForm').addEventListener('submit', createTimeEntry);
@@ -14,19 +13,22 @@ function onLoad(){
 }
 
 function fetchEntries (userId) {
-  var timeEntries    = allEntries('time', userId)
-  var moneyEntries   = allEntries('money', userId)
-  var timeEntryList  = document.getElementById('timeEntryList');
+	var timeEntryList  = document.getElementById('timeEntryList');
   var moneyEntryList = document.getElementById('moneyEntryList');
 	timeEntryList.innerHTML = ''
 	moneyEntryList.innerHTML = ''
-  for (var i = 0; i < timeEntries.length; i++) {
-    drawEntry(timeEntries[i], timeEntryList)
-  }
 
-	for (var i = 0; i < moneyEntries.length; i++) {
-    drawEntry(moneyEntries[i], moneyEntryList)
-  }
+  allEntries('time', userId).then(value => {
+		for (var i = 0; i < value.length; i++) {
+	    drawEntry(value[i], timeEntryList)
+	  }
+	})
+
+	allEntries('money', userId).then(value => {
+		for (var i = 0; i < value.length; i++) {
+	    drawEntry(value[i], moneyEntryList)
+	  }
+	})
 }
 
 function drawEntry(entry, element) {
@@ -35,35 +37,14 @@ function drawEntry(entry, element) {
 	element.appendChild(li)
 }
 
-
-function moveFocus(num, limit, func) {
-  if (num.length === limit) {
-    func()
-  }
-}
-
-function focusTimeEnd() {
-  document.getElementById('timeEntryEnd').focus()
-}
-
-function focusTimeStart() {
-  document.getElementById('timeEntryStart').focus()
-}
-
-function focusTimeDay() {
-  document.getElementById('timeEntryDay').focus()
-}
-
-function focusTimeMonth() {
-  document.getElementById('timeEntryMonth').focus()
-}
-
-function focusTimeYear() {
-  document.getElementById('timeEntryYear').focus()
-}
-
-function focusTimeCategory() {
-	document.getElementById('timeEntryCategory').focus()
+function separateObject(obj){
+	var keys = []
+	var values = []
+	for (var prop in obj) {
+		keys.push(prop)
+		values.push(obj[prop])
+	}
+	return [keys, values]
 }
 
 function resetInputForms() {
