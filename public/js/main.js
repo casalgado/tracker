@@ -1,6 +1,5 @@
 
 function onLoad(){
-	POSSIBLE_TYPES = []
 	firebase.auth().onAuthStateChanged(function(user) {
 	  if (user) {
 			fetchEntries(user.uid)
@@ -8,8 +7,6 @@ function onLoad(){
 			alert('User not signed in')
 	  }
 	});
-	document.getElementById('timeEntryInputForm').addEventListener('submit', createTimeEntry);
-	document.getElementById('moneyEntryInputForm').addEventListener('submit', createMoneyEntry);
 }
 
 function fetchEntries (userId) {
@@ -25,6 +22,25 @@ function fetchEntries (userId) {
 	})
 
 	allEntries('money', userId).then(value => {
+		for (var i = 0; i < value.length; i++) {
+	    drawEntry(value[i], moneyEntryList)
+	  }
+	})
+}
+
+function fetchTodaysEntries (userId) {
+	var timeEntryList  = document.getElementById('timeEntryList');
+  var moneyEntryList = document.getElementById('moneyEntryList');
+	timeEntryList.innerHTML = ''
+	moneyEntryList.innerHTML = ''
+
+  todaysEntries('time', userId).then(value => {
+		for (var i = 0; i < value.length; i++) {
+	    drawEntry(value[i], timeEntryList)
+	  }
+	})
+
+	todaysEntries('money', userId).then(value => {
 		for (var i = 0; i < value.length; i++) {
 	    drawEntry(value[i], moneyEntryList)
 	  }

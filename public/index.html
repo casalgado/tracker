@@ -36,7 +36,7 @@
               <div class="form-group">
                 <input type="text" onkeyup="" class="form-control" id="timeEntryYear" placeholder="Year">
               </div>
-              <button type="submit" class="btn btn-dark btnSubmit">Add</button>
+              <button type="submit" onclick="createEntry('time'); return false" class="btn btn-dark btnSubmit">Add</button>
             </form>
           </div>
           <div class="jumbotron">
@@ -57,7 +57,7 @@
               <div class="form-group">
                 <input type="text" onkeyup="" class="form-control" id="moneyEntryComment" placeholder="Comment">
               </div>
-              <button type="submit" class="btn btn-dark btnSubmit">Add</button>
+              <button type="submit" onclick="createEntry('money'); return false" class="btn btn-dark btnSubmit">Add</button>
             </form>
           </div>
         </div>
@@ -83,6 +83,7 @@
         <script src="js/firebase-app.js"></script>
         <script src="js/database.js"></script>
         <script src="js/entries.js"></script>
+        <script src="js/queries.js"></script>
         <script src="js/popover.js"></script>
         <script src="js/focus.js"></script>
         <script src="js/main.js"></script>

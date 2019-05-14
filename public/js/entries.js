@@ -3,6 +3,18 @@ class Entry {
       this.eid = eid
       this.uid = uid
     }
+
+    saveEntry(){
+      return new Promise(resolve => {
+        var key = firebase.database().ref(this.type + 'Entries').push(this).key
+        return resolve(key)
+      })
+      .then(value => {
+        firebase.database().ref('users/' + this.uid).child(this.type + 'Entries').update({
+          [value]: true
+        })
+      })
+    }
 }
 
 class TimeEntry extends Entry {
@@ -31,134 +43,68 @@ class MoneyEntry extends Entry {
   }
 }
 
-function allEntries(type, uid){
-  return new Promise(resolve => {
-    firebase.database().ref(type + 'Entries').orderByChild("uid").equalTo(uid).once("value").then(function(snapshot) {
-      switch (type) {
-        case 'money':
-            all = []
-            snapshot.forEach(function(entry) {
-              all.push(new MoneyEntry(entry.key, uid, entry.val().type, entry.val().name, entry.val().amount, entry.val().category, entry.val().subcategory, entry.val().comment, entry.val().date))
-            });
-          break;
-        case 'time':
-            all = []
-            snapshot.forEach(function(entry) {
-              all.push(new TimeEntry(entry.key, uid, entry.val().type, entry.val().start, entry.val().end, entry.val().category))
-            });
-          break;
-      } return resolve(all)
-    });
-  })
-}
-
-function saveEntry(type, uid, entry){
-  var entriesRef = firebase.database().ref(type + 'Entries')
-    switch (type) {
-      case 'money':
-        new Promise(resolve => {
-           var key = entriesRef.push({
-             uid:  uid,
-             type: entry.type,
-             name:  entry.name,
-             amount:  entry.amount,
-             category:  entry.category,
-             subcategory:  entry.subcategory,
-             comment:  entry.comment,
-             date: entry.date
-           }).key
-           return resolve(key)
-        })
-        .then(value => {
-          firebase.database().ref('users/' + uid).child(type + 'Entries').update({
-            [value]: true
-          })
-        })
-        .then(() => {fetchEntries(uid)}) // this can be abstracted if saveEntry returns a promise
-      break;
-      case 'time':
-        new Promise(resolve => {
-           var key = entriesRef.push({
-            uid: uid,
-            type: entry.type,
-            start: entry.start,
-            end: entry.end,
-            category: entry.category
-          }).key
-           return resolve(key)
-        })
-        .then(value => {
-          firebase.database().ref('users/' + uid).child(type + 'Entries').update({
-            [value]: true
-          })
-        })
-        .then(() => {fetchEntries(uid)})
-      break;
-  }
-}
-
-function getEntry(type, entryId){ // work in progress
-  var attributes = []
+function createEntry(type){
+  var uid = firebase.auth().currentUser.uid
+  var entry
   switch (type) {
     case 'money':
-      firebase.database().ref('timeEntries/' + entryId).once('value', function(entry) {
-         attributes.push(entry.val().name, entry.val().amount, entry.val().category, entry.val().subcategory, entry.val().comment, entry.val().date, entry.key)
-      })
+        var eid         = ''
+        var name        = document.getElementById('moneyEntryName').value
+        var amount      = document.getElementById('moneyEntryAmount').value
+        var category    = document.getElementById('moneyEntryCategory').value
+        var subcategory = document.getElementById('moneyEntrySubCategory').value
+        var comment     = document.getElementById('moneyEntryComment').value
+        var day         = document.getElementById('timeEntryDay').value
+        var month       = document.getElementById('timeEntryMonth').value
+        var year        = document.getElementById('timeEntryYear').value
+        var date  = convertToDate('0700', day, month, year).format('X')
+        entry = new MoneyEntry(eid, uid, 'money', name, amount, category, subcategory, comment, date)
       break;
     case 'time':
-      firebase.database().ref('timeEntries/' + entryId).once('value', function(entry) {
-         attributes.push(entry.val().start, entry.val().end, entry.val().type, entry.key)
-      })
+        var eid        = ''
+        var start_time = document.getElementById('timeEntryStart').value
+        var end_time   = document.getElementById('timeEntryEnd').value
+        var category   = document.getElementById('timeEntryCategory').value
+
+        var day        = document.getElementById('timeEntryDay').value
+        var month      = document.getElementById('timeEntryMonth').value
+        var year       = document.getElementById('timeEntryYear').value
+
+        var entryStart = convertToDate(start_time, day, month, year).format('X');
+        var entryEnd   = convertToDate(end_time, day, month, year).format('X');
+
+        var entry = new TimeEntry(eid, uid, 'time', entryStart, entryEnd, category)
       break;
   }
-  var obj =  new Entry(attributes[0], attributes[1], attributes[2], attributes[3])
-  return obj
-}
-
-function createMoneyEntry(e) {
-
-  var uid      = firebase.auth().currentUser.uid
-  var name        = document.getElementById('moneyEntryName').value
-  var amount      = document.getElementById('moneyEntryAmount').value
-  var category    = document.getElementById('moneyEntryCategory').value
-  var subcategory = document.getElementById('moneyEntrySubCategory').value
-  var comment     = document.getElementById('moneyEntryComment').value
-  var eid         = ''
-  var day         = document.getElementById('timeEntryDay').value
-  var month       = document.getElementById('timeEntryMonth').value
-  var year        = document.getElementById('timeEntryYear').value
-
-  var date  = convertToDate('0700', day, month, year).format('X')
-  var entry = new MoneyEntry(eid, uid, 'money', name, amount, category, subcategory, comment, date)
-
-  saveEntry('money', uid, entry);
-  e.preventDefault();
-  resetInputForms();
-}
-
-function createTimeEntry(e) {
-
-  var uid        = firebase.auth().currentUser.uid
-  var start_time = document.getElementById('timeEntryStart').value
-  var end_time   = document.getElementById('timeEntryEnd').value
-  var category   = document.getElementById('timeEntryCategory').value
-  var day        = document.getElementById('timeEntryDay').value
-  var month      = document.getElementById('timeEntryMonth').value
-  var year       = document.getElementById('timeEntryYear').value
-  var eid        = ''
-
-  var entryStart = convertToDate(start_time, day, month, year).format('X');
-  var entryEnd   = convertToDate(end_time, day, month, year).format('X');
-
-  var entry = new TimeEntry(eid, uid, 'time', entryStart, entryEnd, category)
-
-  saveEntry('time', uid, entry)
-
-  e.preventDefault();
+  entry.saveEntry().then(() => { fetchEntries(uid) });
   resetInputForms();
   focusTimeStart();
 }
 
+// called when retreiving objects from database
+function instantiateEntry(type, value){
+  var newEntry
+  switch (type) {
+    case 'money':
+        newEntry = new MoneyEntry
+      break;
+    case 'time':
+        newEntry = new TimeEntry
+      break;
+  }
+  separated = separateObject(value)
+  for (var i = 0; i < separated[0].length; i++) {
+    newEntry[separated[0][i]] = separated[1][i]
+  }
+  return newEntry
+}
+
+// called to include "eid" key when retreiving objects from database
+function includeKey(object){
+  entry = JSON.parse(JSON.stringify(object.val()))
+  entry['eid'] = object.key
+  return entry
+}
 
 // takes form parameters as strings and returns a date format. Is called by createEntry().
 function convertToDate(eHourMinute, eDay, eMonth, eYear) {
