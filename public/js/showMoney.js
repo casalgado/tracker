@@ -82,7 +82,7 @@ function totalsPerValue(array, entries){
 
 function calculateTotal(entries){
   var total = entries.reduce((accumulator, entry) => {
-    return accumulator += (parseFloat(entry.amount)
+    return accumulator += (parseFloat(entry.amount))
   }, 0)
   return parseInt(total*100)/100
 }
