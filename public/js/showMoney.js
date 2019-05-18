@@ -81,9 +81,10 @@ function totalsPerValue(array, entries){
 }
 
 function calculateTotal(entries){
-  return entries.reduce((accumulator, entry) => {
-    return accumulator += parseInt(parseFloat(entry.amount) * 100) / 100
+  var total = entries.reduce((accumulator, entry) => {
+    return accumulator += (parseFloat(entry.amount)
   }, 0)
+  return parseInt(total*100)/100
 }
 
 function isolateProperty(prop, entries){
