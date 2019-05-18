@@ -13,6 +13,11 @@ class Entry {
         firebase.database().ref('users/' + this.uid).child(this.type + 'Entries').update({
           [value]: true
         })
+        firebase.database().ref(this.type + 'Entries').child(value).update({
+          eid: value
+        })
+        this['eid'] = value
+        MONEY_ENTRIES.push(this)
       })
     }
 }
@@ -59,6 +64,7 @@ function createEntry(type){
         var year        = document.getElementById('timeEntryYear').value
         var date  = convertToDate('0700', day, month, year).format('X')
         entry = new MoneyEntry(eid, uid, 'money', name, amount, category, subcategory, comment, date)
+        entry.saveEntry().then(() => { MoneyEntry.showByPeriod('day', ACTIVE_DAY.unix())});
       break;
     case 'time':
         var eid        = ''
@@ -74,15 +80,15 @@ function createEntry(type){
         var entryEnd   = convertToDate(end_time, day, month, year).format('X');
 
         var entry = new TimeEntry(eid, uid, 'time', entryStart, entryEnd, category)
+        entry.saveEntry().then(() => { TimeEntry.showByPeriod('day', ACTIVE_DAY.unix())});
       break;
   }
-  entry.saveEntry().then(() => { fetchEntries(uid) });
   resetInputForms();
   focusTimeStart();
 }
 
-// called when retreiving objects from database
 function instantiateEntry(type, value){
+  // called when retreiving objects from database
   var newEntry
   switch (type) {
     case 'money':
@@ -99,15 +105,25 @@ function instantiateEntry(type, value){
   return newEntry
 }
 
-// called to include "eid" key when retreiving objects from database
+function separateObject(obj){
+	var keys = []
+	var values = []
+	for (var prop in obj) {
+		keys.push(prop)
+		values.push(obj[prop])
+	}
+	return [keys, values]
+}
+
 function includeKey(object){
+  // called to include "eid" key when retreiving objects from database
   entry = JSON.parse(JSON.stringify(object.val()))
   entry['eid'] = object.key
   return entry
 }
 
-// takes form parameters as strings and returns a date format. Is called by createEntry().
 function convertToDate(eHourMinute, eDay, eMonth, eYear) {
+  // takes form parameters as strings and returns a date format. Is called by createEntry().
 	t = moment()
 	minutes   = eHourMinute.substring(2,4)
 	hours     = eHourMinute.substring(0,2)

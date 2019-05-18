@@ -7,15 +7,34 @@
 
     <title> Tracker </title>
 
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
   </head>
 
     <body onload="onLoad()">
       <div id="mainContainer" class="container">
         <h5 class="pageTitle"> Tracker <small> To perceive is to know </small> </h5>
-        <div id="formContainer"class="container">
-          <div class="jumbotron">
+        <div class="row">
+          <div id="formContainer"class="container col-3">
+            <h6>Money</h6>
+            <form id="moneyEntryInputForm">
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control" id="moneyEntryName" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control" id="moneyEntryAmount" placeholder="Amount">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control" id="moneyEntryCategory" placeholder="Category">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control" id="moneyEntrySubCategory" placeholder="Subcategory">
+              </div>
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control" id="moneyEntryComment" placeholder="Comment">
+              </div>
+              <button type="submit" onclick="createEntry('money'); return false" class="btn btn-dark btnSubmit">Add</button>
+            </form>
             <h6>Time</h6>
             <form id="timeEntryInputForm">
               <div class="form-group">
@@ -39,37 +58,18 @@
               <button type="submit" onclick="createEntry('time'); return false" class="btn btn-dark btnSubmit">Add</button>
             </form>
           </div>
-          <div class="jumbotron">
-            <h6>Money</h6>
-            <form id="moneyEntryInputForm">
-              <div class="form-group">
-                <input type="text" onkeyup="" class="form-control" id="moneyEntryName" placeholder="Name">
-              </div>
-              <div class="form-group">
-                <input type="text" onkeyup="" class="form-control" id="moneyEntryAmount" placeholder="Amount">
-              </div>
-              <div class="form-group">
-                <input type="text" onkeyup="" class="form-control" id="moneyEntryCategory" placeholder="Category">
-              </div>
-              <div class="form-group">
-                <input type="text" onkeyup="" class="form-control" id="moneyEntrySubCategory" placeholder="Subcategory">
-              </div>
-              <div class="form-group">
-                <input type="text" onkeyup="" class="form-control" id="moneyEntryComment" placeholder="Comment">
-              </div>
-              <button type="submit" onclick="createEntry('money'); return false" class="btn btn-dark btnSubmit">Add</button>
-            </form>
-          </div>
+          <div id="showMoneyContainer"class="container col-sm">
+            
+            <h6 id="moneyTableTitle">  </h6>
+            <table id="moneyTable" class="customTables">
+            </table>
+            <ul id="moneyEntryList"></ul>
         </div>
-        <div id="showMoneyContainer"class="container">
-          <h6> Today's Money </h6>
-          <div class="moneyChartContainer"></div>
-          <ul id="moneyEntryList"></ul>
-        </div>
-        <div id="showTimeContainer"class="container">
+          <div id="showTimeContainer"class="container col-sm">
           <h6> Today's Time </h6>
           <div class="timeChartContainer"></div>
           <ul id="timeEntryList"></ul>
+        </div>
         </div>
       </div>
 
@@ -83,7 +83,9 @@
         <script src="js/firebase-app.js"></script>
         <script src="js/database.js"></script>
         <script src="js/entries.js"></script>
-        <script src="js/queries.js"></script>
+        <script src="js/firebaseQueries.js"></script>
+        <script src="js/localQueries.js"></script>
+        <script src="js/showMoney.js"></script>
         <script src="js/popover.js"></script>
         <script src="js/focus.js"></script>
         <script src="js/main.js"></script>

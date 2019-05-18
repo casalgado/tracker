@@ -1,87 +1,29 @@
-[debug] [2019-05-11T23:17:50.597Z] ----------------------------------------------------------------------
-[debug] [2019-05-11T23:17:50.600Z] Command:       /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/node /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/firebase serve
-[debug] [2019-05-11T23:17:50.601Z] CLI Version:   6.9.2
-[debug] [2019-05-11T23:17:50.601Z] Platform:      darwin
-[debug] [2019-05-11T23:17:50.601Z] Node Version:  v11.14.0
-[debug] [2019-05-11T23:17:50.602Z] Time:          Sat May 11 2019 18:17:50 GMT-0500 (Colombia Standard Time)
-[debug] [2019-05-11T23:17:50.602Z] ----------------------------------------------------------------------
+[debug] [2019-05-17T23:54:08.447Z] ----------------------------------------------------------------------
+[debug] [2019-05-17T23:54:08.449Z] Command:       /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/node /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/firebase serve
+[debug] [2019-05-17T23:54:08.449Z] CLI Version:   6.9.2
+[debug] [2019-05-17T23:54:08.449Z] Platform:      darwin
+[debug] [2019-05-17T23:54:08.449Z] Node Version:  v11.14.0
+[debug] [2019-05-17T23:54:08.454Z] Time:          Fri May 17 2019 18:54:08 GMT-0500 (Colombia Standard Time)
+[debug] [2019-05-17T23:54:08.454Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2019-05-11T23:17:50.617Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-05-11T23:17:50.617Z] > authorizing via signed-in user
-[debug] [2019-05-11T23:17:50.617Z] [iam] checking project tracker-4d4e1 for permissions ["firebase.projects.get"]
-[debug] [2019-05-11T23:17:50.619Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-05-11T23:17:50.619Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+[debug] [2019-05-17T23:54:08.472Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-05-17T23:54:08.473Z] > authorizing via signed-in user
+[debug] [2019-05-17T23:54:08.473Z] [iam] checking project tracker-4d4e1 for permissions ["firebase.projects.get"]
+[debug] [2019-05-17T23:54:08.476Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-05-17T23:54:08.477Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
  <request body omitted>
-[debug] [2019-05-11T23:17:51.058Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-11T23:17:51.084Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1:testIamPermissions  
+[debug] [2019-05-17T23:54:08.960Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-17T23:54:08.978Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1:testIamPermissions  
 
-[debug] [2019-05-11T23:17:52.074Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-11T23:17:52.076Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1  
+[debug] [2019-05-17T23:54:09.893Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-17T23:54:09.895Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1  
  
-[debug] [2019-05-11T23:17:53.428Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-17T23:54:10.622Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Serving from '/Users/carlosalbertosalgado1/Desktop/tracker'...
 [info] 
-[debug] [2019-05-11T23:17:53.431Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/102325833706/clients/_:getWebAppConfig  
+[debug] [2019-05-17T23:54:10.634Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/102325833706/clients/_:getWebAppConfig  
  
-[debug] [2019-05-11T23:17:54.857Z] <<< HTTP RESPONSE 200
-[info] i  hosting: Serving hosting files from: public
-[info] ✔  hosting: Local server: http://localhost:5000
-[debug] [2019-05-13T12:28:38.305Z] ----------------------------------------------------------------------
-[debug] [2019-05-13T12:28:38.307Z] Command:       /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/node /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/firebase serve
-[debug] [2019-05-13T12:28:38.307Z] CLI Version:   6.9.2
-[debug] [2019-05-13T12:28:38.307Z] Platform:      darwin
-[debug] [2019-05-13T12:28:38.307Z] Node Version:  v11.14.0
-[debug] [2019-05-13T12:28:38.308Z] Time:          Mon May 13 2019 07:28:38 GMT-0500 (Colombia Standard Time)
-[debug] [2019-05-13T12:28:38.308Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2019-05-13T12:28:38.322Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-05-13T12:28:38.322Z] > authorizing via signed-in user
-[debug] [2019-05-13T12:28:38.322Z] [iam] checking project tracker-4d4e1 for permissions ["firebase.projects.get"]
-[debug] [2019-05-13T12:28:38.323Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-05-13T12:28:38.324Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2019-05-13T12:28:38.713Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-13T12:28:38.733Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1:testIamPermissions  
-
-[debug] [2019-05-13T12:28:39.665Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-13T12:28:39.667Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1  
- 
-[debug] [2019-05-13T12:28:40.342Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from '/Users/carlosalbertosalgado1/Desktop/tracker'...
-[info] 
-[debug] [2019-05-13T12:28:40.344Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/102325833706/clients/_:getWebAppConfig  
- 
-[debug] [2019-05-13T12:28:41.219Z] <<< HTTP RESPONSE 200
-[info] i  hosting: Serving hosting files from: public
-[info] ✔  hosting: Local server: http://localhost:5000
-[debug] [2019-05-13T22:48:00.858Z] ----------------------------------------------------------------------
-[debug] [2019-05-13T22:48:00.861Z] Command:       /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/node /Users/carlosalbertosalgado1/.nvm/versions/node/v11.14.0/bin/firebase serve
-[debug] [2019-05-13T22:48:00.861Z] CLI Version:   6.9.2
-[debug] [2019-05-13T22:48:00.861Z] Platform:      darwin
-[debug] [2019-05-13T22:48:00.861Z] Node Version:  v11.14.0
-[debug] [2019-05-13T22:48:00.868Z] Time:          Mon May 13 2019 17:48:00 GMT-0500 (Colombia Standard Time)
-[debug] [2019-05-13T22:48:00.868Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2019-05-13T22:48:00.881Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-05-13T22:48:00.882Z] > authorizing via signed-in user
-[debug] [2019-05-13T22:48:00.882Z] [iam] checking project tracker-4d4e1 for permissions ["firebase.projects.get"]
-[debug] [2019-05-13T22:48:00.883Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-05-13T22:48:00.884Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2019-05-13T22:48:01.387Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-13T22:48:01.425Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1:testIamPermissions  
-
-[debug] [2019-05-13T22:48:02.271Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-13T22:48:02.273Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/tracker-4d4e1  
- 
-[debug] [2019-05-13T22:48:02.964Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from '/Users/carlosalbertosalgado1/Desktop/tracker'...
-[info] 
-[debug] [2019-05-13T22:48:02.970Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/102325833706/clients/_:getWebAppConfig  
- 
-[debug] [2019-05-13T22:48:03.811Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-17T23:54:11.442Z] <<< HTTP RESPONSE 200
 [info] i  hosting: Serving hosting files from: public
 [info] ✔  hosting: Local server: http://localhost:5000

@@ -1,0 +1,23 @@
+.row > div {
+  border: 1px solid black;
+  overflow: scroll;
+}
+
+.form-control {
+  border-radius: 0px;
+  height: 25px;
+}
+
+form > .btn {
+  border-radius: 0px;
+  height: 25px;
+  width: 100%;
+}
+
+.customTables {
+  width: 100%;
+}
+
+th {
+  text-transform: capitalize;
+}
