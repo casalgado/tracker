@@ -24,7 +24,7 @@ MoneyEntry.drawDay = function(entries, period){
     cell1.innerHTML = entries[i]['name']
     cell2.innerHTML = '$ ' + entries[i]['amount']
     document.getElementById('moneyTableHeaderCol1').innerHTML = 'Item'
-    document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('dddd')
+    document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('dddd D')
     row.appendChild(cell1)
     row.appendChild(cell2)
     document.getElementById('moneyTable').appendChild(row)
