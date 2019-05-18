@@ -1,6 +1,6 @@
 .row > div {
   border: 1px solid black;
-  overflow: scroll;
+  overflow: visible;
 }
 
 .form-control {

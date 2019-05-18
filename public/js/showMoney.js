@@ -19,12 +19,12 @@ MoneyEntry.drawByPeriod = function(period, entries){
 }
 
 MoneyEntry.drawDay = function(entries, period){
+  document.getElementById('moneyTableHeaderCol1').innerHTML = 'Item'
+  document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('dddd D')
   for (var i = 0; i < entries.length; i++) {
     [row, cell1, cell2] = createTableElements('td')
     cell1.innerHTML = entries[i]['name']
     cell2.innerHTML = '$ ' + entries[i]['amount']
-    document.getElementById('moneyTableHeaderCol1').innerHTML = 'Item'
-    document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('dddd D')
     row.appendChild(cell1)
     row.appendChild(cell2)
     document.getElementById('moneyTable').appendChild(row)
@@ -40,12 +40,12 @@ MoneyEntry.drawDay = function(entries, period){
 MoneyEntry.drawMonth = function(entries, period){
   var categories = isolateProperty('category', entries)
   var totals = totalsPerValue(categories, entries)
+  document.getElementById('moneyTableHeaderCol1').innerHTML = 'Category'
+  document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('MMMM')
   for (var i = 0; i < categories.length; i++) {
     [row, cell1, cell2] = createTableElements('td')
     cell1.innerHTML = categories[i]
     cell2.innerHTML = '$ ' + totals[i]
-    document.getElementById('moneyTableHeaderCol1').innerHTML = 'Category'
-    document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('MMMM')
     row.appendChild(cell1)
     row.appendChild(cell2)
     document.getElementById('moneyTable').appendChild(row)

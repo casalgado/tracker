@@ -15,7 +15,7 @@
       <div id="mainContainer" class="container">
         <h5 class="pageTitle"> Tracker <small> To perceive is to know </small> </h5>
         <div class="row">
-          <div id="formContainer"class="container col-3 col-12-xs">
+          <div id="formContainer"class="container col-xs-12 col-sm-3">
             <h6>Money</h6>
             <form id="moneyEntryInputForm">
               <div class="form-group">
@@ -65,6 +65,7 @@
               <button type="" onclick="MoneyEntry.showByPeriod('day', ACTIVE_DAY.unix())" class="btn btn-info">Day</button>
               <button type="" onclick="MoneyEntry.showByPeriod('month', ACTIVE_DAY.unix())" class="btn btn-info">Month</button>
               <button type="" onclick="showNext('day')" class="btn btn-info">next</button>
+              <button type="" onclick="signMeIn()" class="btn btn-info">Sign In</button>
             </div>
             <table id="moneyTable" class="customTables">
             </table>
