@@ -59,8 +59,13 @@
             </form>
           </div>
           <div id="showMoneyContainer"class="container col-sm">
-            
             <h6 id="moneyTableTitle">  </h6>
+            <div class="moneyPagination">
+              <button type="" onclick="showPrevious('day')" class="btn btn-info">prev</button>
+              <button type="" onclick="MoneyEntry.showByPeriod('day', ACTIVE_DAY.unix())" class="btn btn-info">Day</button>
+              <button type="" onclick="MoneyEntry.showByPeriod('month', ACTIVE_DAY.unix())" class="btn btn-info">Month</button>
+              <button type="" onclick="showNext('day')" class="btn btn-info">next</button>
+            </div>
             <table id="moneyTable" class="customTables">
             </table>
             <ul id="moneyEntryList"></ul>

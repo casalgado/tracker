@@ -24,11 +24,17 @@ MoneyEntry.drawDay = function(entries, period){
     cell1.innerHTML = entries[i]['name']
     cell2.innerHTML = '$ ' + entries[i]['amount']
     document.getElementById('moneyTableHeaderCol1').innerHTML = 'Item'
-    document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('DD')
+    document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('dddd')
     row.appendChild(cell1)
     row.appendChild(cell2)
     document.getElementById('moneyTable').appendChild(row)
   }
+  [row, cell1, cell2] = createTableElements('td')
+  cell1.innerHTML = 'Total:'
+  cell2.innerHTML = '$ ' + calculateTotal(entries)
+  row.appendChild(cell1)
+  row.appendChild(cell2)
+  document.getElementById('moneyTable').appendChild(row)
 }
 
 MoneyEntry.drawMonth = function(entries, period){
@@ -39,11 +45,17 @@ MoneyEntry.drawMonth = function(entries, period){
     cell1.innerHTML = categories[i]
     cell2.innerHTML = '$ ' + totals[i]
     document.getElementById('moneyTableHeaderCol1').innerHTML = 'Category'
-    document.getElementById('moneyTableTitle').innerHTML = "This Month's Money"
+    document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('MMMM')
     row.appendChild(cell1)
     row.appendChild(cell2)
     document.getElementById('moneyTable').appendChild(row)
   }
+  [row, cell1, cell2] = createTableElements('td')
+  cell1.innerHTML = 'Total:'
+  cell2.innerHTML = '$ ' + totals.reduce((accumulator, item) => {return accumulator += item }, 0)
+  row.appendChild(cell1)
+  row.appendChild(cell2)
+  document.getElementById('moneyTable').appendChild(row)
 }
 
 function drawTableHeader(){
@@ -62,12 +74,16 @@ function totalsPerValue(array, entries){
       inCategory = entries.filter((entry) => {
         return entry.category === array[i]
       })
-      var totalAmount = inCategory.reduce((accumulator, entry) => {
-        return accumulator += parseInt(entry.amount)
-      }, 0)
+      var totalAmount = calculateTotal(inCategory)
       totals.push(totalAmount)
   }
   return totals
+}
+
+function calculateTotal(entries){
+  return entries.reduce((accumulator, entry) => {
+    return accumulator += parseInt(parseFloat(entry.amount) * 100) / 100
+  }, 0)
 }
 
 function isolateProperty(prop, entries){
@@ -86,4 +102,14 @@ function createTableElements(cellType){
   var cell1 = document.createElement(cellType)
   var cell2 = document.createElement(cellType)
   return [row, cell1, cell2]
+}
+
+function showNext(period){
+  ACTIVE_DAY.add(1, 'day')
+  MoneyEntry.showByPeriod(period, ACTIVE_DAY.unix())
+}
+
+function showPrevious(period){
+  ACTIVE_DAY.subtract(1, 'day')
+  MoneyEntry.showByPeriod(period, ACTIVE_DAY.unix())
 }
