@@ -54,15 +54,15 @@ function createEntry(type){
   switch (type) {
     case 'money':
         var eid         = ''
-        var name        = document.getElementById('moneyEntryName').value
+        var name        = document.getElementById('moneyEntryName').value.toLowerCase()
         var amount      = document.getElementById('moneyEntryAmount').value
-        var category    = document.getElementById('moneyEntryCategory').value
-        var subcategory = document.getElementById('moneyEntrySubCategory').value
-        var comment     = document.getElementById('moneyEntryComment').value
+        var category    = document.getElementById('moneyEntryCategory').value.toLowerCase()
+        var subcategory = document.getElementById('moneyEntrySubCategory').value.toLowerCase()
+        var comment     = document.getElementById('moneyEntryComment').value.toLowerCase()
         var day         = document.getElementById('timeEntryDay').value
         var month       = document.getElementById('timeEntryMonth').value
         var year        = document.getElementById('timeEntryYear').value
-        var date  = convertToDate('0700', day, month, year).format('X')
+        var date  = convertToDate(moment().format('HHmm'), day, month, year).format('X')
         entry = new MoneyEntry(eid, uid, 'money', name, amount, category, subcategory, comment, date)
         entry.saveEntry().then(() => { MoneyEntry.showByPeriod('day', ACTIVE_DAY.unix())});
       break;

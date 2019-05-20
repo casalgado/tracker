@@ -19,41 +19,57 @@
             <h6>Money</h6>
             <form id="moneyEntryInputForm">
               <div class="form-group">
-                <input type="text" onkeyup="" class="form-control" id="moneyEntryName" placeholder="Name">
+                <select onchange="drawSelectMenu('moneyEntryFrequent', getNamesForCategory(this))" onkeyup="" class="form-control form-control-sm" id="moneyEntryCategory">
+                  <option value="undefined" class="selectPlaceholder">Category</option>
+                </select>
               </div>
               <div class="form-group">
-                <input type="text" onkeyup="" class="form-control" id="moneyEntryAmount" placeholder="Amount">
+                <select onkeyup="" class="form-control form-control-sm" id="moneyEntrySubCategory">
+                  <option value="undefined" class="selectPlaceholder">Subcategory</option>
+                </select>
+              </div>
+
+              <div class="form-group input-group select-group">
+                <div class="input-group-prepend">
+                  <select onchange="fillIn(this, 'moneyEntryName')" class="form-control form-control-sm" id="moneyEntryFrequent">
+                      <option value="undefined" class="selectPlaceholder">Frequent</option>
+                      <option>vino</option>
+                      <option>comida</option>
+                      <option>snack</option>
+                      <option>voles</option>
+                  </select>
+                </div>
+
+                <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryName" placeholder="Name">
+              </div>
+
+              <div class="form-group">
+                <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryAmount" placeholder="Amount">
               </div>
               <div class="form-group">
-                <input type="text" onkeyup="" class="form-control" id="moneyEntryCategory" placeholder="Category">
-              </div>
-              <div class="form-group">
-                <input type="text" onkeyup="" class="form-control" id="moneyEntrySubCategory" placeholder="Subcategory">
-              </div>
-              <div class="form-group">
-                <input type="text" onkeyup="" class="form-control" id="moneyEntryComment" placeholder="Comment">
+                <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryComment" placeholder="Comment">
               </div>
               <button type="submit" onclick="createEntry('money'); return false" class="btn btn-dark btnSubmit">Add</button>
             </form>
             <h6>Time</h6>
             <form id="timeEntryInputForm">
               <div class="form-group">
-                <input type="text" onkeyup="moveFocus(this.value, 4, focusTimeEnd)" class="form-control" id="timeEntryStart" placeholder="Start">
+                <input type="text" onkeyup="moveFocus(this.value, 4, focusTimeEnd)" class="form-control form-control-sm" id="timeEntryStart" placeholder="Start">
               </div>
               <div class="form-group">
-                <input type="text" onkeyup="moveFocus(this.value, 4, focusTimeCategory)" class="form-control" id="timeEntryEnd" placeholder="End">
+                <input type="text" onkeyup="moveFocus(this.value, 4, focusTimeCategory)" class="form-control form-control-sm" id="timeEntryEnd" placeholder="End">
               </div>
               <div class="form-group">
-                <input type="text" onkeyup="moveFocus(this.value, 1, focusTimeDay)" class="form-control" id="timeEntryCategory" placeholder="Type">
+                <input type="text" onkeyup="moveFocus(this.value, 1, focusTimeDay)" class="form-control form-control-sm" id="timeEntryCategory" placeholder="Type">
               </div>
               <div class="form-group">
-                <input type="text" onkeyup="moveFocus(this.value, 2, focusTimeMonth)" class="form-control" id="timeEntryDay" placeholder="Day">
+                <input type="text" onkeyup="moveFocus(this.value, 2, focusTimeMonth)" class="form-control form-control-sm" id="timeEntryDay" placeholder="Day">
               </div>
               <div class="form-group">
-                <input type="text" onkeyup="moveFocus(this.value, 2, focusTimeYear)" class="form-control" id="timeEntryMonth" placeholder="Month">
+                <input type="text" onkeyup="moveFocus(this.value, 2, focusTimeYear)" class="form-control form-control-sm" id="timeEntryMonth" placeholder="Month">
               </div>
               <div class="form-group">
-                <input type="text" onkeyup="" class="form-control" id="timeEntryYear" placeholder="Year">
+                <input type="text" onkeyup="" class="form-control form-control-sm" id="timeEntryYear" placeholder="Year">
               </div>
               <button type="submit" onclick="createEntry('time'); return false" class="btn btn-dark btnSubmit">Add</button>
             </form>
@@ -65,7 +81,6 @@
               <button type="" onclick="MoneyEntry.showByPeriod('day', ACTIVE_DAY.unix())" class="btn btn-info">Day</button>
               <button type="" onclick="MoneyEntry.showByPeriod('month', ACTIVE_DAY.unix())" class="btn btn-info">Month</button>
               <button type="" onclick="showNext('day')" class="btn btn-info">next</button>
-              <button type="" onclick="signMeIn()" class="btn btn-info">Sign In</button>
             </div>
             <table id="moneyTable" class="customTables">
             </table>

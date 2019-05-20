@@ -88,6 +88,7 @@ function calculateTotal(entries){
 }
 
 function isolateProperty(prop, entries){
+  // returns array of values of selected prop for array of entries
   onlyProps = []
   for (var i = 0; i < entries.length; i++) {
     onlyProps.push(entries[i][prop])

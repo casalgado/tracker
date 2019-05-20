@@ -3,9 +3,8 @@
   overflow: visible;
 }
 
-.form-control {
+.form-control, .form-control-sm {
   border-radius: 0px;
-  height: 25px;
 }
 
 form > .btn {
@@ -18,6 +17,6 @@ form > .btn {
   width: 100%;
 }
 
-th {
+#moneyTable {
   text-transform: capitalize;
 }
