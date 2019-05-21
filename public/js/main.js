@@ -1,4 +1,3 @@
-
 function onLoad(){
 	MONEY_ENTRIES = []
 	TIME_ENTRIES = []

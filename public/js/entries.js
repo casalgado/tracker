@@ -16,7 +16,7 @@ class Entry {
         firebase.database().ref(this.type + 'Entries').child(value).update({
           eid: value
         })
-        this['eid'] = value
+        this.eid = value
         MONEY_ENTRIES.push(this)
       })
     }
@@ -92,10 +92,10 @@ function instantiateEntry(type, value){
   var newEntry
   switch (type) {
     case 'money':
-        newEntry = new MoneyEntry
+        newEntry = new MoneyEntry()
       break;
     case 'time':
-        newEntry = new TimeEntry
+        newEntry = new TimeEntry()
       break;
   }
   separated = separateObject(value)
@@ -118,7 +118,7 @@ function separateObject(obj){
 function includeKey(object){
   // called to include "eid" key when retreiving objects from database
   entry = JSON.parse(JSON.stringify(object.val()))
-  entry['eid'] = object.key
+  entry.eid = object.key
   return entry
 }
 
