@@ -3,13 +3,16 @@
   overflow: visible;
 }
 
+#mainContainer {
+  display: none;
+}
+
 .form-control, .form-control-sm {
   border-radius: 0px;
 }
 
 form > .btn {
   border-radius: 0px;
-  height: 25px;
   width: 100%;
 }
 
@@ -19,4 +22,8 @@ form > .btn {
 
 #moneyTable {
   text-transform: capitalize;
+}
+
+#signInForm{
+  margin: 50px;
 }

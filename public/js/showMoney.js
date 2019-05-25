@@ -115,10 +115,3 @@ function showPrevious(period){
   ACTIVE_DAY.subtract(1, 'day')
   MoneyEntry.showByPeriod(period, ACTIVE_DAY.unix())
 }
-
-function signMeIn(){
-  firebase.auth().signInWithEmailAndPassword('casalgado86@gmail.com', 'test123').catch(function(error) {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-  });
-}

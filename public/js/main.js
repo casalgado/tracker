@@ -6,26 +6,28 @@ function onLoad(){
 	SUBCATEGORIES = []
 	firebase.auth().onAuthStateChanged(function(user) {
 	  if (user) {
-			Entry.fetchAllByType('money', user.uid).then(value => {
-				MONEY_ENTRIES = value
-				return MONEY_ENTRIES
-			}).then(value => {
-				MoneyEntry.showByPeriod('day', ACTIVE_DAY.unix())
-				CATEGORIES = isolateProperty('category', value)
-				SUBCATEGORIES = isolateProperty('subcategory', value)
-				drawSelectMenu('moneyEntryCategory', CATEGORIES)
-				drawSelectMenu('moneyEntrySubCategory', SUBCATEGORIES)
-			})
-			Entry.fetchAllByType('time', user.uid).then(value => {
-				TIME_ENTRIES = value
-			})
+			loadPage(user)
 	  } else {
-			document.getElementById('mainContainer').setAttribute('style', 'display:none;')
-			signMeIn()
-
-			alert('User not signed in')
 	  }
 	});
+}
+
+function loadPage(user){
+	document.getElementById('signInForm').setAttribute('style', 'display:none;')
+	document.getElementById('mainContainer').setAttribute('style', 'display:block;')
+	Entry.fetchAllByType('money', user.uid).then(value => {
+		MONEY_ENTRIES = value
+		return MONEY_ENTRIES
+	}).then(value => {
+		MoneyEntry.showByPeriod('day', ACTIVE_DAY.unix())
+		CATEGORIES = isolateProperty('category', value)
+		SUBCATEGORIES = isolateProperty('subcategory', value)
+		drawSelectMenu('moneyEntryCategory', CATEGORIES)
+		drawSelectMenu('moneyEntrySubCategory', SUBCATEGORIES)
+	})
+	Entry.fetchAllByType('time', user.uid).then(value => {
+		TIME_ENTRIES = value
+	})
 }
 
 function resetInputForms() {
@@ -79,3 +81,14 @@ function filterSubcategoriesByCategory(obj){
 	}
 	return items
 }
+
+function signInUser(){
+	var email = document.getElementById('signInEmail').value
+	var password = document.getElementById('signInPassword').value
+  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    var errorCode = error.code;
+		var errorMessage = error.message;
+	}).then(()=> {loadPage(firebase.auth().currentUser)});
+}
+
+
