@@ -21,6 +21,8 @@ function onLoad(){
 			})
 	  } else {
 			document.getElementById('mainContainer').setAttribute('style', 'display:none;')
+			signMeIn()
+
 			alert('User not signed in')
 	  }
 	});
