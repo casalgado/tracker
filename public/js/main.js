@@ -35,7 +35,8 @@ function drawSelectMenu(id, array){
 	input = document.getElementById(id)
 	while (input.children.length != 1) {
     input.removeChild(input.lastChild);
-}
+	}
+	array = [... new Set(array.sort())]
 	for (var i = 0; i < array.length; i++) {
 		element = document.createElement('option')
 		element.setAttribute('value', array[i].toLowerCase())
@@ -48,12 +49,22 @@ function fillIn(obj, id){
 	document.getElementById(id).value = obj.value
 }
 
-function getNamesForCategory(obj){
-	frequent = []
+function filterNamesByCategory(obj){
+	items = []
 	for (var i = 0; i < MONEY_ENTRIES.length; i++) {
 		if (MONEY_ENTRIES[i].category == obj.value) {
-			frequent.push(MONEY_ENTRIES[i].name)
+			items.push(MONEY_ENTRIES[i].name)
 		}
 	}
-	return frequent
+	return items
+}
+
+function filterSubcategoriesByCategory(obj){
+	items = []
+	for (var i = 0; i < MONEY_ENTRIES.length; i++) {
+		if (MONEY_ENTRIES[i].category == obj.value) {
+			items.push(MONEY_ENTRIES[i].subcategory)
+		}
+	}
+	return items
 }

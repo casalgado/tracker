@@ -39,7 +39,7 @@ MoneyEntry.drawDay = function(entries, period){
 
 MoneyEntry.drawMonth = function(entries, period){
   var categories = isolateProperty('category', entries)
-  var totals = totalsPerValue(categories, entries)
+  var totals = totalsPerKey(categories, entries)
   document.getElementById('moneyTableHeaderCol1').innerHTML = 'Category'
   document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('MMMM')
   for (var i = 0; i < categories.length; i++) {
@@ -68,7 +68,7 @@ function drawTableHeader(){
   return row
 }
 
-function totalsPerValue(array, entries){
+function totalsPerKey(array, entries){
   var totals = []
   for (var i = 0; i < array.length; i++) {
       inCategory = entries.filter((entry) => {

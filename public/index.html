@@ -19,7 +19,7 @@
             <h6>Money</h6>
             <form id="moneyEntryInputForm">
               <div class="form-group">
-                <select onchange="drawSelectMenu('moneyEntryFrequent', getNamesForCategory(this))" onkeyup="" class="form-control form-control-sm" id="moneyEntryCategory">
+                <select onchange="drawSelectMenu('moneyEntryFrequent', filterNamesByCategory(this))" onkeyup="" class="form-control form-control-sm" id="moneyEntryCategory">
                   <option value="undefined" class="selectPlaceholder">Category</option>
                 </select>
               </div>
@@ -33,10 +33,6 @@
                 <div class="input-group-prepend">
                   <select onchange="fillIn(this, 'moneyEntryName')" class="form-control form-control-sm" id="moneyEntryFrequent">
                       <option value="undefined" class="selectPlaceholder">Frequent</option>
-                      <option>vino</option>
-                      <option>comida</option>
-                      <option>snack</option>
-                      <option>voles</option>
                   </select>
                 </div>
 
@@ -88,11 +84,17 @@
         </div>
           <div id="showTimeContainer"class="container col-sm">
           <h6> Today's Time </h6>
+          <ul> 
+            <li>  Next/Prev month functionality. </li>
+            <li>  Next/Prev week functionality</li>
+            <li>  Fill in amount and comments for frequent </li>
+          </ul>
           <div class="timeChartContainer"></div>
           <ul id="timeEntryList"></ul>
         </div>
         </div>
       </div>
+      
 
       <!-- Scripts -->
         <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-app.js"></script>
@@ -110,6 +112,5 @@
         <script src="js/popover.js"></script>
         <script src="js/focus.js"></script>
         <script src="js/main.js"></script>
-      <!-- -->
     </body>
 </html>
