@@ -45,8 +45,17 @@ function drawSelectMenu(id, array){
 	}
 }
 
-function fillIn(obj, id){
-	document.getElementById(id).value = obj.value
+function fillInDetails(obj){
+	document.getElementById('moneyEntryName').value = obj.value
+	var entry
+	for (var i = MONEY_ENTRIES.length -1 ; i >= 0; i--) {
+		if (MONEY_ENTRIES[i].name == obj.value) {
+			entry = MONEY_ENTRIES[i]
+			break
+		}
+	}
+	document.getElementById('moneyEntryAmount').value  = entry.amount
+	document.getElementById('moneyEntryComment').value = entry.comment || ""
 }
 
 function filterNamesByCategory(obj){
