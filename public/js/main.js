@@ -8,6 +8,7 @@ function onLoad(){
 	  if (user) {
 			loadPage(user)
 	  } else {
+			document.getElementById('landingContainer').setAttribute('style', 'display:block')
 	  }
 	});
 }

@@ -7,6 +7,10 @@
   display: none;
 }
 
+#landingContainer {
+  display: none;
+}
+
 .form-control, .form-control-sm {
   border-radius: 0px;
 }
