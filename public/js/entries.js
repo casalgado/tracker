@@ -6,14 +6,11 @@ class Entry {
 
     saveEntry(){
       return new Promise(resolve => {
-        var key = firebase.database().ref(this.type + 'Entries').push(this).key
+        var key = firebase.database().ref(`users/${this.uid}/${this.type}Entries`).push(this).key
         return resolve(key)
       })
       .then(value => {
-        firebase.database().ref('users/' + this.uid).child(this.type + 'Entries').update({
-          [value]: true
-        })
-        firebase.database().ref(this.type + 'Entries').child(value).update({
+        firebase.database().ref(`users/${this.uid}/${this.type}Entries`).child(value).update({
           eid: value
         })
         this.eid = value
@@ -64,7 +61,7 @@ function createEntry(type){
         var year        = document.getElementById('timeEntryYear').value
         var date  = convertToDate(moment().format('HHmm'), day, month, year).format('X')
         entry = new MoneyEntry(eid, uid, 'money', name, amount, category, subcategory, comment, date)
-        entry.saveEntry().then(() => { MoneyEntry.showByPeriod('day', ACTIVE_DAY.unix())});
+        entry.saveEntry().then(() => { MoneyEntry.show(SHOWING.period, SHOWING.current.unix())});
       break;
     case 'time':
         var eid        = ''
@@ -80,7 +77,7 @@ function createEntry(type){
         var entryEnd   = convertToDate(end_time, day, month, year).format('X');
 
         var entry = new TimeEntry(eid, uid, 'time', entryStart, entryEnd, category)
-        entry.saveEntry().then(() => { TimeEntry.showByPeriod('day', ACTIVE_DAY.unix())});
+        entry.saveEntry().then(() => { TimeEntry.showByPeriod('day', SHOWING.current.unix())});
       break;
   }
   resetInputForms();

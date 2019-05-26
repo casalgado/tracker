@@ -1,7 +1,7 @@
 function onLoad(){
 	MONEY_ENTRIES = []
 	TIME_ENTRIES = []
-	ACTIVE_DAY = moment()
+	SHOWING = { period:'day', current: moment()}
 	CATEGORIES = []
 	SUBCATEGORIES = []
 	firebase.auth().onAuthStateChanged(function(user) {
@@ -20,7 +20,7 @@ function loadPage(user){
 		MONEY_ENTRIES = value
 		return MONEY_ENTRIES
 	}).then(value => {
-		MoneyEntry.showByPeriod('day', ACTIVE_DAY.unix())
+		MoneyEntry.show('day', SHOWING.current.unix())
 		CATEGORIES = isolateProperty('category', value)
 		SUBCATEGORIES = isolateProperty('subcategory', value)
 		drawSelectMenu('moneyEntryCategory', CATEGORIES)

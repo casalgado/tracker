@@ -1,26 +1,32 @@
 
-MoneyEntry.showByPeriod = function(period, timestamp){
-  // period values correspond to 'day', 'month', or 'year'
+MoneyEntry.show = function(period, timestamp){
+  // period values correspond to 'day', 'week', 'month' or 'year'
+  SHOWING.period = period
   entries = MoneyEntry.getByPeriod(period, timestamp)
-  MoneyEntry.drawByPeriod(period, entries)
+  MoneyEntry.draw(entries)
 }
 
-MoneyEntry.drawByPeriod = function(period, entries){
+MoneyEntry.draw = function(entries){
+  period = SHOWING.period
   moneyTable = document.getElementById('moneyTable')
   moneyTable.innerHTML = ""
   moneyTable.appendChild(drawTableHeader())
   switch (period) {
     case 'day':
-        MoneyEntry.drawDay(entries, period)
+        MoneyEntry.drawDay(entries)
+      break;
+    case 'week':
+        MoneyEntry.drawWeek(entries)
       break;
     default:
-      MoneyEntry.drawMonth(entries, period)
+      MoneyEntry.drawMonth(entries)
   }
 }
 
-MoneyEntry.drawDay = function(entries, period){
+MoneyEntry.drawDay = function(entries){
+  period = SHOWING.period
   document.getElementById('moneyTableHeaderCol1').innerHTML = 'Item'
-  document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('dddd D')
+  document.getElementById('moneyTableTitle').innerHTML = SHOWING.current.format('dddd D')
   for (var i = 0; i < entries.length; i++) {
     [row, cell1, cell2] = createTableElements('td')
     cell1.innerHTML = entries[i]['name']
@@ -37,11 +43,12 @@ MoneyEntry.drawDay = function(entries, period){
   document.getElementById('moneyTable').appendChild(row)
 }
 
-MoneyEntry.drawMonth = function(entries, period){
+MoneyEntry.drawMonth = function(entries){
+  period = SHOWING.period
   var categories = isolateProperty('category', entries)
   var totals = totalsPerKey(categories, entries)
   document.getElementById('moneyTableHeaderCol1').innerHTML = 'Category'
-  document.getElementById('moneyTableTitle').innerHTML = ACTIVE_DAY.format('MMMM')
+  document.getElementById('moneyTableTitle').innerHTML = SHOWING.current.format('MMMM')
   for (var i = 0; i < categories.length; i++) {
     [row, cell1, cell2] = createTableElements('td')
     cell1.innerHTML = categories[i]
@@ -106,12 +113,12 @@ function createTableElements(cellType){
   return [row, cell1, cell2]
 }
 
-function showNext(period){
-  ACTIVE_DAY.add(1, 'day')
-  MoneyEntry.showByPeriod(period, ACTIVE_DAY.unix())
+function showNext(){
+  SHOWING.current.add(1, SHOWING.period)
+  MoneyEntry.show(SHOWING.period, SHOWING.current.unix())
 }
 
-function showPrevious(period){
-  ACTIVE_DAY.subtract(1, 'day')
-  MoneyEntry.showByPeriod(period, ACTIVE_DAY.unix())
+function showPrevious(){
+  SHOWING.current.subtract(1, SHOWING.period)
+  MoneyEntry.show(SHOWING.period, SHOWING.current.unix())
 }
