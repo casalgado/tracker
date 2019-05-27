@@ -9,7 +9,7 @@ function drawSelectMenu(menu, list){
 	while (menu.children.length != 1) {
     menu.removeChild(input.lastChild);
 	}
-	array = [... new Set(list.sort())]
+	list = [... new Set(list.flat().sort())]
 	for (let i = 0; i < list.length; i++) {
 		element = document.createElement('option')
 		element.setAttribute('value', list[i].toLowerCase())

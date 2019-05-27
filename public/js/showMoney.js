@@ -1,9 +1,9 @@
 
 MoneyEntry.show = function(period, timestamp){
   // period values correspond to 'day', 'week', 'month' or 'year'
-  SHOWING.period = period
-  entries = MoneyEntry.getByPeriod(period, timestamp)
-  MoneyEntry.draw(entries)
+  SHOWING.period = period // sets active period
+  getEntries = MoneyEntry.getByPeriod(period, timestamp)
+  MoneyEntry.draw(getEntries)
 }
 
 MoneyEntry.draw = function(entries){
@@ -13,18 +13,17 @@ MoneyEntry.draw = function(entries){
   moneyTable.appendChild(drawTableHeader())
   switch (period) {
     case 'day':
-        MoneyEntry.drawDay(entries)
+        MoneyEntry.drawEachItem(entries)
       break;
     case 'week':
-        MoneyEntry.drawWeek(entries)
+        MoneyEntry.drawEachCategory(entries)
       break;
     default:
-      MoneyEntry.drawMonth(entries)
+      MoneyEntry.drawEachCategory(entries)
   }
 }
 
-MoneyEntry.drawDay = function(entries){
-  period = SHOWING.period
+MoneyEntry.drawEachItem = function(entries){
   document.getElementById('moneyTableHeaderCol1').innerHTML = 'Item'
   document.getElementById('moneyTableTitle').innerHTML = SHOWING.current.format('dddd D')
   for (var i = 0; i < entries.length; i++) {
@@ -43,8 +42,7 @@ MoneyEntry.drawDay = function(entries){
   document.getElementById('moneyTable').appendChild(row)
 }
 
-MoneyEntry.drawMonth = function(entries){
-  period = SHOWING.period
+MoneyEntry.drawEachCategory = function(entries){
   var categories = isolateProperty('category', entries)
   var totals = totalsPerKey(categories, entries)
   document.getElementById('moneyTableHeaderCol1').innerHTML = 'Category'
@@ -59,7 +57,7 @@ MoneyEntry.drawMonth = function(entries){
   }
   [row, cell1, cell2] = createTableElements('td')
   cell1.innerHTML = 'Total:'
-  cell2.innerHTML = '$ ' + totals.reduce((accumulator, item) => {return accumulator += item }, 0)
+  cell2.innerHTML = '$ ' + totals.reduce((sum, total) => {return sum += total }, 0)
   row.appendChild(cell1)
   row.appendChild(cell2)
   document.getElementById('moneyTable').appendChild(row)

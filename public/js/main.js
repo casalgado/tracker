@@ -24,7 +24,7 @@ function loadPage(user){
 		CATEGORIES = isolateProperty('category', value)
 		SUBCATEGORIES = isolateProperty('subcategory', value)
 		drawSelectMenu('moneyEntryCategory', CATEGORIES)
-		drawSelectMenu('moneyEntrySubCategory', SUBCATEGORIES)
+		drawSelectMenu('moneyEntrySubCategory', [CATEGORIES, SUBCATEGORIES])
 	})
 	Entry.fetchAllByType('time', user.uid).then(value => {
 		TIME_ENTRIES = value
