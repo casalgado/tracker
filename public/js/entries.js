@@ -5,8 +5,9 @@ class Entry {
     }
 
     saveEntry(){
+      var key
       return new Promise(resolve => {
-        var key = firebase.database().ref(`users/${this.uid}/${this.type}Entries`).push(this).key
+        key = firebase.database().ref(`users/${this.uid}/${this.type}Entries`).push(this).key
         return resolve(key)
       })
       .then(value => {
@@ -47,36 +48,36 @@ class MoneyEntry extends Entry {
 
 function createEntry(type){
   var uid = firebase.auth().currentUser.uid
-  var entry
+  var entry, eid, name, amount, category, subcategory, comment, day, month, year, date, start_time, end_time
   switch (type) {
     case 'money':
-        var eid         = ''
-        var name        = document.getElementById('moneyEntryName').value.toLowerCase()
-        var amount      = document.getElementById('moneyEntryAmount').value
-        var category    = document.getElementById('moneyEntryCategory').value.toLowerCase()
-        var subcategory = document.getElementById('moneyEntrySubCategory').value.toLowerCase()
-        var comment     = document.getElementById('moneyEntryComment').value.toLowerCase()
-        var day         = document.getElementById('timeEntryDay').value
-        var month       = document.getElementById('timeEntryMonth').value
-        var year        = document.getElementById('timeEntryYear').value
-        var date  = convertToDate(moment().format('HHmm'), day, month, year).format('X')
+        eid         = ''
+        name        = document.getElementById('moneyEntryName').value.toLowerCase()
+        amount      = document.getElementById('moneyEntryAmount').value
+        category    = document.getElementById('moneyEntryCategory').value.toLowerCase()
+        subcategory = document.getElementById('moneyEntrySubCategory').value.toLowerCase()
+        comment     = document.getElementById('moneyEntryComment').value.toLowerCase()
+        day         = document.getElementById('timeEntryDay').value
+        month       = document.getElementById('timeEntryMonth').value
+        year        = document.getElementById('timeEntryYear').value
+        date  = convertToDate(moment().format('HHmm'), day, month, year).format('X')
         entry = new MoneyEntry(eid, uid, 'money', name, amount, category, subcategory, comment, date)
         entry.saveEntry().then(() => { MoneyEntry.show(SHOWING.period, SHOWING.current.unix())});
       break;
     case 'time':
-        var eid        = ''
-        var start_time = document.getElementById('timeEntryStart').value
-        var end_time   = document.getElementById('timeEntryEnd').value
-        var category   = document.getElementById('timeEntryCategory').value
+        eid        = ''
+        start_time = document.getElementById('timeEntryStart').value
+        end_time   = document.getElementById('timeEntryEnd').value
+        category   = document.getElementById('timeEntryCategory').value
 
-        var day        = document.getElementById('timeEntryDay').value
-        var month      = document.getElementById('timeEntryMonth').value
-        var year       = document.getElementById('timeEntryYear').value
+        day        = document.getElementById('timeEntryDay').value
+        month      = document.getElementById('timeEntryMonth').value
+        year       = document.getElementById('timeEntryYear').value
 
-        var entryStart = convertToDate(start_time, day, month, year).format('X');
-        var entryEnd   = convertToDate(end_time, day, month, year).format('X');
+        entryStart = convertToDate(start_time, day, month, year).format('X');
+        entryEnd   = convertToDate(end_time, day, month, year).format('X');
 
-        var entry = new TimeEntry(eid, uid, 'time', entryStart, entryEnd, category)
+        entry = new TimeEntry(eid, uid, 'time', entryStart, entryEnd, category)
         entry.saveEntry().then(() => { TimeEntry.showByPeriod('day', SHOWING.current.unix())});
       break;
   }
@@ -84,38 +85,21 @@ function createEntry(type){
   focusTimeStart();
 }
 
-function instantiateEntry(type, value){
+function instantiateEntry(type, dbObj){
   // called when retreiving objects from database
-  var newEntry
+  var entry 
+  var json = JSON.parse(JSON.stringify(dbObj))
   switch (type) {
     case 'money':
-        newEntry = new MoneyEntry()
+        entry = new MoneyEntry()
       break;
     case 'time':
-        newEntry = new TimeEntry()
+        entry = new TimeEntry()
       break;
   }
-  separated = separateObject(value)
-  for (var i = 0; i < separated[0].length; i++) {
-    newEntry[separated[0][i]] = separated[1][i]
+  for (var i = 0; i < Object.keys(json).length; i++) {
+    entry[Object.keys(json)[i]] = Object.values(json)[i]
   }
-  return newEntry
-}
-
-function separateObject(obj){
-	var keys = []
-	var values = []
-	for (var prop in obj) {
-		keys.push(prop)
-		values.push(obj[prop])
-	}
-	return [keys, values]
-}
-
-function includeKey(object){
-  // called to include "eid" key when retreiving objects from database
-  entry = JSON.parse(JSON.stringify(object.val()))
-  entry.eid = object.key
   return entry
 }
 
