@@ -57,10 +57,7 @@ function createEntry(type){
         category    = document.getElementById('moneyEntryCategory').value.toLowerCase()
         subcategory = document.getElementById('moneyEntrySubCategory').value.toLowerCase()
         comment     = document.getElementById('moneyEntryComment').value.toLowerCase()
-        day         = document.getElementById('timeEntryDay').value
-        month       = document.getElementById('timeEntryMonth').value
-        year        = document.getElementById('timeEntryYear').value
-        date  = convertToDate(moment().format('HHmm'), day, month, year).format('X')
+        date  = SHOWING.current.format('X')
         entry = new MoneyEntry(eid, uid, 'money', name, amount, category, subcategory, comment, date)
         entry.saveEntry().then(() => { MoneyEntry.show(SHOWING.period, SHOWING.current.unix())});
       break;

@@ -4,6 +4,7 @@ function onLoad(){
 	SHOWING = { period:'day', current: moment()}
 	CATEGORIES = []
 	SUBCATEGORIES = []
+	POPOVER_AT = {}
 	firebase.auth().onAuthStateChanged(function(user) {
 	  if (user) {
 			loadPage(user)

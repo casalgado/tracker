@@ -31,3 +31,20 @@ form > .btn {
 #signInForm{
   margin: 50px;
 }
+
+.popoverContainer {
+  border: 1px solid black;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 5000ms ease-in-out;
+}
+
+.popoverContainer.isVisible {
+  max-height: 100px;
+}
+
+#popoverBody {
+  background-color: gainsboro;
+  width: 100%;
+  height: 100px;
+}

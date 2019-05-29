@@ -11,6 +11,7 @@ MoneyEntry.draw = function(entries){
   moneyTable = document.getElementById('moneyTable')
   moneyTable.innerHTML = ""
   moneyTable.appendChild(drawTableHeader())
+  moneyTable.appendChild(drawPopover())
   switch (period) {
     case 'day':
         MoneyEntry.drawEachItem(entries)
@@ -30,15 +31,12 @@ MoneyEntry.drawEachItem = function(entries){
     [row, cell1, cell2] = createTableElements('td')
     cell1.innerHTML = entries[i]['name']
     cell2.innerHTML = '$ ' + entries[i]['amount']
-    row.appendChild(cell1)
-    row.appendChild(cell2)
     document.getElementById('moneyTable').appendChild(row)
   }
   [row, cell1, cell2] = createTableElements('td')
+  row.removeEventListener("click", showPopover)
   cell1.innerHTML = 'Total:'
   cell2.innerHTML = '$ ' + calculateTotal(entries)
-  row.appendChild(cell1)
-  row.appendChild(cell2)
   document.getElementById('moneyTable').appendChild(row)
 }
 
@@ -53,15 +51,12 @@ MoneyEntry.drawEachCategory = function(entries){
     [row, cell1, cell2] = createTableElements('td')
     cell1.innerHTML = categories[i]
     cell2.innerHTML = '$ ' + totals[i]
-    row.appendChild(cell1)
-    row.appendChild(cell2)
     document.getElementById('moneyTable').appendChild(row)
   }
   [row, cell1, cell2] = createTableElements('td')
+  row.removeEventListener("click", showPopover)
   cell1.innerHTML = 'Total:'
   cell2.innerHTML = '$ ' + totals.reduce((sum, total) => {return sum += total }, 0)
-  row.appendChild(cell1)
-  row.appendChild(cell2)
   document.getElementById('moneyTable').appendChild(row)
 }
 
@@ -70,8 +65,17 @@ function drawTableHeader(){
   cell1.setAttribute('id', 'moneyTableHeaderCol1')
   cell1.innerHTML = 'Item'
   cell2.innerHTML = 'Price'
-  row.appendChild(cell1)
-  row.appendChild(cell2)
+  return row
+}
+
+function drawPopover(){
+  var row = document.createElement('div')
+  row.setAttribute('id', 'popoverContainer')
+  row.setAttribute('class', 'popoverContainer')
+  row.innerHTML = ""
+  var popoverBody = document.createElement('div')
+  popoverBody.setAttribute('id', 'popoverBody')
+  row.appendChild(popoverBody)
   return row
 }
 
@@ -110,6 +114,9 @@ function createTableElements(cellType){
   var row = document.createElement('tr')
   var cell1 = document.createElement(cellType)
   var cell2 = document.createElement(cellType)
+  row.appendChild(cell1)
+  row.appendChild(cell2)
+  row.addEventListener("click", showPopover)
   return [row, cell1, cell2]
 }
 
