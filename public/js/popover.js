@@ -1,13 +1,29 @@
 
+function drawPopover(){
+	var row = document.createElement('td')
+	row.setAttribute('id', 'popoverContainer')
+	row.setAttribute('class', 'popoverContainer')
+	row.setAttribute('colspan', '2')
+	row.innerHTML = ""
+	var popoverBody = document.createElement('div')
+	popoverBody.setAttribute('class', 'popoverBody')
+	row.appendChild(popoverBody)
+	return row
+  }
+  
 function showPopover(){
-	popover = document.getElementById('popoverContainer')
-	if (POPOVER_AT == this && popover.classList.contains('isVisible')){
-		popover.classList.remove('isVisible')
+	popoverSpeed = 150
+	if (this.classList.contains('hasPopover')){
+		this.classList.remove('hasPopover')
+		popover = this.nextSibling
+		popover.firstChild.velocity({height: '0px'}, {duration: popoverSpeed} ).then(()=>{popover.parentNode.removeChild(popover)})
 	} else {
-		popover.classList.add('isVisible')
+		this.classList.add('hasPopover')
+		popover = drawPopover()
+		popover.appendAfter(this)
+		popover.firstChild.velocity({height: '100px'}, {duration: popoverSpeed} )
 	}
 	POPOVER_AT = this
-	popover.appendAfter(this)
 }
 
 Element.prototype.appendAfter = function (element) {

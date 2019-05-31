@@ -11,7 +11,6 @@ MoneyEntry.draw = function(entries){
   moneyTable = document.getElementById('moneyTable')
   moneyTable.innerHTML = ""
   moneyTable.appendChild(drawTableHeader())
-  moneyTable.appendChild(drawPopover())
   switch (period) {
     case 'day':
         MoneyEntry.drawEachItem(entries)
@@ -35,6 +34,7 @@ MoneyEntry.drawEachItem = function(entries){
   }
   [row, cell1, cell2] = createTableElements('td')
   row.removeEventListener("click", showPopover)
+  row.style.textIndent = '0em' // can be refactored
   cell1.innerHTML = 'Total:'
   cell2.innerHTML = '$ ' + calculateTotal(entries)
   document.getElementById('moneyTable').appendChild(row)
@@ -55,6 +55,7 @@ MoneyEntry.drawEachCategory = function(entries){
   }
   [row, cell1, cell2] = createTableElements('td')
   row.removeEventListener("click", showPopover)
+  row.style.textIndent = '0em' // can be refactored
   cell1.innerHTML = 'Total:'
   cell2.innerHTML = '$ ' + totals.reduce((sum, total) => {return sum += total }, 0)
   document.getElementById('moneyTable').appendChild(row)
@@ -65,17 +66,8 @@ function drawTableHeader(){
   cell1.setAttribute('id', 'moneyTableHeaderCol1')
   cell1.innerHTML = 'Item'
   cell2.innerHTML = 'Price'
-  return row
-}
-
-function drawPopover(){
-  var row = document.createElement('div')
-  row.setAttribute('id', 'popoverContainer')
-  row.setAttribute('class', 'popoverContainer')
-  row.innerHTML = ""
-  var popoverBody = document.createElement('div')
-  popoverBody.setAttribute('id', 'popoverBody')
-  row.appendChild(popoverBody)
+  row.removeEventListener("click", showPopover)
+  row.style.textIndent = '0em' // can be refactored
   return row
 }
 
@@ -117,6 +109,7 @@ function createTableElements(cellType){
   row.appendChild(cell1)
   row.appendChild(cell2)
   row.addEventListener("click", showPopover)
+  row.style.textIndent = '0.2em'
   return [row, cell1, cell2]
 }
 
