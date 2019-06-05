@@ -55,7 +55,7 @@ function createEntry(type){
         name        = document.getElementById('moneyEntryName').value.toLowerCase()
         amount      = document.getElementById('moneyEntryAmount').value
         category    = document.getElementById('moneyEntryCategory').value.toLowerCase()
-        subcategory = document.getElementById('moneyEntrySubCategory').value.toLowerCase()
+        subcategory = document.getElementById('moneyEntrySubcategory').value.toLowerCase()
         comment     = document.getElementById('moneyEntryComment').value.toLowerCase()
         date  = SHOWING.current.format('X')
         entry = new MoneyEntry(eid, uid, 'money', name, amount, category, subcategory, comment, date)
@@ -79,7 +79,6 @@ function createEntry(type){
       break;
   }
   resetInputForms();
-  focusTimeStart();
 }
 
 function instantiateEntry(type, dbObj){

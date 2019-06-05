@@ -1,7 +1,6 @@
 
 function resetInputForms() {
 	document.getElementById('moneyEntryInputForm').reset();
-	document.getElementById('timeEntryInputForm').reset();
 }
 
 function drawSelectMenu(menu, list){

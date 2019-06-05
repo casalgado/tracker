@@ -9,7 +9,7 @@ function focusTimeEnd() {
 }
 
 function focusTimeStart() {
-  document.getElementById('timeEntryStart').focus()
+  document.getElementById('moneyEntryTable').focus()
 }
 
 function focusTimeDay() {
