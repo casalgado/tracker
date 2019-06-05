@@ -7,58 +7,45 @@ MoneyEntry.show = function(period, timestamp){
 }
 
 MoneyEntry.draw = function(entries){
-  period = SHOWING.period
-  moneyTable = document.getElementById('moneyTable')
+  // get current period and clone of current day
+  let period = SHOWING.period
+  let current = moment(SHOWING.current.format('X'), 'X')
+  // get table from DOM and set necessary variables
+  let moneyTable = document.getElementById('moneyTable')
+  let tableTitle, col1Header, col1List, col2List
+  // reset table
   moneyTable.innerHTML = ""
+  // create table header
   moneyTable.appendChild(drawTableHeader())
-  switch (period) {
-    case 'day':
-        MoneyEntry.drawEachItem(entries)
-      break;
-    case 'week':
-        MoneyEntry.drawEachCategory(entries)
-      break;
-    default:
-      MoneyEntry.drawEachCategory(entries)
+  // set variables depending on period
+  if (period === 'day') {
+    tableTitle = SHOWING.current.format('dddd MMMM D')
+    col1Header = 'Item'
+    col1List   = entries.map(e => e['name'])
+    col2List   = entries.map(e => parseInt(e['amount']))
+  } else {
+    tableTitle = `${current.startOf(period).format('D MMMM')} - ${current.endOf(period).format('D MMMM')}`
+    col1Header = 'Category'
+    col1List   = propList('category', entries)
+    col2List   = totalsPer(col1List, entries)
   }
-}
-
-MoneyEntry.drawEachItem = function(entries){
-  document.getElementById('moneyTableHeaderCol1').innerHTML = 'Item'
-  document.getElementById('moneyTableTitle').innerHTML = SHOWING.current.format('dddd MMMM D')
-  for (var i = 0; i < entries.length; i++) {
+  // apply table title and headers from variables
+  document.getElementById('moneyTableHeaderCol1').innerHTML = col1Header
+  document.getElementById('moneyTableTitle').innerHTML = tableTitle
+  // create table rows
+  for (var i = 0; i < col1List.length; i++) {
     [row, cell1, cell2] = createTableElements('td')
-    cell1.innerHTML = entries[i]['name']
-    cell2.innerHTML = '$ ' + entries[i]['amount']
-    document.getElementById('moneyTable').appendChild(row)
+    cell1.innerHTML = col1List[i]
+    cell2.innerHTML = '$ ' + col2List[i]
+    row.addEventListener("click", showPopover)
+    row.style.textIndent = '0.2em'
+    moneyTable.appendChild(row)
   }
+  // add final 'Total:' row
   [row, cell1, cell2] = createTableElements('td')
-  row.removeEventListener("click", showPopover)
-  row.style.textIndent = '0em' // can be refactored
   cell1.innerHTML = 'Total:'
-  cell2.innerHTML = '$ ' + calculateTotal(entries)
-  document.getElementById('moneyTable').appendChild(row)
-}
-
-MoneyEntry.drawEachCategory = function(entries){
-  var categories = isolateProperty('category', entries)
-  var totals = totalsPerKey(categories, entries)
-  var period  = SHOWING.period
-  var current = moment(SHOWING.current.format('X'), 'X')
-  document.getElementById('moneyTableHeaderCol1').innerHTML = 'Category'
-  document.getElementById('moneyTableTitle').innerHTML = `${current.startOf(period).format('D MMMM')} - ${current.endOf(period).format('D MMMM')}`
-  for (var i = 0; i < categories.length; i++) {
-    [row, cell1, cell2] = createTableElements('td')
-    cell1.innerHTML = categories[i]
-    cell2.innerHTML = '$ ' + totals[i]
-    document.getElementById('moneyTable').appendChild(row)
-  }
-  [row, cell1, cell2] = createTableElements('td')
-  row.removeEventListener("click", showPopover)
-  row.style.textIndent = '0em' // can be refactored
-  cell1.innerHTML = 'Total:'
-  cell2.innerHTML = '$ ' + totals.reduce((sum, total) => {return sum += total }, 0)
-  document.getElementById('moneyTable').appendChild(row)
+  cell2.innerHTML = '$ ' + col2List.reduce((sum, total) => {return sum += total }, 0)
+  moneyTable.appendChild(row)
 }
 
 function drawTableHeader(){
@@ -66,16 +53,35 @@ function drawTableHeader(){
   cell1.setAttribute('id', 'moneyTableHeaderCol1')
   cell1.innerHTML = 'Item'
   cell2.innerHTML = 'Price'
-  row.removeEventListener("click", showPopover)
-  row.style.textIndent = '0em' // can be refactored
   return row
 }
 
-function totalsPerKey(array, entries){
-  var totals = []
-  for (var i = 0; i < array.length; i++) {
-      inCategory = entries.filter((entry) => {
-        return entry.category === array[i]
+function createTableElements2(cellType, c1, c2){
+  let row = document.createElement('tr')
+  let cell1 = document.createElement(cellType)
+  let cell2 = document.createElement(cellType)
+  cell1.innerHTML = c1
+  cell1.innerHTML = c2
+  row.appendChild(cell1)
+  row.appendChild(cell2)
+  return [row, cell1, cell2]
+}
+
+function createTableElements(cellType){
+  let row = document.createElement('tr')
+  let cell1 = document.createElement(cellType)
+  let cell2 = document.createElement(cellType)
+  row.appendChild(cell1)
+  row.appendChild(cell2)
+  return [row, cell1, cell2]
+}
+
+function totalsPer(keys, entries){
+  // takes in array of keys and calculates total amount per key in entries array
+  let totals = []
+  for (var i = 0; i < keys.length; i++) {
+      inCategory = entries.filter(e => {
+        return e.category === keys[i]
       })
       var totalAmount = calculateTotal(inCategory)
       totals.push(totalAmount)
@@ -83,34 +89,17 @@ function totalsPerKey(array, entries){
   return totals
 }
 
+function propList(prop, entries){
+  // returns list of property keys of entries array
+  onlyProps = entries.map( e => e[prop]).getUnique()
+  return onlyProps
+}
+
 function calculateTotal(entries){
   var total = entries.reduce((accumulator, entry) => {
     return accumulator += (parseFloat(entry.amount))
   }, 0)
   return parseInt(total*100)/100
-}
-
-function isolateProperty(prop, entries){
-  // returns array of values of selected prop for array of entries
-  onlyProps = []
-  for (var i = 0; i < entries.length; i++) {
-    onlyProps.push(entries[i][prop])
-  }
-  var uniqueProps = onlyProps.filter(function(element, pos) {
-    return onlyProps.indexOf(element) === pos;
-  })
-  return uniqueProps
-}
-
-function createTableElements(cellType){
-  var row = document.createElement('tr')
-  var cell1 = document.createElement(cellType)
-  var cell2 = document.createElement(cellType)
-  row.appendChild(cell1)
-  row.appendChild(cell2)
-  row.addEventListener("click", showPopover)
-  row.style.textIndent = '0.2em'
-  return [row, cell1, cell2]
 }
 
 function showNext(){
@@ -121,4 +110,9 @@ function showNext(){
 function showPrevious(){
   SHOWING.current.subtract(1, SHOWING.period)
   MoneyEntry.show(SHOWING.period, SHOWING.current.unix())
+}
+
+Array.prototype.getUnique = function(){
+  let uniq = [...new Set(this)];
+  return uniq
 }

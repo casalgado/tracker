@@ -28,23 +28,48 @@
       <div id="mainContainer" class="container">
         <h5 class="pageTitle"> Tracker <small> To perceive is to know </small> </h5>
         <div class="row">
-          <div id="formContainer"class="container col-xs-12 col-sm-3">
+          <div id="formContainer"class="container col-xs-12 col-lg-3">
             <h6>Money</h6>
             <form id="moneyEntryInputForm">
-              <div class="form-group">
-                <select onchange="drawSelectMenu('moneyEntryFrequent', filterNamesByCategory(this))" onkeyup="" class="form-control form-control-sm" id="moneyEntryCategory">
-                  <option value="undefined" class="selectPlaceholder">Category</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <select onkeyup="" class="form-control form-control-sm" id="moneyEntrySubCategory">
-                  <option value="undefined" class="selectPlaceholder">Subcategory</option>
-                </select>
+
+              <div class="form-group input-group select-group">
+                <div class="input-group-prepend">
+                  <select 
+                    class="form-control form-control-sm auto-select"
+                    id="categorySelection"
+                    data-target="moneyEntryCategory"
+                    onchange="drawSelectMenu('moneyEntryFrequent', filterNamesByCategory(this)); 
+                              fillInCategory(this)" 
+                    onkeyup="">
+                      <option value="undefined" class="selectPlaceholder">Category</option>
+                  </select>
+                </div>
+
+                <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryCategory" placeholder="">
               </div>
 
               <div class="form-group input-group select-group">
                 <div class="input-group-prepend">
-                  <select onchange="fillInDetails(this)" class="form-control form-control-sm" id="moneyEntryFrequent">
+                  <select 
+                    class="form-control form-control-sm auto-select"
+                    id="subcategorySelection" 
+                    data-target="moneyEntrySubcategory"
+                    onchange="fillInCategory(this)"
+                    onkeyup="">
+                      <option value="undefined" class="selectPlaceholder">Subcategory</option>
+                  </select>
+                </div>
+
+                <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntrySubcategory" placeholder="">
+              </div>
+
+              <div class="form-group input-group select-group">
+                <div class="input-group-prepend">
+                  <select
+                    class="form-control form-control-sm auto-select" 
+                    id="moneyEntryFrequent"
+                    data-target="moneyEntryName"
+                    onchange="fillInFrequent(this)">
                       <option value="undefined" class="selectPlaceholder">Frequent</option>
                   </select>
                 </div>
@@ -60,7 +85,7 @@
               </div>
               <button type="submit" onclick="createEntry('money'); return false" class="btn btn-dark btnSubmit">Add</button>
             </form>
-            <h6>Time</h6>
+            <!-- <h6>Time</h6>
             <form id="timeEntryInputForm">
               <div class="form-group">
                 <input type="text" onkeyup="moveFocus(this.value, 4, focusTimeEnd)" class="form-control form-control-sm" id="timeEntryStart" placeholder="Start">
@@ -81,9 +106,9 @@
                 <input type="text" onkeyup="" class="form-control form-control-sm" id="timeEntryYear" placeholder="Year">
               </div>
               <button type="submit" onclick="createEntry('time'); return false" class="btn btn-dark btnSubmit">Add</button>
-            </form>
+            </form> -->
           </div>
-          <div id="showMoneyContainer"class="container col-sm">
+          <div id="showMoneyContainer"class="container col-xs-12 col-lg">
             <h6 id="moneyTableTitle">  </h6>
             <div class="moneyPagination">
               <button type="" onclick="showPrevious()" class="btn btn-info">prev</button>
@@ -96,7 +121,7 @@
             </table>
             <ul id="moneyEntryList"></ul>
         </div>
-          <div id="showTimeContainer"class="container col-sm">
+          <div id="showTimeContainer"class="container col-xs-12 col-lg">
           <h6> Today's Time </h6>
           <ul> 
             <li> </li>

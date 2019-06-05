@@ -7,7 +7,7 @@ function resetInputForms() {
 function drawSelectMenu(menu, list){
 	menu = document.getElementById(menu)
 	while (menu.children.length != 1) {
-    menu.removeChild(input.lastChild);
+    	menu.removeChild(menu.lastChild);
 	}
 	list = [... new Set(list.flat().sort())]
 	for (let i = 0; i < list.length; i++) {
@@ -18,7 +18,11 @@ function drawSelectMenu(menu, list){
 	}
 }
 
-function fillInDetails(option){
+function fillInCategory(option){
+	document.getElementById(option.dataset.target).value = option.value
+}
+
+function fillInFrequent(option){
 	var entry
 	for (var i = MONEY_ENTRIES.length -1 ; i >= 0; i--) {
 		if (MONEY_ENTRIES[i].name == option.value) {

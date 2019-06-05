@@ -23,7 +23,6 @@ function showPopover(){
 		popover.appendAfter(this)
 		popover.firstChild.velocity({height: '100px'}, {duration: popoverSpeed} )
 	}
-	POPOVER_AT = this
 }
 
 Element.prototype.appendAfter = function (element) {

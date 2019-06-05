@@ -4,7 +4,6 @@ function onLoad(){
 	SHOWING = { period:'day', current: moment()}
 	CATEGORIES = []
 	SUBCATEGORIES = []
-	POPOVER_AT = {}
 	firebase.auth().onAuthStateChanged(function(user) {
 	  if (user) {
 			loadPage(user)
@@ -17,18 +16,18 @@ function onLoad(){
 function loadPage(user){
 	document.getElementById('signInForm').setAttribute('style', 'display:none;')
 	document.getElementById('mainContainer').setAttribute('style', 'display:block;')
-	Entry.fetchAllByType('money', user.uid).then(value => {
-		MONEY_ENTRIES = value
+	Entry.fetchAllByType('money', user.uid).then(entries => {
+		MONEY_ENTRIES = entries
 		return MONEY_ENTRIES
-	}).then(value => {
+	}).then(entries => {
 		MoneyEntry.show('day', SHOWING.current.unix())
-		CATEGORIES = isolateProperty('category', value)
-		SUBCATEGORIES = isolateProperty('subcategory', value)
-		drawSelectMenu('moneyEntryCategory', CATEGORIES)
-		drawSelectMenu('moneyEntrySubCategory', [CATEGORIES, SUBCATEGORIES])
+		CATEGORIES = propList('category', entries)
+		SUBCATEGORIES = propList('subcategory', entries)
+		drawSelectMenu('categorySelection', CATEGORIES)
+		drawSelectMenu('subcategorySelection', [CATEGORIES, SUBCATEGORIES])
 	})
-	Entry.fetchAllByType('time', user.uid).then(value => {
-		TIME_ENTRIES = value
+	Entry.fetchAllByType('time', user.uid).then(entries => {
+		TIME_ENTRIES = entries
 	})
 }
 
