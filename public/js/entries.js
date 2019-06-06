@@ -36,7 +36,7 @@ class TimeEntry extends Entry {
 class MoneyEntry extends Entry {
   constructor(eid, uid, type, name, amount, category, subcategory, comment, date){
       super(eid, uid);
-      this.type        = type;
+      this.type        = type; // can be refactored
       this.name        = name;
       this.amount      = amount;
       this.category    = category;
@@ -46,39 +46,18 @@ class MoneyEntry extends Entry {
   }
 }
 
-function createEntry(type){
-  var uid = firebase.auth().currentUser.uid
-  var entry, eid, name, amount, category, subcategory, comment, day, month, year, date, start_time, end_time
-  switch (type) {
-    case 'money':
-        eid         = ''
-        name        = document.getElementById('moneyEntryName').value.toLowerCase()
-        amount      = document.getElementById('moneyEntryAmount').value
-        category    = document.getElementById('moneyEntryCategory').value.toLowerCase()
-        subcategory = document.getElementById('moneyEntrySubcategory').value.toLowerCase()
-        comment     = document.getElementById('moneyEntryComment').value.toLowerCase()
-        date  = SHOWING.current.format('X')
-        entry = new MoneyEntry(eid, uid, 'money', name, amount, category, subcategory, comment, date)
-        entry.saveEntry().then(() => { MoneyEntry.show(SHOWING.period, SHOWING.current.unix())});
-      break;
-    case 'time':
-        eid        = ''
-        start_time = document.getElementById('timeEntryStart').value
-        end_time   = document.getElementById('timeEntryEnd').value
-        category   = document.getElementById('timeEntryCategory').value
-
-        day        = document.getElementById('timeEntryDay').value
-        month      = document.getElementById('timeEntryMonth').value
-        year       = document.getElementById('timeEntryYear').value
-
-        entryStart = convertToDate(start_time, day, month, year).format('X');
-        entryEnd   = convertToDate(end_time, day, month, year).format('X');
-
-        entry = new TimeEntry(eid, uid, 'time', entryStart, entryEnd, category)
-        entry.saveEntry().then(() => { TimeEntry.showByPeriod('day', SHOWING.current.unix())});
-      break;
-  }
+function createEntry(form, type){ // type can be refactored out
+  let uid = firebase.auth().currentUser.uid
+  let eid = ''
+  let [name, category, subcategory, amount, comment] = getFormValues(form)
+  let date  = SHOWING.current.format('X')
+  let entry = new MoneyEntry(eid, uid, 'money', name, amount, category, subcategory, comment, date)
+  entry.saveEntry().then(() => { MoneyEntry.show(SHOWING.period, SHOWING.current.unix())});
   resetInputForms();
+}
+
+function getFormValues(form){
+  return Array.from(form.form.getElementsByTagName('input')).map(e => e.value.toLowerCase())
 }
 
 function instantiateEntry(type, dbObj){

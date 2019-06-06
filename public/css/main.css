@@ -19,6 +19,13 @@
   display: none;
 }
 
+/* hacky code */
+.auto-select {
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+/* /hacky code */
+
 .auto-select {
   width: 9em;
 }

@@ -16,6 +16,7 @@ function onLoad(){
 function loadPage(user){
 	document.getElementById('signInForm').setAttribute('style', 'display:none;')
 	document.getElementById('mainContainer').setAttribute('style', 'display:block;')
+	resetInputForms();
 	Entry.fetchAllByType('money', user.uid).then(entries => {
 		MONEY_ENTRIES = entries
 		return MONEY_ENTRIES

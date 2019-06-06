@@ -31,14 +31,28 @@
           <div id="formContainer"class="container col-xs-12 col-lg-3">
             <h6>Money</h6>
             <form id="moneyEntryInputForm">
+              
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <select
+                    class="auto-select custom-select custom-select-sm" 
+                    id="nameSelection"
+                    data-target="moneyEntryName"
+                    onchange="fillInFrequent(this)">
+                      <option value="undefined" class="selectPlaceholder">Name</option>
+                  </select>
+                </div>
+
+                <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryName" placeholder="">
+              </div>
 
               <div class="form-group input-group select-group">
                 <div class="input-group-prepend">
                   <select 
-                    class="form-control form-control-sm auto-select"
+                    class="auto-select custom-select custom-select-sm"
                     id="categorySelection"
                     data-target="moneyEntryCategory"
-                    onchange="drawSelectMenu('moneyEntryFrequent', filterNamesByCategory(this)); 
+                    onchange="drawSelectMenu('nameSelection', filterNamesByCategory(this)); 
                               fillInCategory(this)" 
                     onkeyup="">
                       <option value="undefined" class="selectPlaceholder">Category</option>
@@ -51,7 +65,7 @@
               <div class="form-group input-group select-group">
                 <div class="input-group-prepend">
                   <select 
-                    class="form-control form-control-sm auto-select"
+                    class="form-control form-control-sm auto-select custom-select custom-select-sm"
                     id="subcategorySelection" 
                     data-target="moneyEntrySubcategory"
                     onchange="fillInCategory(this)"
@@ -63,27 +77,13 @@
                 <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntrySubcategory" placeholder="">
               </div>
 
-              <div class="form-group input-group select-group">
-                <div class="input-group-prepend">
-                  <select
-                    class="form-control form-control-sm auto-select" 
-                    id="moneyEntryFrequent"
-                    data-target="moneyEntryName"
-                    onchange="fillInFrequent(this)">
-                      <option value="undefined" class="selectPlaceholder">Frequent</option>
-                  </select>
-                </div>
-
-                <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryName" placeholder="Name">
-              </div>
-
               <div class="form-group">
                 <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryAmount" placeholder="Amount">
               </div>
               <div class="form-group">
                 <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryComment" placeholder="Comment">
               </div>
-              <button type="submit" onclick="createEntry('money'); return false" class="btn btn-dark btnSubmit">Add</button>
+              <button type="submit" onclick="createEntry(this, 'money'); return false" class="btn btn-primary btnSubmit">Add</button>
             </form>
             <!-- <h6>Time</h6>
             <form id="timeEntryInputForm">

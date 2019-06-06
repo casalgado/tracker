@@ -19,6 +19,7 @@ function drawSelectMenu(menu, list){
 
 function fillInCategory(option){
 	document.getElementById(option.dataset.target).value = option.value
+	option.children[0].selected = 'selected'
 }
 
 function fillInFrequent(option){
@@ -32,6 +33,7 @@ function fillInFrequent(option){
 	document.getElementById('moneyEntryName').value = option.value
 	document.getElementById('moneyEntryAmount').value  = entry.amount
 	document.getElementById('moneyEntryComment').value = entry.comment || ""
+	option.children[0].selected = 'selected'
 }
 
 
