@@ -22,7 +22,7 @@ MoneyEntry.draw = function(entries){
     tableTitle = SHOWING.current.format('dddd MMMM D')
     col1Header = 'Item'
     col1List   = entries.map(e => e['name'])
-    col2List   = entries.map(e => parseInt(e['amount']))
+    col2List   = entries.map(e => parseFloat(e['amount']))
   } else {
     tableTitle = `${current.startOf(period).format('D MMMM')} - ${current.endOf(period).format('D MMMM')}`
     col1Header = 'Category'
