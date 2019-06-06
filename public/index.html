@@ -30,7 +30,7 @@
         <div class="row">
           <div id="formContainer"class="container col-xs-12 col-lg-3">
             <h6>Money</h6>
-            <form id="moneyEntryInputForm">
+            <form onsubmit="createEntry(this, 'money'); return false"id="moneyEntryInputForm" class="needs-validation">
               
               <div class="form-group input-group">
                 <div class="input-group-prepend">
@@ -43,7 +43,7 @@
                   </select>
                 </div>
 
-                <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryName" placeholder="">
+                <input required type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryName" placeholder="">
               </div>
 
               <div class="form-group input-group select-group">
@@ -59,7 +59,7 @@
                   </select>
                 </div>
 
-                <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryCategory" placeholder="">
+                <input required type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryCategory" placeholder="">
               </div>
 
               <div class="form-group input-group select-group">
@@ -78,12 +78,12 @@
               </div>
 
               <div class="form-group">
-                <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryAmount" placeholder="Amount">
+                <input required type="number" min="1" onkeyup="" class="form-control form-control-sm" id="moneyEntryAmount" placeholder="Amount">
               </div>
               <div class="form-group">
                 <input type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryComment" placeholder="Comment">
               </div>
-              <button type="submit" onclick="createEntry(this, 'money'); return false" class="btn btn-primary btnSubmit">Add</button>
+              <button type="submit" class="btn btn-primary btnSubmit">Add</button>
             </form>
             <!-- <h6>Time</h6>
             <form id="timeEntryInputForm">

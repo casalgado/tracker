@@ -57,7 +57,7 @@ function createEntry(form, type){ // type can be refactored out
 }
 
 function getFormValues(form){
-  return Array.from(form.form.getElementsByTagName('input')).map(e => e.value.toLowerCase())
+  return Array.from(form.getElementsByTagName('input')).map(e => e.value.toLowerCase())
 }
 
 function instantiateEntry(type, dbObj){
