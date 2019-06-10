@@ -30,7 +30,7 @@
         <div class="row">
           <div id="formContainer"class="container col-xs-12 col-lg-3">
             <h6>Money</h6>
-            <form onsubmit="createEntry(this, 'money'); return false"id="moneyEntryInputForm" class="needs-validation">
+            <form onsubmit="createEntry(this); return false"id="moneyEntryInputForm" class="">
               
               <div class="form-group input-group">
                 <div class="input-group-prepend">
@@ -38,7 +38,7 @@
                     class="auto-select custom-select custom-select-sm" 
                     id="nameSelection"
                     data-target="moneyEntryName"
-                    onchange="fillInFrequent(this)">
+                    onchange="fillInRecent(this)">
                       <option value="undefined" class="selectPlaceholder">Name</option>
                   </select>
                 </div>
@@ -52,8 +52,8 @@
                     class="auto-select custom-select custom-select-sm"
                     id="categorySelection"
                     data-target="moneyEntryCategory"
-                    onchange="drawSelectMenu('nameSelection', filterNamesByCategory(this)); 
-                              fillInCategory(this)" 
+                    onchange="drawSelectMenu('subcategorySelection', filterSubcategoriesByCategory(this)); 
+                              fillInValue(this)" 
                     onkeyup="">
                       <option value="undefined" class="selectPlaceholder">Category</option>
                   </select>
@@ -68,7 +68,7 @@
                     class="form-control form-control-sm auto-select custom-select custom-select-sm"
                     id="subcategorySelection" 
                     data-target="moneyEntrySubcategory"
-                    onchange="fillInCategory(this)"
+                    onchange="fillInValue(this)"
                     onkeyup="">
                       <option value="undefined" class="selectPlaceholder">Subcategory</option>
                   </select>
@@ -122,9 +122,13 @@
             <ul id="moneyEntryList"></ul>
         </div>
           <div id="showTimeContainer"class="container col-xs-12 col-lg">
-          <h6> Today's Time </h6>
+          <h6> Todo </h6>
           <ul> 
-            <li> </li>
+            <li> Organize Cats Subcats </li>
+            <li> Intentar polymorphism. all functions  inside classes/subclasses </li>
+            <li> Pop overs </li>
+            <li> Tests </li>
+            <li> Styles </li>
           </ul>
           <div class="timeChartContainer"></div>
           <ul id="timeEntryList"></ul>

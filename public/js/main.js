@@ -14,7 +14,7 @@ function onLoad(){
 }
 
 function loadPage(user){
-	document.getElementById('signInForm').setAttribute('style', 'display:none;')
+	document.getElementById('landingContainer').setAttribute('style', 'display:none;')
 	document.getElementById('mainContainer').setAttribute('style', 'display:block;')
 	resetInputForms()
 	Entry.fetchAllByType('money', user.uid).then(entries => {
@@ -24,6 +24,7 @@ function loadPage(user){
 		MoneyEntry.show('day', SHOWING.current.unix())
 		CATEGORIES = propList('category', entries)
 		SUBCATEGORIES = propList('subcategory', entries)
+		drawSelectMenu('nameSelection', getRecent(10))
 		drawSelectMenu('categorySelection', CATEGORIES)
 		drawSelectMenu('subcategorySelection', [CATEGORIES, SUBCATEGORIES])
 	})
@@ -35,10 +36,8 @@ function loadPage(user){
 function signInUser(){
 	var email = document.getElementById('signInEmail').value
 	var password = document.getElementById('signInPassword').value
-  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-    var errorCode = error.code;
+	firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+		var errorCode = error.code;
 		var errorMessage = error.message;
 	}).then(()=> {loadPage(firebase.auth().currentUser)});
 }
-
-

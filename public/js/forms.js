@@ -3,12 +3,28 @@ function resetInputForms() {
 	document.getElementById('moneyEntryInputForm').reset();
 }
 
+function getRecent(num){
+	let recent = []
+	for (var i = MONEY_ENTRIES.length - 1; i >= 0; i--) {
+		const element = MONEY_ENTRIES[i].name
+		if (recent.length < num) {
+			recent.push(element)
+			recent = recent.getUnique()
+		}
+	}
+	return recent
+}
+
+function getValueInList(name, value, list) {
+
+}
+
 function drawSelectMenu(menu, list){
 	menu = document.getElementById(menu)
 	while (menu.children.length != 1) {
     	menu.removeChild(menu.lastChild);
 	}
-	list = [... new Set(list.flat().sort())]
+	list = list.flat().getUnique().sort()
 	for (let i = 0; i < list.length; i++) {
 		element = document.createElement('option')
 		element.setAttribute('value', list[i].toLowerCase())
@@ -17,13 +33,12 @@ function drawSelectMenu(menu, list){
 	}
 }
 
-function fillInCategory(option){
+function fillInValue(option){
 	document.getElementById(option.dataset.target).value = option.value
 	option.children[0].selected = 'selected'
 }
 
-function fillInFrequent(option){
-	var entry
+function fillInRecent(option){
 	for (var i = MONEY_ENTRIES.length -1 ; i >= 0; i--) {
 		if (MONEY_ENTRIES[i].name == option.value) {
 			entry = MONEY_ENTRIES[i]
@@ -31,6 +46,8 @@ function fillInFrequent(option){
 		}
 	}
 	document.getElementById('moneyEntryName').value = option.value
+	document.getElementById('moneyEntryCategory').value = entry.category
+	document.getElementById('moneyEntrySubcategory').value = entry.subcategory
 	document.getElementById('moneyEntryAmount').value  = entry.amount
 	document.getElementById('moneyEntryComment').value = entry.comment || ""
 	option.children[0].selected = 'selected'
@@ -48,10 +65,10 @@ function filterNamesByCategory(option){
 	return items
 }
 
-function filterSubcategoriesByCategory(obj){
+function filterSubcategoriesByCategory(option){
 	items = []
 	for (var i = 0; i < MONEY_ENTRIES.length; i++) {
-		if (MONEY_ENTRIES[i].category == obj.value) {
+		if (MONEY_ENTRIES[i].category == option.value) {
 			items.push(MONEY_ENTRIES[i].subcategory)
 		}
 	}

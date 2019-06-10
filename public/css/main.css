@@ -3,7 +3,7 @@
   overflow: visible;
 }
 
-#mainContainer {
+#mainContainer, #landingContainer {
   display: none;
 }
 
@@ -15,11 +15,11 @@
   padding: 1em;
 }
 
-#landingContainer {
-  display: none;
-}
-
-/* hacky code */
+/* hacky code 
+   solved by using dropdown addons in forms 
+   at cost of using select menus
+   not yet tested
+*/
 .auto-select {
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;

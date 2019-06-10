@@ -46,7 +46,7 @@ class MoneyEntry extends Entry {
   }
 }
 
-function createEntry(form, type){ // type can be refactored out
+function createEntry(form){ 
   let uid = firebase.auth().currentUser.uid
   let eid = ''
   let [name, category, subcategory, amount, comment] = getFormValues(form)
