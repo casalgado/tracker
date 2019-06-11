@@ -39,7 +39,7 @@
                     id="nameSelection"
                     data-target="moneyEntryName"
                     onchange="fillInRecent(this)">
-                      <option value="undefined" class="selectPlaceholder">Name</option>
+                      <option value="undefined" class="selectPlaceholder">Recent</option>
                   </select>
                 </div>
 
@@ -67,7 +67,7 @@
                     class="form-control form-control-sm auto-select custom-select custom-select-sm"
                     id="subcategorySelection" 
                     data-target="moneyEntrySubcategory"
-                    onchange="fillInValue(this)"
+                    onchange="subcategoryChangeEventHandler(this)"
                     onkeyup="">
                       <option value="undefined" class="selectPlaceholder">Subcategory</option>
                   </select>

@@ -17,9 +17,19 @@ function getByPeriod(entries, period, timestamp) {
 }
 
 function getRecent(num){
+  let entries
+  if (!arguments[1]){
+    entries = [...MONEY_ENTRIES]
+  } else {
+    // update RECENT.filter with arguments
+    for (let i = 1; i < arguments.length; i++) {
+      Object.assign(RECENT.filter, arguments[i])
+      entries = getByPropertyValues(RECENT.filter)
+    }
+  }
 	let recent = []
-	for (var i = MONEY_ENTRIES.length - 1; i >= 0; i--) {
-		const element = MONEY_ENTRIES[i].name
+	for (var i = entries.length - 1; i >= 0; i--) {
+		const element = entries[i].name
 		if (recent.length < num) {
 			recent.push(element)
 			recent = recent.getUnique()
@@ -29,6 +39,9 @@ function getRecent(num){
 }
 
 function getByPropertyValues(obj){
+  // takes in object of the form {prop: value, prop: value} and returns only entries that 
+  // corespond to them. If obj = {category: alimentacion, subcategory: desayuno}, returns
+  // only entries that fit both values. Returns most recent first. 
   let entries = [...MONEY_ENTRIES]
   let keys = Object.keys(obj)
   let values = Object.values(obj)

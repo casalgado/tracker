@@ -1,7 +1,8 @@
 
 function resetInputForms() {
 	document.getElementById('moneyEntryInputForm').reset();
-	RECENT = getRecent(RECENT_LENGTH)
+	RECENT.filters = {}
+	RECENT.names = getRecent(RECENT.length)
 }
 
 function drawSelectMenu(menu, list){
@@ -39,9 +40,15 @@ function fillInRecent(option){
 
 function categoryChangeEventHandler(option){
 	fillInValue(option)
+	drawSelectMenu('nameSelection', getRecent(RECENT.length, {'category':`${option.value}`}))
 	drawSelectMenu('subcategorySelection', propList('subcategory', getByPropertyValues({'category':`${option.value}`})));
-	option.children[0].selected = 'selected'
-    var test = 'test'                       
+	option.children[0].selected = 'selected'                  
+}
+
+function subcategoryChangeEventHandler(option){
+	fillInValue(option)
+	drawSelectMenu('nameSelection', getRecent(RECENT.length, {'subcategory':`${option.value}`}))
+	option.children[0].selected = 'selected' 
 }
 
 // the two methods below can be combined by using two arguments
