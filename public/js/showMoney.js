@@ -89,12 +89,6 @@ function totalsPer(keys, entries){
   return totals
 }
 
-function propList(prop, entries){
-  // returns list of property keys of entries array
-  onlyProps = entries.map( e => e[prop]).getUnique()
-  return onlyProps
-}
-
 function calculateTotal(entries){
   var total = entries.reduce((accumulator, entry) => {
     return accumulator += (parseFloat(entry.amount))

@@ -1,22 +1,7 @@
 
 function resetInputForms() {
 	document.getElementById('moneyEntryInputForm').reset();
-}
-
-function getRecent(num){
-	let recent = []
-	for (var i = MONEY_ENTRIES.length - 1; i >= 0; i--) {
-		const element = MONEY_ENTRIES[i].name
-		if (recent.length < num) {
-			recent.push(element)
-			recent = recent.getUnique()
-		}
-	}
-	return recent
-}
-
-function getValueInList(name, value, list) {
-
+	RECENT = getRecent(RECENT_LENGTH)
 }
 
 function drawSelectMenu(menu, list){
@@ -24,7 +9,7 @@ function drawSelectMenu(menu, list){
 	while (menu.children.length != 1) {
     	menu.removeChild(menu.lastChild);
 	}
-	list = list.flat().getUnique().sort()
+	list = list.flat().getUnique()
 	for (let i = 0; i < list.length; i++) {
 		element = document.createElement('option')
 		element.setAttribute('value', list[i].toLowerCase())
@@ -35,7 +20,6 @@ function drawSelectMenu(menu, list){
 
 function fillInValue(option){
 	document.getElementById(option.dataset.target).value = option.value
-	option.children[0].selected = 'selected'
 }
 
 function fillInRecent(option){
@@ -53,6 +37,12 @@ function fillInRecent(option){
 	option.children[0].selected = 'selected'
 }
 
+function categoryChangeEventHandler(option){
+	fillInValue(option)
+	drawSelectMenu('subcategorySelection', propList('subcategory', getByPropertyValues({'category':`${option.value}`})));
+	option.children[0].selected = 'selected'
+    var test = 'test'                       
+}
 
 // the two methods below can be combined by using two arguments
 function filterNamesByCategory(option){

@@ -29,7 +29,7 @@
         <h5 class="pageTitle"> Tracker <small> To perceive is to know </small> </h5>
         <div class="row">
           <div id="formContainer"class="container col-xs-12 col-lg-3">
-            <h6>Money</h6>
+            <h6 onclick="resetInputForms()">Money</h6>
             <form onsubmit="createEntry(this); return false"id="moneyEntryInputForm" class="">
               
               <div class="form-group input-group">
@@ -52,8 +52,7 @@
                     class="auto-select custom-select custom-select-sm"
                     id="categorySelection"
                     data-target="moneyEntryCategory"
-                    onchange="drawSelectMenu('subcategorySelection', filterSubcategoriesByCategory(this)); 
-                              fillInValue(this)" 
+                    onchange="categoryChangeEventHandler(this)" 
                     onkeyup="">
                       <option value="undefined" class="selectPlaceholder">Category</option>
                   </select>

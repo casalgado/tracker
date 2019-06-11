@@ -4,6 +4,8 @@ function onLoad(){
 	SHOWING = { period:'day', current: moment()}
 	CATEGORIES = []
 	SUBCATEGORIES = []
+	RECENT = []
+	RECENT_LENGTH = 10
 	firebase.auth().onAuthStateChanged(function(user) {
 	  if (user) {
 			loadPage(user)
@@ -22,11 +24,12 @@ function loadPage(user){
 		return MONEY_ENTRIES
 	}).then(entries => {
 		MoneyEntry.show('day', SHOWING.current.unix())
-		CATEGORIES = propList('category', entries)
-		SUBCATEGORIES = propList('subcategory', entries)
-		drawSelectMenu('nameSelection', getRecent(10))
+		CATEGORIES = propList('category', entries).sort()
+		SUBCATEGORIES = propList('subcategory', entries).sort()
+		RECENT = getRecent(RECENT_LENGTH)
+		drawSelectMenu('nameSelection', RECENT)
 		drawSelectMenu('categorySelection', CATEGORIES)
-		drawSelectMenu('subcategorySelection', [CATEGORIES, SUBCATEGORIES])
+		drawSelectMenu('subcategorySelection', SUBCATEGORIES)
 	})
 	Entry.fetchAllByType('time', user.uid).then(entries => {
 		TIME_ENTRIES = entries
