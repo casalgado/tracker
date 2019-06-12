@@ -1,18 +1,19 @@
 .row > div {
-  border: 1px solid black;
-  overflow: visible;
+	border: 1px solid black;
+	overflow: visible;
 }
 
-#mainContainer, #landingContainer {
-  display: none;
+#mainContainer,
+#landingContainer {
+	display: none;
 }
 
 #formContainer {
-  padding: 1em;
+	padding: 1em;
 }
 
 #showMoneyContainer {
-  padding: 1em;
+	padding: 1em;
 }
 
 /* hacky code 
@@ -21,83 +22,92 @@
    not yet tested
 */
 .auto-select {
-  border-bottom-right-radius: 0px;
-  border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-top-right-radius: 0px;
 }
 /* /hacky code */
 
 .auto-select {
-  width: 9em;
+	width: 9em;
 }
 
 form > .btn {
-  border-radius: 999px;
-  width: 100%;
+	border-radius: 999px;
+	width: 100%;
+}
+
+#moneyPagination {
+	display: grid;
+	grid-template-columns: 2.5em 1fr 1fr 1fr 2.5em;
+	justify-items: center;
+}
+
+.paginationCaret {
+}
+
+.btnMoneyPagination {
+	min-width: 4em;
 }
 
 .customTables {
-  width: 100%;
+	width: 100%;
 }
 
 #moneyTable {
-  text-transform: capitalize;
+	text-transform: capitalize;
 }
 
 #moneyTableHeaderCol1 {
-  width: 75%;
+	width: 75%;
 }
 
-#signInForm{
-  margin: 50px;
+#signInForm {
+	margin: 50px;
 }
 
 .popoverContainer {
-  height: 0px;
-  overflow: hidden;
-  font-size: 100%;
-  -webkit-box-shadow: 0px 0px 0px 0px rgba(255,255,255,1);
-  box-shadow: 0px 0px 0px 0px rgba(255,255,255,1);
-  position: relative;
+	height: 0px;
+	overflow: hidden;
+	font-size: 100%;
+	-webkit-box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 1);
+	box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 1);
+	position: relative;
 }
 
-.hasPopover  {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  z-index: 1;
-  position: relative;
-  border-radius: 3px;
+.hasPopover {
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	z-index: 1;
+	position: relative;
+	border-radius: 3px;
 }
 
 .popoverBody {
-  position: relative;
-  background-color: aliceblue;
-  width: 100%;
-  height: 0px;
-  z-index: -3;
+	position: relative;
+	background-color: aliceblue;
+	width: 100%;
+	height: 0px;
+	z-index: -3;
 }
-
-
 
 /* material design shadows */
 .level-1 {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
 .level-2 {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .level-3 {
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .level-4 {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .level-5 {
-  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
-
-

@@ -7,6 +7,7 @@
 
     <title> Tracker </title>
 
+    <script src="https://kit.fontawesome.com/349071ea41.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
   </head>
@@ -30,7 +31,7 @@
         <div class="row">
           <div id="formContainer"class="container col-xs-12 col-lg-3">
             <h6 onclick="resetInputForms()">Money</h6>
-            <form onsubmit="createEntry(this); return false"id="moneyEntryInputForm" class="">
+            <form onsubmit="createEntry(this); return false" id="moneyEntryInputForm" class="">
               
               <div class="form-group input-group">
                 <div class="input-group-prepend">
@@ -109,12 +110,13 @@
           </div>
           <div id="showMoneyContainer"class="container col-xs-12 col-lg">
             <h6 id="moneyTableTitle">  </h6>
-            <div class="moneyPagination">
-              <button type="" onclick="showPrevious()" class="btn btn-info">prev</button>
-              <button type="" onclick="MoneyEntry.show('day', SHOWING.current.unix())" class="btn btn-info">Day</button>
-              <button type="" onclick="MoneyEntry.show('isoWeek', SHOWING.current.unix())" class="btn btn-info">Week</button>
-              <button type="" onclick="MoneyEntry.show('month', SHOWING.current.unix())" class="btn btn-info">Month</button>
-              <button type="" onclick="showNext()" class="btn btn-info">next</button>
+            <div id="moneyPagination">
+                
+              <button type="" onclick="showPrevious()" class="btn"><i class="fas fa-caret-left fa-lg paginationCaret"></i></button>
+              <button type="" onclick="MoneyEntry.show('day', SHOWING.current.unix())" class="btn btn-info btnMoneyPagination">Day</button>
+              <button type="" onclick="MoneyEntry.show('isoWeek', SHOWING.current.unix())" class="btn btn-info btnMoneyPagination">Week</button>
+              <button type="" onclick="MoneyEntry.show('month', SHOWING.current.unix())" class="btn btn-info btnMoneyPagination">Month</button>
+              <button type="" onclick="showNext()" class="btn"><i class="fas fa-caret-right fa-lg paginationCaret"></i></button>
             </div>
             <table id="moneyTable" class="customTables">
             </table>
@@ -123,8 +125,8 @@
           <div id="showTimeContainer"class="container col-xs-12 col-lg">
           <h6> Todo </h6>
           <ul> 
-            <li> Organize Cats Subcats </li>
-            <li> Intentar polymorphism. all functions  inside classes/subclasses </li>
+            <li> Edit / Refactor Cats Subcats </li>
+            <li> Intentar polymorphism. all functions inside classes/subclasses </li>
             <li> Pop overs </li>
             <li> Tests </li>
             <li> Styles </li>
