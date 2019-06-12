@@ -37,18 +37,20 @@ form > .btn {
 }
 
 #moneyPagination {
-	margin: auto;
-	width: 300px;
-	/* display: grid;
-	grid-template-columns: 2.5em 1fr 1fr 1fr 2.5em;
-	justify-items: center; */
+	display: flex;
 }
 
-.paginationCaret {
+.caretContainer {
+	padding: 6px 12px 6px 12px;
+	cursor: pointer;
+}
+
+.caretContainer i {
+	line-height: inherit;
 }
 
 .btnMoneyPagination {
-	min-width: 4em;
+	margin: 3px;
 }
 
 .customTables {

@@ -112,11 +112,11 @@
             <h6 id="moneyTableTitle">  </h6>
             <div id="moneyPagination">
                 
-              <button type="" onclick="showPrevious()" class="btn"><i class="fas fa-caret-left fa-lg paginationCaret"></i></button>
+              <div onclick="showPrevious()" class="caretContainer"><i class="fas fa-caret-left fa-lg"></i></div>
               <button type="" onclick="MoneyEntry.show('day', SHOWING.current.unix())" class="btn btn-info btnMoneyPagination">Day</button>
               <button type="" onclick="MoneyEntry.show('isoWeek', SHOWING.current.unix())" class="btn btn-info btnMoneyPagination">Week</button>
               <button type="" onclick="MoneyEntry.show('month', SHOWING.current.unix())" class="btn btn-info btnMoneyPagination">Month</button>
-              <button type="" onclick="showNext()" class="btn"><i class="fas fa-caret-right fa-lg paginationCaret"></i></button>
+              <div onclick="showNext()" class="caretContainer"><i class="fas fa-caret-right fa-lg"></i></div>
             </div>
             <table id="moneyTable" class="customTables">
             </table>
