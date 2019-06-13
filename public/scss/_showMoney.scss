@@ -1,13 +1,5 @@
 #showMoneyContainer {
-	padding: 2%;
-}
-
-.btnMoneyPagination {
-	min-width: 4em;
-}
-
-.customTables {
-	width: 100%;
+	padding: 0px;
 }
 
 tr {
@@ -18,17 +10,32 @@ tr:nth-child(even) {
 	background-color: #f2f2f2;
 }
 
-#moneyTable {
-	text-transform: capitalize;
-	margin-left: -2%;
-	width: 104%;
+#moneyTableTitle {
+	text-align: center;
 }
 
-#moneyTable th,
-td {
-	padding-left: 2%;
+#moneyPagination {
+	margin-left: 1.2em;
+}
+
+#moneyTable {
+	width: 100%;
+	text-transform: capitalize;
+
+	tr {
+		border-bottom: 1px solid #ddd;
+
+		&:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+	}
+
+	th,
+	td {
+		padding-left: 1.5em;
+	}
 }
 
 #moneyTableHeaderCol1 {
-	width: 75%;
+	width: 65%;
 }
