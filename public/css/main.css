@@ -41,8 +41,20 @@ tr:nth-child(even) {
 
 #showMoneyContainer {
   background-color: white;
-  border-right: none;
-  border-left: none;
+}
+
+#showMoneyContainer h6 {
+  background-color: #004ba0;
+}
+
+@media only screen and (min-width: 768px) {
+  #showMoneyContainer {
+    border-right: 1px solid #e1e2e1;
+    border-left: 1px solid #e1e2e1;
+  }
+  #showMoneyContainer h6 {
+    background-color: #1976d2;
+  }
 }
 
 #moneyTable {
@@ -97,7 +109,6 @@ tr:nth-child(even) {
 }
 
 .row > div {
-  border: 1px solid #e1e2e1;
   overflow: visible;
   padding: 0px;
 }
@@ -109,8 +120,6 @@ tr:nth-child(even) {
   width: 100%;
   padding-left: 1em;
   line-height: 36px;
-  border-left: 1px solid #e1e2e1;
-  border-right: 1px solid #e1e2e1;
 }
 
 h6 {
@@ -120,12 +129,12 @@ h6 {
   background-color: #1976d2;
   font-size: 16px;
   line-height: 42px;
-  font-weight: 200;
+  font-weight: 400;
 }
 
 .btn-primary {
   background-color: #1976d2;
-  font-weight: 200;
+  font-weight: 400;
 }
 
 #mainContainer,

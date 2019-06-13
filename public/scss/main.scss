@@ -4,7 +4,6 @@
 @import 'popover';
 
 .row > div {
-	border: 1px solid $gray2;
 	overflow: visible;
 	padding: 0px;
 }
@@ -16,8 +15,6 @@
 	width: 100%;
 	padding-left: 1em;
 	line-height: 36px;
-	border-left: 1px solid $gray2;
-	border-right: 1px solid $gray2;
 }
 
 h6 {
@@ -28,12 +25,12 @@ h6 {
 	background-color: $primary;
 	font-size: 16px;
 	line-height: 42px;
-	font-weight: 200;
+	font-weight: 400;
 }
 
 .btn-primary {
 	background-color: $primary;
-	font-weight: 200;
+	font-weight: 400;
 }
 
 #mainContainer,

@@ -13,8 +13,20 @@ tr:nth-child(even) {
 
 #showMoneyContainer {
 	background-color: white;
-	border-right: none;
-	border-left: none;
+
+	h6 {
+		background-color: $primaryDark;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	#showMoneyContainer {
+		border-right: 1px solid $gray2;
+		border-left: 1px solid $gray2;
+		h6 {
+			background-color: $primary;
+		}
+	}
 }
 
 #moneyTable {
