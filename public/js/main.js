@@ -15,8 +15,6 @@ function onLoad() {
 }
 
 function loadPage(user) {
-	document.getElementById('landingContainer').setAttribute('style', 'display:none;');
-	document.getElementById('mainContainer').setAttribute('style', 'display:block;');
 	resetInputForms();
 	Entry.fetchAllByType('money', user.uid)
 		.then((entries) => {
@@ -31,6 +29,10 @@ function loadPage(user) {
 			drawSelectMenu('nameSelection', RECENT.names);
 			drawSelectMenu('categorySelection', CATEGORIES);
 			drawSelectMenu('subcategorySelection', SUBCATEGORIES);
+			document.getElementById('landingContainer').setAttribute('style', 'display:none;');
+			document.getElementById('loaderContainer').setAttribute('style', 'display:none;');
+			document.getElementById('mainContainer').setAttribute('style', 'display:block;');
+			document.getElementById('mainContainer').velocity({ opacity: '1' }, { duration: 200 });
 		});
 	Entry.fetchAllByType('time', user.uid).then((entries) => {
 		TIME_ENTRIES = entries;
