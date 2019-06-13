@@ -1,0 +1,27 @@
+#formContainer {
+	padding: 1em;
+}
+
+/* hacky code 
+   solved by using dropdown addons in forms 
+   at cost of using select menus
+   not yet tested
+*/
+.auto-select {
+	border-bottom-right-radius: 0px;
+	border-top-right-radius: 0px;
+}
+/* /hacky code */
+
+.auto-select {
+	width: 9em;
+}
+
+form > .btn {
+	border-radius: 999px;
+	width: 100%;
+}
+
+#signInForm {
+	margin: 50px;
+}

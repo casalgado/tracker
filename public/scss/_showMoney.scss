@@ -1,0 +1,34 @@
+#showMoneyContainer {
+	padding: 2%;
+}
+
+.btnMoneyPagination {
+	min-width: 4em;
+}
+
+.customTables {
+	width: 100%;
+}
+
+tr {
+	border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#moneyTable {
+	text-transform: capitalize;
+	margin-left: -2%;
+	width: 104%;
+}
+
+#moneyTable th,
+td {
+	padding-left: 2%;
+}
+
+#moneyTableHeaderCol1 {
+	width: 75%;
+}
