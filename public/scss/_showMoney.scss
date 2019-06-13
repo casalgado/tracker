@@ -13,6 +13,7 @@ tr:nth-child(even) {
 
 #showMoneyContainer {
 	background-color: white;
+	min-height: 300px;
 
 	h6 {
 		background-color: $primaryDark;
@@ -23,6 +24,7 @@ tr:nth-child(even) {
 	#showMoneyContainer {
 		border-right: 1px solid $gray2;
 		border-left: 1px solid $gray2;
+		border-bottom: 1px solid $gray1;
 		h6 {
 			background-color: $primary;
 		}

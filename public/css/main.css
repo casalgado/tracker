@@ -41,6 +41,7 @@ tr:nth-child(even) {
 
 #showMoneyContainer {
   background-color: white;
+  min-height: 300px;
 }
 
 #showMoneyContainer h6 {
@@ -51,6 +52,7 @@ tr:nth-child(even) {
   #showMoneyContainer {
     border-right: 1px solid #e1e2e1;
     border-left: 1px solid #e1e2e1;
+    border-bottom: 1px solid #f9fafb;
   }
   #showMoneyContainer h6 {
     background-color: #1976d2;
@@ -141,6 +143,10 @@ h6 {
 #landingContainer {
   display: none;
   background-color: #f9fafb;
+}
+
+#showTimeContainer {
+  min-height: 300px;
 }
 
 /* material design shadows */
