@@ -1,4 +1,4 @@
-#formContainer {
+#moneyEntryInputForm {
   padding: 1em;
 }
 
@@ -26,10 +26,6 @@ form > .btn {
   margin: 50px;
 }
 
-#showMoneyContainer {
-  padding: 0px;
-}
-
 tr {
   border-bottom: 1px solid #ddd;
 }
@@ -38,12 +34,15 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-#moneyTableTitle {
-  text-align: center;
+#moneyPagination {
+  margin: 0 auto;
+  width: 300px;
 }
 
-#moneyPagination {
-  margin-left: 1.2em;
+#showMoneyContainer {
+  background-color: white;
+  border-right: none;
+  border-left: none;
 }
 
 #moneyTable {
@@ -52,16 +51,20 @@ tr:nth-child(even) {
 }
 
 #moneyTable tr {
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #e1e2e1;
 }
 
 #moneyTable tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f9fafb;
 }
 
 #moneyTable th,
 #moneyTable td {
   padding-left: 1.5em;
+}
+
+#moneyTable tr:first-child {
+  border-top: none;
 }
 
 #moneyTableHeaderCol1 {
@@ -94,13 +97,41 @@ tr:nth-child(even) {
 }
 
 .row > div {
-  border: 1px solid black;
+  border: 1px solid #e1e2e1;
   overflow: visible;
+  padding: 0px;
+}
+
+#pageTitle {
+  color: white;
+  background-color: #004ba0;
+  margin: 0;
+  width: 100%;
+  padding-left: 1em;
+  line-height: 36px;
+  border-left: 1px solid #e1e2e1;
+  border-right: 1px solid #e1e2e1;
+}
+
+h6 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-align: center;
+  color: white;
+  background-color: #1976d2;
+  font-size: 16px;
+  line-height: 42px;
+  font-weight: 200;
+}
+
+.btn-primary {
+  background-color: #1976d2;
+  font-weight: 200;
 }
 
 #mainContainer,
 #landingContainer {
   display: none;
+  background-color: #f9fafb;
 }
 
 /* material design shadows */
