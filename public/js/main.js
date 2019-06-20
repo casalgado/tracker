@@ -10,6 +10,7 @@ function onLoad() {
 			loadPage(user);
 		} else {
 			document.getElementById('landingContainer').setAttribute('style', 'display:block');
+			document.getElementById('loaderContainer').setAttribute('style', 'display:none');
 		}
 	});
 }
